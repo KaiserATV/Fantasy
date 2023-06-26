@@ -16,6 +16,8 @@ import java.util.Random;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 
+//test
+
 public class Spielfeld extends JFrame {
     private static final int GRID_SIZE = 1000;
     private static final int CELL_SIZE = 10;
