@@ -163,11 +163,11 @@ public class Spielfeld extends JFrame {
             while (!current.equals(middle)) {
                 if (random.nextDouble() < 0.7) {  // 70% chance to make a move towards the middle
                     current = makeMove(current, middle);
-                } else {  // 30% chance to wander off randomly
+                } else {  // 30% Chance random wegzuwandern
                     current = wander(current);
                 }
-                grid[current.x][current.y] = 2;  // Generate path
-                if (random.nextDouble() < 0.05) {  // 5% chance to create a branch
+                grid[current.x][current.y] = 2;  // Pfad generieren
+                if (random.nextDouble() < 0.05) {  // 5% Chance, eine Abzweigung zu generieren
                     generateBranch(current, random.nextInt(4), random.nextInt(5) + 5);
                 }
             }
@@ -193,10 +193,10 @@ public class Spielfeld extends JFrame {
 
         for (int i = 0; i < NUM_CELLS; i++) {
             for (int j = 0; j < NUM_CELLS; j++) {
-                if (grid[i][j] != 2 && isAdjacentToPath(i, j) && random.nextDouble() < 0.1) { // 10% chance to place a building next to a path
-                    grid[i][j] = 1;  // place a building
+                if (grid[i][j] != 2 && isAdjacentToPath(i, j) && random.nextDouble() < 0.1) { // Gebäude neben Pfad 10%
+                    grid[i][j] = 1;  // Gebäude
                 } else if (grid[i][j] != 2) {
-                    grid[i][j] = 0;  // place a tree
+                    grid[i][j] = 0;  // Baum
                 }
             }
         }
@@ -212,10 +212,10 @@ public class Spielfeld extends JFrame {
         if (current.y > 0) candidates.add(new Point(current.x, current.y - 1));  // up
         if (current.y < NUM_CELLS - 1) candidates.add(new Point(current.x, current.y + 1));  // down
 
-        // Prefer moves that get us closer to the target
+        // Züge, die einen näher zum Ziel bringen, werden bevorzugt
         candidates.sort(Comparator.comparingDouble(p -> p.distance(target)));
 
-        // Choose one of the five best moves with a certain probability, otherwise choose randomly
+        // Einen der 5 besten Wege, oder zufällig
         if (random.nextDouble() < PREFER_BEST_MOVE && candidates.size() >= 3) {
             java.util.List<Point> bestMoves = candidates.subList(0, 2);
             return bestMoves.get(random.nextInt(bestMoves.size()));
