@@ -162,7 +162,7 @@ public class Spielfeld extends JFrame {
             Point start = points.get(iter);
             Point current = new Point(start.x, start.y);
             while (!current.equals(middle)) {
-                if (random.nextDouble() < 0.7) {  // 70% chance to make a move towards the middle
+                if (random.nextDouble() < 0.7) {  // 70% Chance sich Richtung Mitte zu bewegen
                     current = makeMove(current, middle);
                 } else {  // 30% Chance random wegzuwandern
                     current = wander(current);
