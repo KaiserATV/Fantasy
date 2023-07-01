@@ -10,7 +10,7 @@ public class Spielfeld {
             new SpielfeldGUI(grid);
 
             // Start playing music
-            Thread musicThread = new Thread(new Music("Sacred Garden.wav"));
+            Thread musicThread = new Thread(new Music("src/Sacred Garden.wav"));
             musicThread.start();
         });
     }

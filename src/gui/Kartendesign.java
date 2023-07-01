@@ -21,11 +21,11 @@ public class Kartendesign {
         this.buildings = new ArrayList<>();
 
         images = new ArrayList<>();
-        images.add(new ImageIcon("Cherry.png").getImage());
-        images.add(new ImageIcon("Abstrakt.png").getImage());
-        images.add(new ImageIcon("Laub.png").getImage());
-        images.add(new ImageIcon("Haus.png").getImage());
-        images.add(new ImageIcon("Weg.png").getImage());
+        images.add(new ImageIcon("src/Cherry.png").getImage());
+        images.add(new ImageIcon("src/Abstrakt.png").getImage());
+        images.add(new ImageIcon("src/Laub.png").getImage());
+        images.add(new ImageIcon("src/Haus.png").getImage());
+        images.add(new ImageIcon("src/Weg.png").getImage());
 
         this.imageIndices = new int[grid.length][grid[0].length];
         
