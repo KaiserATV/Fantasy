@@ -1,19 +1,23 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Rectangle;
 import java.awt.Graphics;
 
 public class Spieler {
     private int x, y;
     private Color color;
     private int steps;
+    private int playerId;
 
-    public Spieler(int x, int y, Color color) {
+    public Spieler(int x, int y, Color color, int playerId) {
         this.x = x;
         this.y = y;
         this.color = color;
         this.steps = 0;
+        this.playerId = playerId;
     }
+
 
     public void moveTo(int newX, int newY) {
         int distance = Math.abs(this.x - newX) + Math.abs(this.y - newY);
@@ -28,7 +32,6 @@ public class Spieler {
         g.setColor(color);
         g.fillOval(x * cellSize, y * cellSize, cellSize, cellSize);
     }
-
 
     // Getter Methoden
     public int getX() {
@@ -46,6 +49,14 @@ public class Spieler {
     public int getSteps() {
         return this.steps;
     }
+    
+    public int getPlayerId() {
+    	return this.playerId;
+    }
+    
+    public Rectangle getBounds(int cellSize) {
+        return new Rectangle(x * cellSize, y * cellSize, cellSize, cellSize);
+    }
 
     // Setter Methoden
     public void setX(int x) {
@@ -62,5 +73,9 @@ public class Spieler {
 
     public void setSteps(int steps) {
         this.steps = steps;
+    }
+    
+    public void setPlayerId(int playerId) {
+    	this.playerId = playerId;
     }
 }
