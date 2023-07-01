@@ -6,7 +6,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class SpielfeldGUI extends JFrame {
-    private int[][] grid; // Modified variable to accommodate multiple players
+    private int[][] grid; 
     private final SpielerMovement spielerMovement;
     private final Kartendesign kartendesign;
     private final JLabel diceLabel;
@@ -14,7 +14,7 @@ public class SpielfeldGUI extends JFrame {
     private final JScrollPane scrollPane;
     private final JPanel panel;
 
-    public SpielfeldGUI(int[][] grid) { // Updated constructor parameter
+    public SpielfeldGUI(int[][] grid) { 
         this.grid = grid;
 
         setTitle("Spielfeld");
@@ -23,18 +23,19 @@ public class SpielfeldGUI extends JFrame {
         diceLabel = new JLabel();
         stepsLabel = new JLabel();
 
-        Spieler spieler1 = new Spieler(0, 0, Color.RED, 1); // Spieler 1 starts at (0, 0)
-        Spieler spieler2 = new Spieler(SpielfeldKonstanten.NUM_CELLS - 1, 0, Color.BLUE, 2); // Spieler 2 starts at (NUM_CELLS - 1, 0)
-        Spieler spieler3 = new Spieler(0, SpielfeldKonstanten.NUM_CELLS - 1, Color.GREEN, 3); // Spieler 3 starts at (0, NUM_CELLS - 1)
-        Spieler spieler4 = new Spieler(SpielfeldKonstanten.NUM_CELLS - 1, SpielfeldKonstanten.NUM_CELLS - 1, Color.YELLOW, 4); // Spieler 4 starts at (NUM_CELLS - 1, NUM_CELLS - 1)
+        Spieler spieler1 = new Spieler(0, 0, Color.RED, 1); // Spieler 1  (0, 0)
+        Spieler spieler2 = new Spieler(SpielfeldKonstanten.NUM_CELLS - 1, 0, Color.BLUE, 2); // Spieler 2 
+        Spieler spieler3 = new Spieler(0, SpielfeldKonstanten.NUM_CELLS - 1, Color.GREEN, 3); // Spieler 3 
+        Spieler spieler4 = new Spieler(SpielfeldKonstanten.NUM_CELLS - 1, SpielfeldKonstanten.NUM_CELLS - 1, Color.YELLOW, 4); // Spieler 4 
 
         Spieler[] spielerArray = {spieler1, spieler2, spieler3, spieler4};
         String[] spielerNamen = {"Spieler 1", "Spieler 2", "Spieler 3", "Spieler 4"};
 
         spielerMovement = new SpielerMovement(spielerArray, this, diceLabel);
         spielerMovement.ausgewaehlterSpieler = spielerArray[0];
-        spielerMovement.rollDice(); // Roll dice for the first player
-
+        int firstRoll = spielerMovement.rollDice();
+        spielerMovement.ausgewaehlterSpieler.setSteps(firstRoll);
+        stepsLabel.setText("Verbleibende Schritte: " + spielerMovement.ausgewaehlterSpieler.getSteps());
         kartendesign = new Kartendesign(grid, this);
         kartendesign.generatePaths();
 
@@ -75,7 +76,7 @@ public class SpielfeldGUI extends JFrame {
             @Override
             public void keyPressed(KeyEvent e) {
                 spielerMovement.handleKeyEvent(e, panel, stepsLabel);
-                scrollToActivePlayer(); // Scroll to active player after each key press
+                scrollToActivePlayer(); 
             }
         });
 
@@ -99,5 +100,7 @@ public class SpielfeldGUI extends JFrame {
         Rectangle playerBounds = activePlayer.getBounds(SpielfeldKonstanten.CELL_SIZE);
         panel.scrollRectToVisible(playerBounds);
     }
+
+    
 }
 

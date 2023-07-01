@@ -15,6 +15,15 @@ public class Music implements Runnable {
     public void run() {
         try {
             File file = new File(filename);
+            if(!file.exists()){
+                System.out.println("File not found: " + file.getAbsolutePath());
+                return;
+}
+            AudioFileFormat.Type[] types = AudioSystem.getAudioFileTypes();
+            for (AudioFileFormat.Type type : types){
+            System.out.println(type);
+}
+
             AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
             Clip clip = AudioSystem.getClip();
             clip.open(audioStream);

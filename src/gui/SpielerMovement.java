@@ -35,6 +35,9 @@ public class SpielerMovement {
             int x = ausgewaehlterSpieler.getX();
             int y = ausgewaehlterSpieler.getY();
 
+              updateStepsLabel(stepsLabel); // Aktualisiere das stepsLabel vor dem Setzen des Schritts
+
+
             switch (e.getKeyCode()) {
                 case KeyEvent.VK_W:
                 case KeyEvent.VK_UP:
@@ -62,30 +65,42 @@ public class SpielerMovement {
                     break;
             }
 
+
+                stepsLabel.setText("Verbleibende Schritte: " + ausgewaehlterSpieler.getSteps());
+            	panel.repaint();
+
+                checkNextPlayer(stepsLabel);
+    }
+}
+
+private void checkNextPlayer(JLabel stepsLabel) {
+    // Prüfen, ob der aktuelle Spieler keine Schritte mehr übrig hat
+    if (ausgewaehlterSpieler.getSteps() == 0) {
+        int previousPlayerIndex = ausgewaehlterSpielerIndex; // Vorheriger Spielerindex
+        ausgewaehlterSpielerIndex = (ausgewaehlterSpielerIndex + 1) % spielerArray.length;
+        ausgewaehlterSpieler = spielerArray[ausgewaehlterSpielerIndex];
+
+        // Überprüfen, ob der aktuelle Spieler gewechselt wurde
+        if (previousPlayerIndex != ausgewaehlterSpielerIndex) {
+            JOptionPane.showMessageDialog(null, "Spieler " + ausgewaehlterSpieler.getPlayerId() + " ist dran!"); // Nachricht anzeigen
+            ausgewaehlterSpieler.setSteps(rollDice()); // Würfeln für den neuen Spieler
+            updateStepsLabel(stepsLabel); // Aktualisiere das stepsLabel nach dem Spielerwechsel
+        } else {
+            ausgewaehlterSpieler.setSteps(0); // Setze Schritte auf 0 für den aktuellen Spieler
             stepsLabel.setText("Verbleibende Schritte: " + ausgewaehlterSpieler.getSteps());
-            panel.repaint();
-
-            if (ausgewaehlterSpieler.getSteps() == 0) {
-                int previousPlayerIndex = ausgewaehlterSpielerIndex; // Vorheriger Spielerindex
-                ausgewaehlterSpielerIndex = (ausgewaehlterSpielerIndex + 1) % spielerArray.length;
-                ausgewaehlterSpieler = spielerArray[ausgewaehlterSpielerIndex];
-                ausgewaehlterSpieler.setSteps(rollDice()); // Würfeln, wenn keine Schritte mehr übrig sind
-
-                // Überprüfen, ob der aktuelle Spieler gewechselt wurde
-                if (previousPlayerIndex != ausgewaehlterSpielerIndex) {
-                    JOptionPane.showMessageDialog(null, "Spieler " + ausgewaehlterSpieler.getPlayerId() + " ist dran!"); // Nachricht anzeigen
-                }
-            }
+            JOptionPane.showMessageDialog(null, "Runde beendet! Nächster Spieler ist dran.");
         }
     }
+}
 
+private void updateStepsLabel(JLabel stepsLabel) {
+    int remainingSteps = ausgewaehlterSpieler.getSteps();
+    stepsLabel.setText("Verbleibende Schritte: " + remainingSteps);
+}
 
-    public int rollDice() {  
-        int diceRoll = random.nextInt(6) + 1;
-        ausgewaehlterSpieler.setSteps(diceRoll);
-        diceLabel.setText("Würfelergebnis: " + diceRoll); // Zeigt das Würfelergebnis an
-        return diceRoll;
-    }
-
-
+public int rollDice() {  
+    int diceRoll = random.nextInt(6) + 1;
+    diceLabel.setText("Würfelergebnis: " + diceRoll); // Zeigt das Würfelergebnis an
+    return diceRoll;
+}
 }
