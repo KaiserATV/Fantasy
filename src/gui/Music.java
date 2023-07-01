@@ -20,9 +20,6 @@ public class Music implements Runnable {
             clip.open(audioStream);
             clip.start();
 
-            // Wenn Sie möchten, dass die Musik dauerhaft läuft, verwenden Sie diese Zeile:
-            // clip.loop(Clip.LOOP_CONTINUOUSLY);
-
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException ex) {
             ex.printStackTrace();
         }
