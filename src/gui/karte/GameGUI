@@ -26,9 +26,9 @@ public class GameGUI extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Laden der Bilder für Bäume, Wege und Gebäude
-        treeImage = new Image("tree.png");
-        pathImage = new Image("path.png");
-        buildingImage = new Image("building.png");
+        treeImage = new Image("Fantasy/src/Bilder/Laub.png");
+        pathImage = new Image("Fantasy/src/Bilder/Weg.png");
+        buildingImage = new Image("Fantasy/src/Bilder/Haus.png");
 
         // Erstellen der Karten-Datenstruktur (Array von Tiles)
         map = new Tile[MAP_SIZE][MAP_SIZE];
