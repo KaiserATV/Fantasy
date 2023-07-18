@@ -1,9 +1,13 @@
-package gui;
+package spieler;
 
 import java.awt.event.KeyEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import karte.SpielfeldGUI;
+import karte.SpielfeldKonstanten;
+
 import java.util.Random;
 import java.awt.Graphics;
 

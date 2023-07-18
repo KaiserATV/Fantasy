@@ -1,4 +1,4 @@
-package gui;
+package spieler;
 
 import java.awt.Color;
 import java.awt.Rectangle;
