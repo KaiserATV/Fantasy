@@ -1,4 +1,5 @@
 package karte;
+package spieler;
 
 import javax.swing.*;
 import java.awt.*;

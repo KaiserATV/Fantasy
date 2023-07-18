@@ -1,5 +1,8 @@
 package karte;
-import spieler;
+
+import spieler.Spieler;
+import spieler.SpielerMovement;
+
 import ui;
 import uilogik;
 
@@ -11,10 +14,6 @@ public class Spielfeld {
         SwingUtilities.invokeLater(() -> {
             int[][] grid = new int[SpielfeldKonstanten.NUM_CELLS][SpielfeldKonstanten.NUM_CELLS]; // Updated grid variable for multiple players
             new SpielfeldGUI(grid);
-
-            // Start playing music
-            Thread musicThread = new Thread(new Music("Fantasy/src/SacredGarden.wav"));
-            musicThread.start();
         });
     }
 }
