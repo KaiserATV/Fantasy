@@ -1,12 +1,23 @@
 package uilogik;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.concurrent.TimeUnit;
 
+import lebewesen.Lebewesen;
+import lebewesen.Monster;
+import lebewesen.Spieler;
+import sys.KampfSys;
 import ui.KampfGUI;
 
 public class KampfUIController extends UICon{
-	public KampfUIController(KampfGUI k) {
-		gui = k;
+	public KampfUIController(Spieler e, Lebewesen z) {
+		
+		gui = new KampfGUI();
+		sys = new KampfSys(e,z);
+		
+		pve = sys.isPve();
+		
 		aktionZeilen = 0;
 		buttonZurueck = gui.getZurueckButton();
 		buttonLinks = gui.getLinksButton();
@@ -22,8 +33,26 @@ public class KampfUIController extends UICon{
 		buttonZurueck.addActionListener(e -> menuZurueck());
 		buttonLinks.addActionListener(e -> links());
 		buttonRechts.addActionListener(e -> rechts());
+		gui.getErgebnis().addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e){
+				gui.clearErgebnis();
+				gui.setEntscheid();
+				entscheidMenu = true;
+				if(!pve) {
+					tauschen();
+				}
+				
+			}
+		});
 		
 	}
+	
+	public void tauschen() {
+		sys.tauscheReihenfolge();
+		gui.setInfoWidth(sys.bestimmeBreite());
+		gui.setAktion("<html><br/>Was wird "+ sys.getNamenEins() +" tun?</html>");
+	}
+	
 	public void menuZurueck() {
 		if(entscheidMenu) {
 			System.out.println("1");
@@ -50,12 +79,13 @@ public class KampfUIController extends UICon{
 			angriffsMenu = true;
 			System.out.println("1");
 		}else if(angriffsMenu) {
-			//angriffsimplementierung
-			//angriffsMenu = false;
-			//entscheidMenu = true;
+			angriffsMenu = false;
+			addAktion(sys.getNamenEins()+" greift "+ sys.getNamenZwei()+" an!");
+			gui.clearAngriff();
+			gui.addErgebnis();
+			naechsterZug();
 			System.out.println("2");
 		}
-		
 	}
 	public void rechts() {
 		if(entscheidMenu) {
@@ -68,8 +98,6 @@ public class KampfUIController extends UICon{
 			itemMenu = true;
 			System.out.println("2");
 		}
-		//item implementierung
-		
 	}
 	
 	
@@ -87,21 +115,14 @@ public class KampfUIController extends UICon{
 		}else {
 			ausgang = "<html>";
 		}
-		//int dauer = (int)Math.ceil(1000/(s.length()/2.0));//Scalt mit Bestimmter Zeit, derzeit 2sec // 2000 ms
-		for(int i=1;i <= s.length();i++) {
-			gui.setAktion(ausgang+s.substring(0,i));
-			try {
-				TimeUnit.MILLISECONDS.sleep(50);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 		gui.setAktion(ausgang+s+"</html>");
 	}
+	
 	public void clearAktion() {
 		gui.setAktion("");
 		aktionZeilen =0;
 	}
+	
 	public void verkuerzen() {
 		String bearbeiten = gui.getAktion();
 		String neu;
@@ -111,9 +132,28 @@ public class KampfUIController extends UICon{
 		gui.setAktion(neu);
 	}
 	
+	public void naechsterZug() {
+		int h = sys.kaempfen();
+		if (pve && h > 0) {
+			int i = sys.monsterAngriff();
+			addAktion(sys.getNamenEins() +"greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!<br/>"+sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
+			//gui.setErgebnis("<html>sys.getNamenEins() machst "+h+ " Schaden!<br/> Und nimmst " +i+ " Schaden!"); 
+			gui.setInfoWidth(sys.bestimmeBreite());
+		}else if(!pve && h > 0){
+			addAktion(sys.getNamenEins()+" macht "+h + " Schaden an "+sys.getNamenZwei());
+			gui.setInfoWidth(sys.bestimmeBreite());
+		}else {
+			gui.setInfoWidth(0);
+			gui.setWinPane(sys.getNamenEins(),sys.getNamenZwei());
+		}
+		
+	}
+	
+	private boolean pve;
 	private boolean entscheidMenu;
 	private boolean angriffsMenu;
 	private boolean itemMenu;
 	private KampfGUI gui;
+	private KampfSys sys;
 	private int aktionZeilen;
 }
