@@ -3,7 +3,6 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.*;
 
-
 public abstract class GUIVorlage {
     public GUIVorlage(){
         main.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -11,10 +10,15 @@ public abstract class GUIVorlage {
         
         contentPane.setSize(1000,1000);
         contentPane.setLayout(null);
+        contentPane.setBackground(Color.black);
+        
+        altPane.setSize(1000,1000);
+        altPane.setVisible(true);
+        altPane.setLayout(null);
+        altPane.setBackground(Color.cyan);
 
-        //Feld für Infos
+        //Feld für Infos - Farbe in Unterklassen implementieren
         info.setVisible(true);
-        info.setBackground(Color.BLUE);
         infoText.setVisible(true);
         info.add(infoText);
         
@@ -106,6 +110,8 @@ public abstract class GUIVorlage {
     }
     
     protected JFrame main = new JFrame();
+    
+    protected JPanel altPane = new JPanel();
     protected JPanel contentPane = new JPanel();
     protected JPanel bildEbene = new JPanel();
     protected JPanel entscheid = new JPanel();
@@ -122,4 +128,5 @@ public abstract class GUIVorlage {
     protected JButton buttonRechts = new JButton();
     
     protected JButton buttonZurueck = new JButton();
+    
 }
