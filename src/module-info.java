@@ -6,6 +6,8 @@
  *
  */
 module FantasySpiel2 {
-	requires java.desktop;
+	requires transitive java.desktop;
+	exports spieler;
+	exports karte;
 //hallo
 }
