@@ -1,5 +1,12 @@
 package sys;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import gegenstaende.Gegenstand;
 import lebewesen.Lebewesen;
 import lebewesen.Monster;
 import lebewesen.Spieler;
@@ -15,6 +22,16 @@ public class KampfSys {
 		schadenGesIch = 0;
 		schadenGesGegen = 0;
 		getauscht = false;
+		
+		try {
+			ichBild = ImageIO.read(new File("/home/max/eclipse-workspace-neu/FantasyGame/src/img/tree.png"));
+			gegenBild = ImageIO.read(new File("/home/max/eclipse-workspace-neu/FantasyGame/src/img/tree2.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		
 	}
 	public int kaempfen() {//Logik für die Kämpfe, mal sehen, weil keine Ahnung wie struktur aussieht
@@ -67,7 +84,18 @@ public class KampfSys {
 		schadenGesIch = schadenGesGegen;
 		schadenGesGegen = i;
 		
+		BufferedImage t = gegenBild;
+		gegenBild = ichBild;
+		ichBild = t;
+		
 		getauscht = true;
+	}
+	public String itemBenutzen(int i) {
+//		ich.getRucksack().get(i).use();
+		
+		
+//		return ich.getRucksack().get(i).getName();
+		return "cool";
 	}
 	
 	public boolean isPve() {
@@ -79,6 +107,33 @@ public class KampfSys {
 	public String getNamenZwei() {
 		return gegen.getName();
 	}
+	public int getLebenEins() {
+		return ich.getLeben();
+	}
+	public int getLebenZwei() {
+		return gegen.getLeben();
+	}
+	public String[] getUsables() {
+		String[] items;
+		if(ich.getUseable().size()>0) {
+			items = new String[ich.getUseable().size()];
+			int i = 0;
+			for(Gegenstand g:ich.getUseable()) {
+				items[i] = g.getName();
+				i++;
+			}
+		}else {
+			items = new String[]{"cool","item2","item3","..."};
+		}
+		return items;
+	}
+	public BufferedImage getBildEins() {
+		return ichBild;
+	}
+	public BufferedImage getBildZwei() {
+		return gegenBild;
+	}
+	
 	
 	private boolean getauscht;
 	private int schadenGesIch;
@@ -89,4 +144,6 @@ public class KampfSys {
 	private boolean weiter;
 	private Spieler ich;
 	private Lebewesen gegen;
+	private BufferedImage ichBild;
+	private BufferedImage gegenBild;
 }

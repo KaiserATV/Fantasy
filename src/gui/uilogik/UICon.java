@@ -8,7 +8,4 @@ public class UICon {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected JButton buttonLinks;
-	protected JButton buttonRechts;
-	protected JButton buttonZurueck;
 }
