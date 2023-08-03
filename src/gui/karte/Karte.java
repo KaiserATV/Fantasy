@@ -44,6 +44,7 @@ public class Karte {
         gebaeudeBild = new ImageIcon("Fantasy/src/Bilder/Haus.png").getImage();
     
         frame = new JFrame("Karte");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLayout(new GridBagLayout());
         new SpielerBewegung(this, frame);
 
@@ -105,13 +106,13 @@ frame.add(scrollPane, gbc);
         };
         
         for (Point ecke : ecken) {
-            List<Point> kopieGebaeudeListe = new ArrayList<>(gebaeudeListe);  // Kopiere die Gebäudeliste für jede Ecke
-            verbindeMitNaechstenGebaeuden(ecke, kopieGebaeudeListe, 3);       // Erhöhe die Anzahl der Verbindungen ein wenig
+            List<Point> kopieGebaeudeListe = new ArrayList<>(gebaeudeListe);
+            verbindeMitNaechstenGebaeuden(ecke, kopieGebaeudeListe, 40);  // Verbinde bis zu 10 Gebäude von jeder Ecke aus
         }
     }
     
-    private void verbindeMitNaechstenGebaeuden(Point start, List<Point> gebaeudeListe, int verbleibendeVerbindungen) {
-        if (verbleibendeVerbindungen <= 0 || gebaeudeListe.isEmpty()) {
+    private void verbindeMitNaechstenGebaeuden(Point start, List<Point> gebaeudeListe, int maxVerbindungen) {
+        if (gebaeudeListe.isEmpty() || maxVerbindungen <= 0) {
             return;
         }
     
@@ -123,20 +124,11 @@ frame.add(scrollPane, gbc);
         erstelleWeg(start, naechstesGebaeude);
         gebaeudeListe.remove(naechstesGebaeude);
     
-        List<Point> naheGebaeude = findeNaheGebaeude(naechstesGebaeude, gebaeudeListe, verbleibendeVerbindungen);
-        for (Point ziel : naheGebaeude) {
-            if (!ziel.equals(naechstesGebaeude)) {  // Vermeide, das gleiche Gebäude erneut zu verbinden
-                erstelleWeg(naechstesGebaeude, ziel);
-                gebaeudeListe.remove(ziel);
-            }
-        }
-    
-        for (Point ziel : naheGebaeude) {
-            verbindeMitNaechstenGebaeuden(ziel, gebaeudeListe, verbleibendeVerbindungen - 1);
-        }
+        // Rekursiver Aufruf
+        verbindeMitNaechstenGebaeuden(naechstesGebaeude, gebaeudeListe, maxVerbindungen - 1);
     }
     
-
+    
     private Point findeNaechstesGebaeude(Point start, List<Point> gebaeudeListe) {
         Point naechstesGebaeude = null;
         double minimaleDistanz = Double.MAX_VALUE;
