@@ -35,6 +35,7 @@ public class Spieler {
     public Point getPosition() {
         return new Point(this.x, this.y);
     }
+
     
     public void moveTo(int newX, int newY, int maxX, int maxY) {
         if (newX < 0 || newY < 0 || newX >= maxX || newY >= maxY) {

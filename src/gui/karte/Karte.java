@@ -7,14 +7,12 @@ import java.util.Random;
 import java.util.List;
 import javax.swing.*;
 import spieler.Spieler;
+import spieler.SpielerBewegung;
 import java.awt.Image;
 import java.awt.Graphics;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.Color;
-import java.awt.Toolkit;
-import java.awt.Insets;
-import java.awt.BorderLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 
@@ -31,6 +29,9 @@ public class Karte {
     private Image baumBild;
     private Image gebaeudeBild;
     private Spieler spieler;
+    private static final int FELD_BREITE = 25;
+    private static final int FELD_HOEHE = 25;
+
 
     public Karte() {
         karte = new FeldTyp[70][70];
@@ -43,7 +44,9 @@ public class Karte {
         gebaeudeBild = new ImageIcon("Fantasy/src/Bilder/Haus.png").getImage();
     
         frame = new JFrame("Karte");
-frame.setLayout(new GridBagLayout());
+        frame.setLayout(new GridBagLayout());
+        new SpielerBewegung(this, frame);
+
 
 GridBagConstraints gbc = new GridBagConstraints();
 gbc.gridx = 0;
@@ -191,6 +194,15 @@ frame.add(scrollPane, gbc);
             }
         }
     }
+
+    public FeldTyp getFeldTypAtPosition(Point point) {
+        if (point.x >= 0 && point.x < karte.length && point.y >= 0 && point.y < karte[0].length) {
+            return karte[point.x][point.y];
+        } else {
+            throw new IndexOutOfBoundsException("Position außerhalb der Karte!");
+        }
+    }
+    
     
 
     class KartenPanel extends JPanel {
@@ -202,8 +214,6 @@ frame.add(scrollPane, gbc);
         protected void paintComponent(Graphics g) {
             super.paintComponent(g);
 
-            int feldBreite = 25;
-            int feldHöhe = 25;
 
             for (int i = 0; i < karte.length; i++) {
                 for (int j = 0; j < karte[0].length; j++) {
@@ -219,13 +229,15 @@ frame.add(scrollPane, gbc);
                             aktuellesBild = gebaeudeBild;
                             break;
                     }
-                    g.drawImage(aktuellesBild, i * feldBreite, j * feldHöhe, feldBreite, feldHöhe, this);
+                    g.drawImage(aktuellesBild, i * FELD_BREITE, j * FELD_HOEHE, FELD_BREITE, FELD_HOEHE, this);
+
                 }
             }
 
             // Spieler darstellen
             g.setColor(Color.RED); // Spielerfarbe
-            g.fillRect(spieler.getPosition().x * 20, spieler.getPosition().y * 20, 20, 20);
+            g.fillRect(spieler.getPosition().x * FELD_BREITE, spieler.getPosition().y * FELD_HOEHE, FELD_BREITE, FELD_HOEHE);
+
         }
     
 
@@ -233,11 +245,5 @@ frame.add(scrollPane, gbc);
         public Dimension getPreferredSize() {
         return new Dimension(karte.length * 25, karte[0].length * 25);
         }
-
-    }
-
-    public static void main(String[] args) {
-        Karte karte = new Karte();
-        new spieler.SpielerBewegung(karte, karte.getFrame());
     }
 }
