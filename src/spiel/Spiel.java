@@ -1,24 +1,57 @@
 package spiel;
 
 import java.awt.Point;
-import aktionen.FeldAktionen;
+import java.awt.Color;
 import karte.Karte;
 import karte.Karte.FeldTyp;
 import spieler.Spieler;
+import spieler.SpielerBewegung;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Spiel {
 
-    private FeldAktionen aktionen = new FeldAktionen();
-    private Karte karte = new Karte();
-    private Spieler spieler = new Spieler();
+        private Karte karte = new Karte();
+        private List < Spieler > alleSpieler = new ArrayList < > ();
+        private static SpielerBewegung spielerBewegung;
 
-    public FeldTyp getFeldTypAtPosition(Point point) {
-        return karte.getFeldTypAtPosition(point);  
-    }
+        public FeldTyp getFeldTypAtPosition(Point point) {
+                return karte.getFeldTypAtPosition(point);
+        }
 
+        public static void main(String[] args) {
+                // Spiel-Instanz erstellen
+                Spiel spiel = new Spiel();
 
-    public static void main(String[] args) {
-        Spiel spiel = new Spiel();
-        // Weitere Logik für Ihr Spiel
-    }
+                // Spieler erstellen und Positionen anpassen
+                Spieler player1 = new Spieler(new Point(0, 0), Color.RED);
+                Spieler player2 = new Spieler(new Point(0, 69), Color.GREEN);
+                Spieler player3 = new Spieler(new Point(69, 0), Color.BLUE);
+                Spieler player4 = new Spieler(new Point(69, 69), Color.YELLOW);
+
+                // Spieler zur Liste hinzufügen
+                spiel.alleSpieler.add(player1);
+                spiel.alleSpieler.add(player2);
+                spiel.alleSpieler.add(player3);
+                spiel.alleSpieler.add(player4);
+
+                // Aktuellen Spieler setzen (zum Beispiel zu Beginn des Spiels)
+                Spieler.setAktuellerSpieler(player1);
+
+                // Überprüfen, ob Spieler erfolgreich erstellt wurden
+                if (player1 != null && player2 != null && player3 != null && player4 != null) {
+                        // Aktuellen Spieler bewegen (anhand von Koordinaten)
+                        spiel.karte.addSpieler(player1);
+                        spiel.karte.addSpieler(player2);
+                        spiel.karte.addSpieler(player3);
+                        spiel.karte.addSpieler(player4);
+
+                        spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler);
+
+                        // KartenPanel-Instanz aus dem Karte-Objekt holen
+                        Karte.KartenPanel kartenPanel = spiel.karte.new KartenPanel();
+                        // Das KartenPanel neu zeichnen, um die Spielerpositionen zu aktualisieren
+                        kartenPanel.repaint();
+                }
+        }
 }

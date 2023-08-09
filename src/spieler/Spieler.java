@@ -1,115 +1,142 @@
 package spieler;
 
 import java.awt.Color;
-import java.awt.Rectangle;
-import java.awt.Graphics;
 import java.awt.Point;
-
+import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class Spieler {
-    private int x, y;
-    private Color color;
-    private int steps;
-    private int playerId;
+        private static Spieler aktuellerSpieler;
+        private Point position; // Verwende einen Punkt, um die Position zu speichern
+        private Color color;
+        private int steps;
+        private int playerID;
+        private static int totalPlayers = 0;
+        private static final int MAX_PLAYERS = 10;
 
-    public Spieler() {
-        // Initialwerte, z.B.:
-        this(0, 0, Color.BLACK, 1);
-    }
-
-    public Spieler(int x, int y, Color color, int playerId) {
-        this.x = x;
-        this.y = y;
-        this.color = color;
-        this.steps = 0;
-        this.playerId = playerId;
-    }
-   
-    
-    public void setPosition(Point point) {
-        this.x = point.x;
-        this.y = point.y;
-    }
-    
-
-    public Point getPosition() {
-        return new Point(this.x, this.y);
-    }
-
-    
-    public void moveTo(int newX, int newY, int maxX, int maxY) {
-        if (newX < 0 || newY < 0 || newX >= maxX || newY >= maxY) {
-            return; // Bewegung außerhalb der Grenzen verhindern
+        public Spieler() {
+                this(new Point(0, 0), Color.BLACK); // Verwende den Konstruktor mit Punkt
         }
-        this.x = newX;
-        this.y = newY;
-    }
-    
-    public void moveUp(int maxX, int maxY) {
-        moveTo(this.x, this.y - 1, maxX, maxY);
-    }
-        
-    public void moveDown(int maxX, int maxY) {
-        moveTo(this.x, this.y + 1, maxX, maxY);
-    }
-        
-    public void moveLeft(int maxX, int maxY) {
-        moveTo(this.x - 1, this.y, maxX, maxY);
-    }
-        
-    public void moveRight(int maxX, int maxY) {
-        moveTo(this.x + 1, this.y, maxX, maxY);
-    }
-    
 
-    public void draw(Graphics g, int cellSize) {
-        g.setColor(color);
-        g.fillOval(x * cellSize, y * cellSize, cellSize, cellSize);
-    }
+        public Spieler(Point position, Color color) {
+                this.position = position;
+                this.color = color;
+                this.steps = 0;
+                this.playerID = totalPlayers++;
 
-    // Getter Methoden
-    public int getX() {
-        return this.x;
-    }
+                if (totalPlayers > MAX_PLAYERS) {
+                        throw new IllegalArgumentException("Maximale Anzahl an Spielern erreicht!");
+                }
+        }
 
-    public int getY() {
-        return this.y;
-    }
+        public static Spieler createSpieler(Point position, Color color) {
+                if (totalPlayers >= MAX_PLAYERS) {
+                        return null;
+                }
+                return new Spieler(position, color);
+        }
 
-    public Color getColor() {
-        return this.color;
-    }
+        /**
+         * Gibt den aktuellen Spieler zurück.
+         * 
+         * @return Der aktuelle Spieler.
+         */
+        public static Spieler getAktuellerSpieler() {
+                return aktuellerSpieler;
+        }
 
-    public int getSteps() {
-        return this.steps;
-    }
+        /**
+         * Setzt den aktuellen Spieler.
+         * 
+         * @param spieler Der Spieler, der als aktueller Spieler festgelegt werden soll.
+         */
+        public static void setAktuellerSpieler(Spieler spieler) {
+                aktuellerSpieler = spieler;
+        }
 
-    public int getPlayerId() {
-    	return this.playerId;
-    }
+        public void setPosition(Point point) {
+                this.position = point;
+        }
 
-    public Rectangle getBounds(int cellSize) {
-        return new Rectangle(x * cellSize, y * cellSize, cellSize, cellSize);
-    }
+        public Point getPosition() {
+                return new Point(position); // Verhindere das Ändern der internen Position
+        }
 
-    // Setter Methoden
-    public void setX(int x) {
-        this.x = x;
-    }
+        public void moveTo(int newX, int newY, int maxX, int maxY) {
+                Point newPosition = new Point(newX, newY);
+                if (newPosition.x < 0 || newPosition.y < 0 || newPosition.x >= maxX || newPosition.y >= maxY) {
+                        return; // Bewegung außerhalb der Grenzen verhindern
+                }
+                position = newPosition;
+                steps++; // Erhöht die Anzahl der Schritte um 1
+        }
 
-    public void setY(int y) {
-        this.y = y;
-    }
+        public void moveUp(int maxX, int maxY) {
+                moveTo(position.x, position.y - 1, maxX, maxY);
+        }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
+        public void moveDown(int maxX, int maxY) {
+                moveTo(position.x, position.y + 1, maxX, maxY);
+        }
 
-    public void setSteps(int steps) {
-        this.steps = steps;
-    }
+        public void moveLeft(int maxX, int maxY) {
+                moveTo(position.x - 1, position.y, maxX, maxY);
+        }
 
-    public void setPlayerId(int playerId) {
-    	this.playerId = playerId;
-    }
+        public void moveRight(int maxX, int maxY) {
+                moveTo(position.x + 1, position.y, maxX, maxY);
+        }
+
+        public void draw(Graphics g, int cellSize) {
+                g.setColor(color);
+                g.fillOval(position.x * cellSize, position.y * cellSize, cellSize, cellSize);
+        }
+
+        // Nachfolgend sind die Getter- und Setter-Methoden:
+
+        public int getX() {
+                return position.x;
+        }
+
+        public int getY() {
+                return position.y;
+        }
+
+        public Color getColor() {
+                return this.color;
+        }
+
+        public int getSteps() {
+                return this.steps;
+        }
+
+        public int getPlayerID() {
+                return this.playerID;
+        }
+
+        /**
+         * Gibt die Grenzen des Spielers als Rechteck zurück.
+         *
+         * @param cellSize Größe einer Zelle im Raster.
+         * @return Das Rechteck, das die Grenzen des Spielers darstellt.
+         */
+        public Rectangle getBounds(int cellSize) {
+                return new Rectangle(position.x * cellSize, position.y * cellSize, cellSize, cellSize);
+        }
+
+        public void setX(int x) {
+                position.x = x;
+        }
+
+        public void setY(int y) {
+                position.y = y;
+        }
+
+        public void setColor(Color color) {
+                this.color = color;
+        }
+
+        public void setSteps(int steps) {
+                this.steps = steps;
+        }
 }
