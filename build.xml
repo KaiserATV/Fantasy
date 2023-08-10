@@ -3,14 +3,7 @@
               Any modifications will be overwritten.
               To include a user specific buildfile here, simply create one in the same
               directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="FantasyGame">
-  <javac srcdir="${src}"
-         destdir="${build}"
-         fork="yes"
-         executable="/opt/java/jdk4.26/bin/javac"
-  />
-
-    <property environment="env"/>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="FantasyGame"><property environment="env"/>
     <property name="debuglevel" value="source,lines,vars"/>
     <property name="target" value="17"/>
     <property name="source" value="17"/>
