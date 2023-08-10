@@ -40,9 +40,9 @@ public class Karte {
                 karte = new FeldTyp[70][70];
                 initKarte();
 
-                wegBild = new ImageIcon("/home/max/eclipse-workspace-neu/FantasyGame/src/img/Weg.png").getImage();
-                baumBild = new ImageIcon("/home/max/eclipse-workspace-neu/FantasyGame/src/img/Laub.png").getImage();
-                gebaeudeBild = new ImageIcon("/home/max/eclipse-workspace-neu/FantasyGame/src/img/Haus.png").getImage();
+                wegBild = new ImageIcon("Fantasy/src/img/Weg.png").getImage();
+                baumBild = new ImageIcon("Fantasy/src/img/Laub.png").getImage();
+                gebaeudeBild = new ImageIcon("/home/fknoess/FantasieGame2.0/Fantasy/src/img/Haus.png").getImage();
 
                 frame = new JFrame("Karte");
                 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
