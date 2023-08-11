@@ -33,6 +33,7 @@ public class SpielerBewegung {
                 this.feldaktionen = new FeldAktionen(frame);
                 this.alleSpieler = spielerListe; // Hier haben wir die Änderung vorgenommen
                 initSpielerBewegung();
+                frame.repaint();
         }
 
         /**
@@ -79,6 +80,7 @@ public class SpielerBewegung {
                                 // reagieren
                         }
                 });
+                
         }
 
         /**
@@ -100,7 +102,7 @@ public class SpielerBewegung {
         private void spielerBewegt() {
                 Spieler aktuellerSpieler = Spieler.getAktuellerSpieler();
                 Karte.FeldTyp aktuellesFeld = karte.getFeldTypAtPosition(aktuellerSpieler.getPosition());
-
+                frame.repaint();
                 switch (aktuellesFeld) {
                 case Juwelier:
                         feldaktionen.betreteJuwelier(alleSpieler.get(aktuellerSpielerIndex));
