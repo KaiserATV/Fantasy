@@ -1,6 +1,5 @@
 package fabio.gui.karte;
 
-//test einzweidrei
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Graphics;
