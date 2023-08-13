@@ -15,6 +15,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import java.io.File;
+
 
 import ani.fantasyLebewesen.Spieler;
 
@@ -26,15 +28,21 @@ public class Karte {
         private static final int KARTE_HOEHE = KARTE_BREITE;
         private static final int GEBAEUDE_RATIO = 30;
         private static final int MAX_VERBINDUNGEN_VON_ECKE = 40;
-        private static final String WEG_BILD_PATH = "src/img/Weg.png";
-        private static final String BAUM_BILD_PATH = "src/img/Laub.png";
-        private static final String GEBAEUDE_BILD_PATH = "src/img/Haus.png";
         private FeldTyp[][] karte;
         private JPanel contentPane = new JPanel();
         private JFrame frame;
         private Image wegBild;
         private Image baumBild;
         private Image gebaeudeBild; 
+        
+        private static String getBasePath() {
+                return System.getProperty("user.dir") + File.separator + "Fantasy" + File.separator + "src" + File.separator + "img" + File.separator;
+            }
+        private static final String WEG_BILD_PATH = getBasePath() + "Weg.png";
+        private static final String BAUM_BILD_PATH = getBasePath() + "Laub.png";
+        private static final String GEBAEUDE_BILD_PATH = getBasePath() + "Haus.png";
+
+            
 
         public boolean add(Spieler arg0) {
                 return spielerListe.add(arg0);
