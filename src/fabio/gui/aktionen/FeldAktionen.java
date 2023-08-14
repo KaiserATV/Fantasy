@@ -27,7 +27,7 @@ public class FeldAktionen  {
 
     			Monster m = new Monster();
     			
-                if (chance < 0) { // 20% Chance auf Monsterinteraktion
+                if (chance < 0) { // 10% Chance auf Monsterinteraktion
                         monsterLaufen(ich,m);
                         
                 }
@@ -42,7 +42,7 @@ public class FeldAktionen  {
 
                 TravelingMerchant t = new TravelingMerchant();
                 
-                if (chance < 1) { // 10% Chance auf fahrenden Händler
+                if (chance < 8) { // 8% Chance auf fahrenden Händler
                         shopLaufen(ich,t);
                 }
         }
