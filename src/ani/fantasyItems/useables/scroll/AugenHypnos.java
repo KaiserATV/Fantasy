@@ -21,6 +21,9 @@ public class AugenHypnos extends Scroll {
 		return (a+b+c);
 	}
 	
+	
+	//lähmrolle
+	
 	@Override
 	public String anwenden(Monster monster) {
 		// lähmt alle Monster im Umkreis

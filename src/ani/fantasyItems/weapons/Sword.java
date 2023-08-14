@@ -22,18 +22,5 @@ public class Sword extends Weapons {
 		return (a+b+c);
 	}
 	
-	@Override
-	public String anwenden(Monster monster, Spieler player) {
-		//schlägt [stark] mal zu!
-		int a = player.getStrength();
-		int b = monster.getHp();
-		int c = player.getMacht();
-		int schaden = b - (a * c) ;
-		monster.setHp(schaden);
-		String d = "Du schlägst mit deinem Schwert ";
-		String e = String.valueOf(player.getStrength());
-		String f = " Mal zu";
-		return (d+e+f);
-	}
 
 }

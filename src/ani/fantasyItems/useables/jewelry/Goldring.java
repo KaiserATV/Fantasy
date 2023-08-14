@@ -20,6 +20,8 @@ public class Goldring extends Ring {
 		String c = " Goldstücke gekauft";
 		return (a+b+c);
 	}
+	//zähm = loot und nicht kämpfen
+	
 	
 	@Override
 	public String anwenden(Monster monster, Spieler player) { // Begrenzung durch Fingeranzahl? -> ausrüsten nur wenn noch ein Finger frei?

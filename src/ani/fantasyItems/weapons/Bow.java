@@ -21,16 +21,5 @@ public class Bow extends Weapons {
 		return (a+b+c);
 	}
 	
-	@Override
-	public String anwenden(Monster monster, Spieler player) {
-		int a = player.getStrength();
-		int b = monster.getHp();
-		int c = player.getMacht();
-		int schaden = b - (a + c) ;
-		monster.setHp(schaden);
-		String d ="Du schießt mit deinem Bogen ";
-		String e = String.valueOf(player.getStrength());
-		String f = " Pfeile auf die Monster ab";
-		return (d+e+f);	
-	}
+	
 }

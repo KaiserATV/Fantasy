@@ -33,29 +33,40 @@ public class Spieler extends Lebewesen {
 	
 	private void werte(String s) {
 		switch (s) {
+		case "Krämer":
+			hpmax = 100;
+			strength = 50;
+			gold = 2000;
+			bewegung = 15;
+			
+		break;
 		case "Zwerg":
-			hpmax = 70;
-			strength = 10;
-			gold = 500;
+			hpmax = 60;
+			strength = 7;
+			gold = 169;
+			bewegung = 9;
 			
 		break;
 		case "Elf":
-			hpmax = 50;
-			strength = 10;
-			gold = 700;
+			hpmax = 45;
+			strength = 7;
+			gold = 150;
+			bewegung = 12;
 			
 		break;
 		case "Ork":
-			hpmax = 100;
+			hpmax = 90;
 			strength = 5;
-			gold = 0;
+			gold = 1;
+			bewegung = 8;
 			
 			
 		break;
 		case "Zauberer":
 			hpmax = 30;
-			strength = 20;
-			gold = 1000;
+			strength = 14;
+			gold = 360;
+			bewegung = 9;
 			
 			
 		break;
@@ -64,38 +75,6 @@ public class Spieler extends Lebewesen {
 		break;
 		}
 	}
-//	public void create() {
-//		System.out.println("1: hp max");
-//		System.out.println("2: strength max");
-//		System.out.println("3: gold max");
-//		String background = input.next();
-//		
-//		System.out.println("Willkommen " + name);
-//		System.out.println("Deine Werte sind:");
-//		
-//		int gold = 1000;
-//		int strength = 5;
-//		int hp = 50;
-//		
-//		switch(background){
-//		case "1":
-//			hp = 70;
-//			break;
-//		case "2":
-//			strength = 7;
-//			break;
-//		case "3":
-//			gold = 1500;
-//			break;
-//		default:
-//			System.out.println("Eingabe uneindeutig. Durchschnittswerte werden verwendet.");
-//		}
-//		
-//		System.out.println("Leben: " +hp);
-//		System.out.println("Stärke: " +strength);
-//		System.out.println("Gold: " +gold);
-//		
-//	}
 
 	public static Spieler createSpieler(String name, Point position, Color color, String back,int[] bel) {
         if (totalPlayers >= MAX_PLAYERS) {

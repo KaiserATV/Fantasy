@@ -87,7 +87,7 @@ public class SpielerDialog extends Dialog {
         
         jLabel2.setText("Herkunft:");
 
-        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Zwerg", "Ork", "Elf", "Zauberer" }));
+        jComboBox1.setModel(new DefaultComboBoxModel<>(new String[] { "Krämer","Zwerg", "Ork", "Elf", "Zauberer" }));
 
         
         jTextField6.setEditable(false);

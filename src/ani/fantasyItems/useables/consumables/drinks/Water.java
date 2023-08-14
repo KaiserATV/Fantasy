@@ -11,7 +11,7 @@ public class Water extends Drinks {
 	
 	private String name = "Water";
 	
-	private int p =15;
+	private int p =10;
 	
 	@Override
 	public String kaufenAsString() {

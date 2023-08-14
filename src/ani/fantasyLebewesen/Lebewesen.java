@@ -137,7 +137,15 @@ protected static int totalPlayers = 0;
 protected static final int MAX_PLAYERS = 10;
 	
 	
-	
+	protected int bewegung;
+
+		public int getBewegung() {
+			return bewegung;
+		}
+		
+		public void setBewegung(int b) {
+			bewegung = hp;
+		}
 	
 	
 	

@@ -6,8 +6,8 @@ public class Beluaferus extends Monster {
 	// haben Name(hängt zusammen mit Angriffstyp), Leben, Stärke, Gold (bzw. Drops?), Status 
 		Beluaferus(){
 		name = "Beluaferus";
-		hp = 10;
-		strength = 200;
+		hp = 21;
+		strength = 5;//Schaden 5-9
 		}
 		private boolean mangriff = true;
 			@Override
