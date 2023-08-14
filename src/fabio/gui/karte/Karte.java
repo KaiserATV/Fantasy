@@ -16,7 +16,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import java.io.File;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import ani.fantasyLebewesen.Spieler;
 
@@ -24,7 +25,7 @@ public class Karte {
 
         private static final int FELD_BREITE = 25;
         private static final int FELD_HOEHE = FELD_BREITE;
-        private static final int KARTE_BREITE = 70;
+        private static final int KARTE_BREITE = 50;
         private static final int KARTE_HOEHE = KARTE_BREITE;
         private static final int GEBAEUDE_RATIO = 30;
         private static final int MAX_VERBINDUNGEN_VON_ECKE = 40;
@@ -40,6 +41,8 @@ public class Karte {
         private Image wegBild;
         private Image baumBild;
         private Image gebaeudeBild;
+        private List<Point> kartenecken;
+        private Map<FeldTyp, Point> gebaeudePositionen;
 
         public boolean add(Spieler arg0) {
                 return spielerListe.add(arg0);
@@ -110,7 +113,7 @@ public class Karte {
 
         public Karte() {
                 karte = new FeldTyp[KARTE_BREITE][KARTE_HOEHE];
-                initKarte();
+                
 
                 wegBild = new ImageIcon(WEG_BILD_PATH).getImage();
                 baumBild = new ImageIcon(BAUM_BILD_PATH).getImage();
@@ -140,6 +143,16 @@ public class Karte {
                 frame.setVisible(true);
 
                 spielerListe = new ArrayList < > ();
+                
+                kartenecken = Arrays.asList(
+                        new Point(0, 0),
+                        new Point(0, KARTE_HOEHE - 1),
+                        new Point(KARTE_BREITE - 1, 0),
+                        new Point(KARTE_BREITE - 1, KARTE_HOEHE - 1)
+                );
+                
+                gebaeudePositionen = new HashMap<>();
+                initKarte();
 
         }
 
@@ -190,6 +203,7 @@ public class Karte {
                 for (int i = 0; i < karte.length; i++) {
                         Arrays.fill(karte[i], FeldTyp.BAUM);
                 }
+              
 
                 Random rand = new Random();
                 int gebaeudeAnzahl = (karte.length * karte[0].length) / GEBAEUDE_RATIO;
@@ -198,6 +212,11 @@ public class Karte {
                 for (int i = 0; i < gebaeudeAnzahl; i++) {
                         int x = rand.nextInt(karte.length);
                         int y = rand.nextInt(karte[0].length);
+                        
+                        if (kartenecken.contains(new Point(x, y))) {
+                            i--; // Wenn die Position eine Kartenecke ist, wiederhole die Iteration
+                            continue;
+                        }
                         if (karte[x][y] != FeldTyp.Juwelier && karte[x][y] != FeldTyp.Buchhandlung && karte[x][y] != FeldTyp.Schmiede) {
                         		if(i%4==0) {
                         			karte[x][y] = FeldTyp.Juwelier;
@@ -208,6 +227,9 @@ public class Karte {
                         		}else if(i%4==3) {
                         			karte[x][y] = FeldTyp.Taverne;
                         		}
+                        		
+                        		// Speichere die Position des Gebäudes in der HashMap, direkt nachdem es gesetzt wurde
+                                gebaeudePositionen.put(karte[x][y], new Point(x, y));
                                 gebaeudeListe.add(new Point(x, y));
                         } else {
                                 i--;
@@ -220,7 +242,7 @@ public class Karte {
                         new Point(karte.length - 1, 0),
                         new Point(karte.length - 1, karte[0].length - 1)
                 };
-
+                
                 for (Point ecke: ecken) {
                         List < Point > kopieGebaeudeListe = new ArrayList < > (gebaeudeListe);
                         verbindeMitNaechstenGebaeuden(ecke, kopieGebaeudeListe, MAX_VERBINDUNGEN_VON_ECKE); // Verbinde bis zu xx Gebäude von jeder Ecke
@@ -228,6 +250,7 @@ public class Karte {
                 }
         }
 
+        
         /**
          * Verbindet einen Startpunkt mit dem nächsten Gebäude bis zu einem gegebenen
          * Maximum an Verbindungen.
@@ -303,5 +326,15 @@ public class Karte {
                                 karte[x][y] = FeldTyp.WEG;
                         }
                 }
+        }
+        
+        // Neue Getter-Methode für die Kartenecken
+        public List<Point> getKartenecken() {
+            return kartenecken;
+        }
+
+        // Neue Getter-Methode für die Gebäudepositionen
+        public Map<FeldTyp, Point> getGebaeudePositionen() {
+            return gebaeudePositionen;
         }
 }
