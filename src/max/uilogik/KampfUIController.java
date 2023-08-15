@@ -1,0 +1,319 @@
+package max.uilogik;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.util.List;
+
+import javax.swing.JFrame;
+
+import ani.fantasyItems.Item;
+import ani.fantasyItems.equippable.jewelry.Jewelry;
+import ani.fantasyItems.schmiedegut.Armor;
+import ani.fantasyItems.useables.consumables.Consumeables;
+import ani.fantasyItems.weapons.Weapons;
+import ani.fantasyLebewesen.Lebewesen;
+import ani.fantasyLebewesen.spieler.Spieler;
+import fabio.spielerbewegung.SpielerBewegung;
+import max.sys.KampfSys;
+import max.ui.KampfGUI;
+
+public class KampfUIController extends UICon{
+	public KampfUIController(Spieler p, Lebewesen z, JFrame y, SpielerBewegung b) {
+		super(p,b);
+		
+		gui = new KampfGUI(y);
+		sys = new KampfSys(p,z);
+		
+		bewegung = b;
+		
+		pve = sys.isPve();
+		
+		gui.setInfo(sys.getNamenZwei());
+		gui.setInfoColor(Color.white);
+		
+		
+		gui.setSpieler1Bild(sys.getBildEins());
+		gui.setSpieler2Bild(sys.getBildZwei());
+		
+		entscheidMenu = true;
+		angriffsMenu = false;
+		itemMenu = false;
+		
+		gui.setAktion(sys.getNamenEins()+" begegnet "+sys.getNamenZwei()+".");
+		gui.addAktion("Was wird "+sys.getNamenEins()+" tun?");
+		
+		buttonIni();
+		
+		gui.setItemData(sys.getUsables());
+		
+		gui.setTravKeys(rechts, links, oben, unten, zu, aus);
+	
+	}
+	
+	private KeyAdapter zu = new KeyAdapter () {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == zurueck) {
+					back();
+			}
+		}
+	};
+	private void back() {
+		if(angriffsMenu) {
+			gui.clearAngriff();
+			angriffsMenu = false;
+			entscheidMenu = true;
+			gui.setEntscheid();
+		}else if(itemMenu) {
+			gui.clearItems();
+			itemMenu = false;
+			angriffsMenu = true;
+			gui.setAngriff();
+		}
+	}
+	
+	
+	
+	
+	private KeyAdapter aus = new KeyAdapter() {
+		@Override 
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				int g = gui.getSelectedIndex();
+				if(itemMenu && g < (sys.getUsables().length-1)) {	
+					gui.clearItems();
+					gui.setAngriff();
+					itemMenu = false;
+					angriffsMenu = true;
+					gui.addAktion(sys.getNamenEins()+" benutzt "+ sys.getItemName(sys.getItem(g))+" und bekommt "+sys.getItemEffekt(sys.getItem(g)));
+					sys.itemBenutzen(sys.getItem(g));
+					gui.removeItem(g);
+				}
+			}
+		}
+	};
+	
+	
+	private void buttonIni(){
+		gui.setKeyListenerLinks(linksEnt,0);
+		gui.setKeyListenerRechts(rechtsEnt,0);
+		gui.setKeyListenerLinks(linksAngr,1);
+		gui.setKeyListenerRechts(rechtsAngr,1);
+		gui.setErgebnisListener(weiter);
+		gui.anlegenListener(anlegenLinks, anlegenRechts);
+	}
+	//skippt von der Anzeige des Geschehenen zum neuen Menu
+		private KeyAdapter weiter = new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == auswahl) {
+					gui.clearErgebnis();
+					gui.setEntscheid();
+					entscheidMenu = true;
+					if(!pve) {
+						tauschen();
+					}else if(monsterTod) {
+						gui.beenden();
+					}else {
+						gui.setAktion("Was wird "+sys.getNamenEins() + " tun?");
+						gui.addAktion(sys.getNamenEins()+" Leben: "+sys.getLebenEins());
+						gui.addAktion(sys.getNamenZwei()+" Leben: "+sys.getLebenZwei());
+					}
+					
+				}
+			}		
+		};
+	
+
+	private KeyAdapter linksEnt = new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				gui.clearEntscheid();
+				gui.setAngriff();
+				entscheidMenu = false;
+				angriffsMenu = true;
+			}
+		}
+	};
+	private KeyAdapter linksAngr = new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				angriffsMenu = false;
+				gui.clearAktion();
+				gui.addAktion(sys.getNamenEins()+" greift "+ sys.getNamenZwei()+" an!");
+				gui.clearAngriff();
+				gui.setErgebnis();
+				gui.addErgebnis("");
+				naechsterZug();
+			}
+		}
+	};
+	
+	private KeyAdapter rechtsEnt = new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				if(sys.flucht()) {
+					gui.beenden();	
+				}else {
+					gui.addAktion(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
+					if(!pve) {
+						tauschen();
+					}else {
+						naechsterZug();
+					}
+				}
+			}	
+		}
+	};
+	private KeyAdapter rechtsAngr = new KeyAdapter() {
+		@Override 
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				gui.clearAngriff();
+				gui.setItems();//Muss implementiert werden
+				angriffsMenu = false;
+				itemMenu = true;
+			}
+		}
+	};
+	
+	
+	private void naechsterZug() {
+		int h = sys.kaempfen();
+		if (pve && h > 0) {
+			int i = sys.monsterAngriff();
+			gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
+			gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
+			if(i>0) {
+				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
+				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
+				gui.setInfoWidth(sys.bestimmeBreite());	
+			}else {
+			gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
+			gui.clearEntscheid();
+			monsterTod=true;
+			gui.setErgebnis();
+			bewegung.removeSpieler(sys.getSpielerEins());
+			}
+		}else if(!pve && h > 0){
+			gui.setAktion(sys.getNamenEins() +"greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
+			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
+			gui.setInfoWidth(sys.bestimmeBreite());
+			gui.setInfo(sys.getNamenZwei());
+		}else {
+			winUebergang();
+			if(!pve) {
+				bewegung.removeSpieler(sys.getSpielerZwei());	
+			}
+		}
+		
+	}
+	private void winUebergang() {
+		gui.setInfoWidth(0);
+		gui.setAktion(sys.getNamenEins()+" besiegt "+sys.getNamenZwei()+".");
+		gui.addAktion("Und bekommt:");
+		gui.clearAngriff();
+		sys.addLootBag();
+		gui.setErgebnisListener(lootMenu);
+		
+	}
+	
+	private KeyAdapter lootMenu = new KeyAdapter() {
+		@Override
+		public void keyPressed(KeyEvent e) {
+			if(e.getKeyCode() == auswahl) {
+				Consumeables cons = sys.getLootConsum();
+				Item extra = sys.getLootExtra();
+				switch (zaehler) {
+				case 0:
+					gui.addErgebnis("--> "+sys.getLootGold()+" Gold!");
+				break;
+				case 1:
+					if(cons != null) {
+						gui.addErgebnisMulti(ergebnisGen(cons));
+					}
+				break;
+				case 2:
+					if(extra != null) {
+						gui.addErgebnisMulti(ergebnisGen(extra));
+					}else if(extra == null && cons == null) {
+						gui.beenden();
+					}
+				break;
+				case 3:
+					if(sys.anlegbar()) {
+						if(sys.anlegbar()) {
+							gui.clearErgebnis();
+							gui.addAnlegen();
+						}
+					}else {
+						gui.beenden();	
+					}
+				break;
+				default:
+					gui.beenden();
+				}
+				zaehler++;
+			}
+		}
+	};
+	
+	private String ergebnisGen(Item i) {
+		String verschieden= i.getName()+" mit ";
+			if(i instanceof Armor) {
+				verschieden+=((Armor)i).getSchutz();
+			}else if(i instanceof Weapons) {
+				verschieden+=((Weapons)i).getStrength();
+			}else {
+				verschieden+= i.getEffekt();
+			}
+		return "--> "+verschieden+"!";
+	}
+	
+	
+	
+	
+	private ActionListener anlegenLinks = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			sys.anlegen();
+			gui.clearAnlegen();
+			gui.setErgebnis();
+		}
+	};
+	private ActionListener anlegenRechts = new ActionListener() {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			gui.clearAnlegen();
+			gui.setErgebnis();
+		}	
+	};
+	
+	
+
+	private void tauschen() {
+		sys.tauscheReihenfolge();
+		gui.setSpieler1Bild(sys.getBildEins());
+		gui.setSpieler2Bild(sys.getBildZwei());
+		gui.setInfoWidth(sys.bestimmeBreite());
+		gui.setInfo(sys.getNamenZwei());
+		gui.setItemData(sys.getUsables());
+		gui.clearAktion();
+		gui.setAktion("Was wird "+ sys.getNamenEins() +" tun?");
+	}
+	
+	private boolean monsterTod=false;
+	private int zaehler = 0;
+	private boolean pve;
+	private boolean entscheidMenu;
+	private boolean angriffsMenu;
+	private boolean itemMenu;
+	private KampfGUI gui;
+	private KampfSys sys;
+}
