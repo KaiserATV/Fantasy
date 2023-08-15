@@ -25,7 +25,7 @@ public class Beluaferus extends Monster {
 	}
 	public Item lootExtra() {
 		int i=zufall.nextInt(100);
-		if(i <13) {
+		if(i < 13) {
 			if(i <8) {
 				return new Sword();
 			}else {

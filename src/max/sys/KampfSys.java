@@ -26,6 +26,7 @@ public class KampfSys extends VorlageSys{
 		lootCon = gegen.lootConsu();
 		lootItem = gegen.lootExtra();
 		
+		gekauft = lootItem;
 		
 		ichBild = ich.getSpielerGesamt();
 		gegenBild = gegen.getSpielerGesamt();
@@ -122,10 +123,11 @@ public class KampfSys extends VorlageSys{
 			
 		}
 		String[] items = new String[itemsList.size()+1];
-		items[itemsList.size()+1]="...";
-		for(int i=0; i <itemsList.size(); i++) {
-			items[i] = itemsList.get(i);
-		}
+		items[itemsList.size()]="...";
+			for(int i=0; i <itemsList.size(); i++) {
+				items[i] = itemsList.get(i);
+			}	
+		
 		return items;
 	}
 	public BufferedImage getBildEins() {
@@ -202,5 +204,6 @@ public class KampfSys extends VorlageSys{
 	private int lootGold;
 	private Consumeables lootCon;
 	private Item lootItem;
+	
 	
 }

@@ -9,7 +9,9 @@ import ani.fantasyLebewesen.spieler.Spieler;
 public abstract class VorlageSys {
 
 	public boolean anlegbar() {
+		System.out.println(gekauft.getName());
 		if(gekauft instanceof Weapons || gekauft instanceof Armor || gekauft instanceof Equippable) {
+			System.out.println("test");
 			return true;
 		}else {
 			return false;
@@ -31,6 +33,14 @@ public abstract class VorlageSys {
 	
 	public String getStats() {
 		return ich.getStats();
+	}
+	public String getStatsWeniger() {
+		if(ich.getWaffe()!=null) {
+			return "Stärke(Waffe): "+ich.getWaffe().getStrength()+" Schutz: "+ich.getSchutz()+" Macht:"+ich.getMacht();	
+		}else {
+			return "Stärke(Waffe): "+0+" Schutz: "+ich.getSchutz()+" Macht:"+ich.getMacht();
+		}
+		
 	}
 
 	protected Item gekauft;

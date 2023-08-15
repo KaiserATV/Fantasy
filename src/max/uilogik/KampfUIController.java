@@ -247,10 +247,10 @@ public class KampfUIController extends UICon{
 					}
 				break;
 				case 3:
-					if(sys.anlegbar()) {
+					if(extra != null) {
 						if(sys.anlegbar()) {
 							gui.clearErgebnis();
-							gui.addAnlegen();
+							gui.addAnlegen(ergebnisGen(extra)+" Anlegen? - Derzeit: "+sys.getStatsWeniger());
 						}
 					}else {
 						gui.beenden();	
@@ -267,9 +267,9 @@ public class KampfUIController extends UICon{
 	private String ergebnisGen(Item i) {
 		String verschieden= i.getName()+" mit ";
 			if(i instanceof Armor) {
-				verschieden+=((Armor)i).getSchutz();
+				verschieden+=((Armor)i).getSchutz()+" Schutz";
 			}else if(i instanceof Weapons) {
-				verschieden+=((Weapons)i).getStrength();
+				verschieden+=((Weapons)i).getStrength()+" Stärke";
 			}else {
 				verschieden+= i.getEffekt();
 			}

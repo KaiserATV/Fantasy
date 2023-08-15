@@ -16,6 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 
 
@@ -71,6 +72,15 @@ public abstract class GUIVorlage {
         anlegen.setBackground(Color.black);
         anlegen.add(anlegenLinks);
         anlegen.add(anlegenRechts);
+        abfrage.setVisible(false);
+        abfrage.setBounds(0,0,1000,40);
+        abfrage.setFocusable(false);
+        abfrage.setBorder(null);
+        abfrage.setEditable(false);
+        abfrage.setBackground(Color.black);
+        abfrage.setForeground(Color.white);
+        abfrage.setFont(schrift);
+        anlegen.add(abfrage);
         
         
         //Menu für Entscheidung ob Flucht oder Angriff
@@ -287,11 +297,22 @@ public abstract class GUIVorlage {
 		 contentPane.add(anlegen);
 		 anlegenLinks.requestFocusInWindow();
 		 contentPane.repaint();
+	 }/**
+	  * Funktion um die Anlegen-Ebene hinzuzufügen
+	  * @param String s - text des Textfeldes
+	  */
+	 public void addAnlegen(String s) {
+		 abfrage.setVisible(true);
+		 abfrage.setText(s);
+		 contentPane.add(anlegen);
+		 anlegenLinks.requestFocusInWindow();
+		 contentPane.repaint();
 	 }
 	 /**
 	  * Funktion um die Anlegen-Ebene zu entfernen
 	  */
 	 public void clearAnlegen() {
+		 abfrage.setVisible(false);
 		 contentPane.remove(anlegen);
 	 }
 	 /**
@@ -337,6 +358,7 @@ public abstract class GUIVorlage {
     protected JLabel infoText = new JLabel();
     protected JTextArea aktionText = new JTextArea();
 	protected JTextArea ergebnis = new JTextArea();
+	protected JTextField abfrage = new JTextField();
     
     protected JButton buttonLinks = new JButton();
     protected JButton buttonRechts = new JButton();

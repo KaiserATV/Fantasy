@@ -58,6 +58,7 @@ public class KampfGUI extends GUIVorlage{
         aktionText.setForeground(Color.white);
         
         
+        
 		//Spielerbilder
 		spieler1.setVisible(true);
 		spieler2.setVisible(true);
