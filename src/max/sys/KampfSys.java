@@ -36,11 +36,11 @@ public class KampfSys extends VorlageSys{
 		schaden = ich.getStrength()+ich.getMacht();
 		
 		gegen.reduziereHp(schaden-gegen.getSchutz());
-		if(gegen.getHp() < 0) {
+		if(gegen.getHp() > 0) {
+			return schaden;
+		}else {
 			gewonnen(ich);
 			return -schaden;
-		}else {
-			return schaden;
 		}
 	}
 	
