@@ -43,8 +43,13 @@ public class KampfSys extends VorlageSys{
 			gegen.reduziereHp(schaden-gegen.getSchutz());
 			return schaden;
 		}else {
-			gewonnen(ich);
-			return -schaden;
+			if(ich.isUnsterblich()) {
+				schaden = 1-ich.getHp();
+				return schaden;
+			}else {
+				gewonnen(ich);
+				return -schaden;	
+			}
 		}
 	}
 	
@@ -78,11 +83,15 @@ public class KampfSys extends VorlageSys{
 				zahm = true;
 				return -1;
 			}else {
-				ich.setHp(0);
-				return -schaden;	
+				if(ich.isUnsterblich()) {
+					schaden = 1-ich.getHp();
+					return schaden;
+				}else {
+					ich.setHp(0);
+					return -schaden;	
+				}	
 			}
 		}
-		
 	}
 	
 	public void tauscheReihenfolge() {
