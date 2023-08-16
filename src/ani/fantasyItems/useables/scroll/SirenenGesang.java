@@ -2,6 +2,7 @@ package ani.fantasyItems.useables.scroll;
 
 import ani.fantasyLebewesen.Lebewesen;
 import ani.fantasyLebewesen.nsc.Monster;
+import ani.fantasyLebewesen.spieler.Spieler;
 
 public class SirenenGesang extends Scroll {
 
@@ -15,9 +16,9 @@ public class SirenenGesang extends Scroll {
 	private int p = zufall.nextInt(100)+250;
 
 	@Override
-	public void anwenden(Lebewesen spieler) {
-		if(spieler instanceof Monster) {
-			((Monster)spieler).setState("zahm");	
+	public void anwenden(Spieler ich, Lebewesen gegen) {
+		if(gegen instanceof Monster) {
+			((Monster)gegen).setState("zahm");	
 		}
 	}
 

@@ -16,8 +16,11 @@ public class Nebelfelder extends Scroll {
 	private int p = zufall.nextInt(100)+1100;
 
 	@Override
-	public void anwenden(Lebewesen spieler) {
-		((Spieler)spieler).setArmor(null);
+	public void anwenden(Spieler ich, Lebewesen gegen) {
+		ich.setArmor(null);
+		if(gegen instanceof Spieler) {
+			((Spieler)gegen).setArmor(null);
+		}
 	}
 
 	@Override

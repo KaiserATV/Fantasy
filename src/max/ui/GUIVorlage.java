@@ -38,12 +38,6 @@ public abstract class GUIVorlage {
         contentPane.setPreferredSize(new Dimension(1000,1000));
         contentPane.setLayout(null);
         
-        altPane.setSize(1000,1000);
-        altPane.setVisible(true);
-        altPane.setLayout(null);
-        altPane.setBackground(Color.cyan);
-        altPane.setFocusable(false);
-
         //Feld für Infos - Farbe in Unterklassen implementieren
         info.setVisible(true);
         info.setFocusable(false);
@@ -155,7 +149,6 @@ public abstract class GUIVorlage {
         
         main.pack();
         
-        main.setSize(1000,1000);
         
         buttonLinks.requestFocusInWindow();
  
@@ -345,7 +338,6 @@ public abstract class GUIVorlage {
     
     protected JFrame main;
     
-    protected JPanel altPane = new JPanel();
     protected JPanel contentPane = new JPanel();
     protected JPanel bildEbene = new JPanel();
     protected JPanel entscheid = new JPanel();

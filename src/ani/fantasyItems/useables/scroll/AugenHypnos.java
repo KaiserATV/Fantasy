@@ -1,6 +1,7 @@
 package ani.fantasyItems.useables.scroll;
 
 import ani.fantasyLebewesen.Lebewesen;
+import ani.fantasyLebewesen.spieler.Spieler;
 
 public class AugenHypnos extends Scroll {
 	public AugenHypnos() {
@@ -14,9 +15,9 @@ public class AugenHypnos extends Scroll {
 	private int p = zufall.nextInt(100)+200;
 
 	@Override
-	public void anwenden(Lebewesen spieler) {
-		spieler.setGelaehmt(true);
-		spieler.setLaehmung(2);//anzahl der Runden die gelähmt - mind 1
+	public void anwenden(Spieler ich, Lebewesen gegen) {
+		gegen.setGelaehmt(true);
+		gegen.setLaehmung(2);//anzahl der Runden die gelähmt - mind 1
 	}
 
 	@Override

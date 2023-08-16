@@ -183,12 +183,6 @@ public class KampfGUI extends GUIVorlage{
 		items.addKeyListener(zu);
 		items.addKeyListener(aus);
 	}
-	/**
-	 * Funktion die aufgerufen wird, wenn eine Person gewonnen
-	 */
-	public void setWinPane() {
-		main.setContentPane(altPane);
-	}
     /**
      * Fügt die Angriffsebene der contentpane hinzu
      */
