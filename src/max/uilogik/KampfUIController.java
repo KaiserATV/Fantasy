@@ -5,12 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.List;
 
 import javax.swing.JFrame;
 
 import ani.fantasyItems.Item;
-import ani.fantasyItems.equippable.jewelry.Jewelry;
 import ani.fantasyItems.schmiedegut.Armor;
 import ani.fantasyItems.useables.consumables.Consumeables;
 import ani.fantasyItems.weapons.Weapons;
@@ -154,6 +152,7 @@ public class KampfUIController extends UICon{
 		}
 	};
 	
+	
 	private KeyAdapter rechtsEnt = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -161,12 +160,14 @@ public class KampfUIController extends UICon{
 				if(sys.flucht()) {
 					gui.beenden();	
 				}else {
-					gui.addAktion(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
 					if(!pve) {
 						tauschen();
 					}else {
-						naechsterZug();
+						naechsterZugItem(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
+						gui.clearEntscheid();
+						gui.setErgebnis();
 					}
+					e.getComponent().setVisible(false);
 				}
 			}	
 		}
@@ -182,14 +183,41 @@ public class KampfUIController extends UICon{
 			}
 		}
 	};
+	private void naechsterZugItem(String s) {
+		if (pve) {
+			int i = sys.monsterAngriff();
+			if(i>0) {
+				gui.setAktion(s);
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
+				gui.setInfoWidth(sys.bestimmeBreite());	
+			}else if(sys.getZahm()){
+				gui.setAktion(s);
+				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
+				winUebergang();
+			}else {
+				gui.setAktion(s);
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
+				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
+				gui.clearEntscheid();
+				monsterTod=true;
+				gui.setErgebnis();
+				bewegung.removeSpieler(sys.getSpielerEins());
+			}
+		}else if(!pve){
+			gui.setAktion(s);
+			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
+			gui.setInfoWidth(sys.bestimmeBreite());
+			gui.setInfo(sys.getNamenZwei());
+		}
+	}
+	
+	
 	
 	private void naechsterZugItem() {
 		if (pve) {
 			int i = sys.monsterAngriff();
 			if(i>0) {
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
-				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
-				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
 			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
@@ -219,9 +247,8 @@ public class KampfUIController extends UICon{
 			if(i>0) {
 				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
-				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
-				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
+				System.out.println(sys.bestimmeBreite());
 			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 				winUebergang();
