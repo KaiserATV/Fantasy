@@ -34,7 +34,7 @@ public class ShopUIController extends UICon{
 		
 		gui.setInfo(sys.getLadenName());
 		
-		gui.setTravKeys(rechts, links, oben, unten, zurueckMenu, auswahl, aus);
+		gui.setTravKeys(rechts, links, zurueckMenu, auswahl, aus);
 		
 		
 		gui.setAktion(sys.getSpielerName()+" betritt " +sys.getLadenName()+".");
