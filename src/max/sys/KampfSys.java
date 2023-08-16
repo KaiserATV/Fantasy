@@ -66,9 +66,7 @@ public class KampfSys extends VorlageSys{
 		return weiter;
 	}
 	public int bestimmeBreite() {
-		double prozente = ((double)schadenGesIch/urSprLebenGegen);
-		return (int) Math.floor(1000-prozente*1000);
-		
+		return (int) Math.ceil((((double) gegen.getHp())/gegen.getHpMax())*1000);
 	}
 	public int monsterAngriff() {
 		schaden = ((Monster) gegen).getStrength();

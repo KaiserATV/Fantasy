@@ -248,7 +248,6 @@ public class KampfUIController extends UICon{
 				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.setInfoWidth(sys.bestimmeBreite());	
-				System.out.println(sys.bestimmeBreite());
 			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 				winUebergang();
@@ -272,8 +271,8 @@ public class KampfUIController extends UICon{
 				bewegung.removeSpieler(sys.getSpielerZwei());	
 			}
 		}
-		
 	}
+	
 	private void winUebergang() {
 		gui.setInfoWidth(0);
 		gui.setAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
