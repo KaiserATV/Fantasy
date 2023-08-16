@@ -98,21 +98,21 @@ public class SpielerBewegung {
                 frame.repaint();
                 switch (aktuellesFeld) {
                 case Juwelier:
-                        feldaktionen.betreteJuwelier(alleSpieler.get(aktuellerSpielerIndex));
+                        feldaktionen.betreteJuwelier(aktuellerSpieler);
                         break;
                 case Buchhandlung:
-                    feldaktionen.betreteBuchhandlung(alleSpieler.get(aktuellerSpielerIndex));
+                    feldaktionen.betreteBuchhandlung(aktuellerSpieler);
                     break;
                 case Schmiede:
-                    feldaktionen.betreteSchmiede(alleSpieler.get(aktuellerSpielerIndex));
+                    feldaktionen.betreteSchmiede(aktuellerSpieler);
                     break;
                 case Taverne:
-                	feldaktionen.betreteTaverne(alleSpieler.get(aktuellerSpielerIndex));
+                	feldaktionen.betreteTaverne(aktuellerSpieler);
                 case BAUM:
-                        feldaktionen.wahrscheinlichkeitMonsterInteraktion(alleSpieler.get(aktuellerSpielerIndex));
+                        feldaktionen.wahrscheinlichkeitMonsterInteraktion(aktuellerSpieler);
                         break;
                 case WEG:
-                        feldaktionen.wahrscheinlichkeitHaendlerTreffen(alleSpieler.get(aktuellerSpielerIndex));
+                        feldaktionen.wahrscheinlichkeitHaendlerTreffen(aktuellerSpieler);
                         break;
                 }
                 for(Spieler s:alleSpieler) {
