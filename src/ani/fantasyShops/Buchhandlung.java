@@ -14,12 +14,9 @@ public class Buchhandlung extends Shops {
 			return "Buchhandlung";
 		}
 	
-
-	
-	
 	public void wareBuch() {
 		for(int i=0;i<n;i++) {
-			switch(zufall.nextInt(3)) {
+			switch(zufall.nextInt(4)) {
 			case 0:
 				AugenHypnos augen = new AugenHypnos();
 				inventar.add(augen);
@@ -31,6 +28,10 @@ public class Buchhandlung extends Shops {
 			case 2:
 				Nebelfelder nebel = new Nebelfelder();
 				inventar.add(nebel);
+				break;
+			case 3:
+				SirenenGesang siren = new SirenenGesang();
+				inventar.add(siren);
 				break;
 			default:
 				System.out.println("Etwas ist schief gegangen...");
