@@ -22,6 +22,7 @@ public class Ork extends Spieler {
 		return "("+90+" Leben, "+5+" Stärke, "+8+" Bewegungsreichweite, "+1+" Startgold)";
 	}
 	private void setBild(Color c) {
+		System.out.println("test");
 		try {
 			if(c == Color.red) {
 					spielerGesamt = ImageIO.read(new File("src/img/klassen/GanzOrk_Rot.png"));
@@ -37,7 +38,6 @@ public class Ork extends Spieler {
 	//			spielerKopf = ImageIO.read(new File("src/img/klassen/GanzElf_Rot.png"));
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

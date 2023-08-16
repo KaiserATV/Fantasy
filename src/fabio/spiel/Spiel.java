@@ -92,6 +92,10 @@ public class Spiel {
 			}
 			return false;
 		}
+		
+		public List<Point> getKartenEcken() {
+			return karte.getKartenecken();
+		}
         
         
         

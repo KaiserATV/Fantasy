@@ -369,15 +369,15 @@ public class SpielerDialog extends Dialog {
     }
     private void spielerHinzu(int i) {
     	if(i == 0) {
-    		s.spielerAdd(new Kraemer(jTextField1.getText().trim(), bestimmePos(s.getSpielerAnzahl()), bestimmeColor(), beleg));	
+    		s.spielerAdd(new Kraemer(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));	
     	}else if(i == 1) {
-    		s.spielerAdd(new Elf(jTextField1.getText().trim(), bestimmePos(s.getSpielerAnzahl()), bestimmeColor(), beleg));
+    		s.spielerAdd(new Elf(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));
     	}else if(i == 2) {
-    		s.spielerAdd(new Ork(jTextField1.getText().trim(), bestimmePos(s.getSpielerAnzahl()), bestimmeColor(), beleg));
+    		s.spielerAdd(new Ork(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));
     	}else if(i == 3) {
-    		s.spielerAdd(new Zaubererin(jTextField1.getText().trim(), bestimmePos(s.getSpielerAnzahl()), bestimmeColor(), beleg));
+    		s.spielerAdd(new Zaubererin(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));
     	}else if(i == 4) {
-    		s.spielerAdd(new Zwerg(jTextField1.getText().trim(), bestimmePos(s.getSpielerAnzahl()), bestimmeColor(), beleg));
+    		s.spielerAdd(new Zwerg(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));
     	}
 			
 		
@@ -392,21 +392,6 @@ public class SpielerDialog extends Dialog {
     	}
     	return false;
     	
-    }
-    private Point bestimmePos(int i) {
-    	switch(i) {
-		case 0:
-			return new Point(0,0);
-		case 1:
-			return new Point(0,69);
-		case 2:
-			return new Point(69,0);
-		case 3:
-			return new Point(69,69);
-		default: 
-			System.out.println("Fehler bei Positionserstellung");
-			return null;
-		}
     }
     private Color bestimmeColor() {
     		switch(farbenList.get(jComboBox2.getSelectedIndex())) {
