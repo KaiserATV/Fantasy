@@ -169,6 +169,7 @@ public abstract class Lebewesen {
 	        this.color = color;
 	}
 	
+	
 	public void setSteps(int steps) {
 	        this.steps = steps;
 	}

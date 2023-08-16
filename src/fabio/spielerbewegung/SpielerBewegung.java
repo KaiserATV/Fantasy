@@ -5,7 +5,7 @@ import fabio.gui.karte.Karte;
 import javax.swing.*;
 
 import ani.fantasyLebewesen.spieler.Spieler;
-
+import javax.swing.JOptionPane;
 import java.awt.KeyboardFocusManager;
 import java.awt.KeyEventDispatcher;
 import java.awt.event.KeyEvent;
@@ -69,12 +69,16 @@ public class SpielerBewegung {
                                 frame.repaint();
                             } else if (e.getKeyCode() == belegung[4]) {
                                 naechsterSpieler();
+                                Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
+                                JOptionPane.showMessageDialog(frame, "Du h. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
                                 frame.repaint();
                             }
                         } 
                     } else if (!aktuellerSpieler.hatBewegungen()) {
-                        System.out.println("next");
                         naechsterSpieler();
+                     // Erstellt ein Popup mit dem Namen des nächsten Spielers
+                        Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
+                        JOptionPane.showMessageDialog(frame, "Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
                         frame.repaint();
                     }
                     
