@@ -91,6 +91,7 @@ public class KampfUIController extends UICon{
 					gui.addAktion(sys.getNamenEins()+" benutzt "+ sys.getItemName(sys.getItem(g))+" und bekommt "+sys.getItemEffekt(sys.getItem(g)));
 					sys.itemBenutzen(sys.getItem(g));
 					gui.removeItem(g);
+					naechsterZugItem();
 				}
 			}
 		}
@@ -183,6 +184,30 @@ public class KampfUIController extends UICon{
 		}
 	};
 	
+	private void naechsterZugItem() {
+		if (pve) {
+			int i = sys.monsterAngriff();
+			gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
+			if(i>0) {
+				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
+				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
+				gui.setInfoWidth(sys.bestimmeBreite());	
+			}else {
+				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
+				gui.clearEntscheid();
+				monsterTod=true;
+				gui.setErgebnis();
+				bewegung.removeSpieler(sys.getSpielerEins());
+			}
+		}else if(!pve){
+			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
+			gui.setInfoWidth(sys.bestimmeBreite());
+			gui.setInfo(sys.getNamenZwei());
+		}
+	}
+	
+	
+	
 	
 	private void naechsterZug() {
 		int h = sys.kaempfen();
@@ -195,11 +220,11 @@ public class KampfUIController extends UICon{
 				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
 			}else {
-			gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
-			gui.clearEntscheid();
-			monsterTod=true;
-			gui.setErgebnis();
-			bewegung.removeSpieler(sys.getSpielerEins());
+				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
+				gui.clearEntscheid();
+				monsterTod=true;
+				gui.setErgebnis();
+				bewegung.removeSpieler(sys.getSpielerEins());
 			}
 		}else if(!pve && h > 0){
 			gui.setAktion(sys.getNamenEins() +"greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
@@ -216,7 +241,7 @@ public class KampfUIController extends UICon{
 	}
 	private void winUebergang() {
 		gui.setInfoWidth(0);
-		gui.setAktion(sys.getNamenEins()+" besiegt "+sys.getNamenZwei()+".");
+		gui.setAktion(sys.getNamenEins()+"( "+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
 		gui.addAktion("Und bekommt:");
 		gui.clearAngriff();
 		sys.addLootBag();
