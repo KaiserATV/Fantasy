@@ -241,7 +241,7 @@ public class KampfUIController extends UICon{
 	}
 	private void winUebergang() {
 		gui.setInfoWidth(0);
-		gui.setAktion(sys.getNamenEins()+"( "+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
+		gui.setAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
 		gui.addAktion("Und bekommt:");
 		gui.clearAngriff();
 		sys.addLootBag();
