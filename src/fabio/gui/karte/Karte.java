@@ -7,6 +7,9 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,8 +28,10 @@ import java.util.Map;
 
 public class Karte {
 
-        private static final int FELD_BREITE = 25;
-        private static final int FELD_HOEHE = FELD_BREITE;
+		static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		static double heightRatio = screenSize.getHeight() / 1080.0;
+        private static int FELD_HOEHE = (int) (20 * heightRatio);
+        private static int FELD_BREITE = FELD_HOEHE;
         private static final int KARTE_BREITE = 50;
         private static final int KARTE_HOEHE = KARTE_BREITE;
         private static final int GEBAEUDE_RATIO = 30;
@@ -40,6 +45,7 @@ public class Karte {
         private FeldTyp[][] karte;
         private JPanel contentPane = new JPanel();
         private JFrame frame;
+        JPanel zentralPanel = new JPanel(null);
         private Image wegBild;
         private Image baumBild;
         private Image gebaeudeBild;
@@ -134,11 +140,27 @@ public class Karte {
                 gbc.fill = GridBagConstraints.BOTH;
 
                 KartenPanel kartenPanel = new KartenPanel();
-                JScrollPane scrollPane = new JScrollPane(kartenPanel);
+                zentralPanel.setLayout(new GridBagLayout()); // Setzen des Layouts für zentralPanel
+                GridBagConstraints zentralGbc = new GridBagConstraints();
+                zentralGbc.gridx = 0;
+                zentralGbc.gridy = 0;
+                zentralGbc.weightx = 1.0;
+                zentralGbc.weighty = 1.0;
+                zentralGbc.fill = GridBagConstraints.NONE; // Hier wird es NICHT gefüllt
+                zentralPanel.add(kartenPanel, zentralGbc); // Das KartenPanel wird zum zentralPanel hinzugefügt
+                JScrollPane scrollPane = new JScrollPane(zentralPanel);
                 contentPane.add(scrollPane, gbc);
                 contentPane.setVisible(true);
                 frame.setLayout(new CardLayout());
                 frame.add("a",contentPane);
+                frame.addComponentListener(new ComponentAdapter() {
+                    @Override
+                    public void componentResized(ComponentEvent e) {
+                        Dimension newSize = frame.getSize();                        
+                        frame.repaint();  // Neuzeichnen, um die Änderungen anzuzeigen
+                    }
+                });
+
                 
                 frame.pack();
                 frame.setLocationRelativeTo(null); // Zentriert das Fenster auf dem Bildschirm
