@@ -114,7 +114,6 @@ public class KampfSys extends VorlageSys{
 	}
 	public String[] getUsables() {
 		List<String> itemsList= new LinkedList<String>();
-		System.out.println(ich.bag.getBag().size());
 		if(ich.bag.getBag().size()>0) {
 			for(Item g:ich.bag.getBag()) {
 				if(g instanceof Useables)

@@ -9,9 +9,7 @@ import ani.fantasyLebewesen.spieler.Spieler;
 public abstract class VorlageSys {
 
 	public boolean anlegbar() {
-		System.out.println(gekauft.getName());
 		if(gekauft instanceof Weapons || gekauft instanceof Armor || gekauft instanceof Equippable) {
-			System.out.println("test");
 			return true;
 		}else {
 			return false;

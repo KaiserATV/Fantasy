@@ -23,8 +23,6 @@ public class ShopUIController extends UICon{
 		
 		gui = new ShopGUI(y);
 		sys = new ShopSys(p,s);
-		System.out.println(rechts);	
-		System.out.println(links);
 
 		urGeld = sys.getSpielerVermoegen();
 		

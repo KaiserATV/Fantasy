@@ -50,7 +50,6 @@ public class ShopGUI extends GUIVorlage{
 	 * @param aus KeyListener welcher bei auswahl feuert (inventar)
 	 */
 	public void setTravKeys(int rechts, int links, int oben, int unten,KeyAdapter zu, int auswahl, KeyAdapter aus) {
-		System.out.println(rechts +" "+links);
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(rechts,0))));
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(links,0))));     
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.UP_CYCLE_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(oben,0))));
