@@ -186,12 +186,16 @@ public class KampfUIController extends UICon{
 	private void naechsterZugItem() {
 		if (pve) {
 			int i = sys.monsterAngriff();
-			gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 			if(i>0) {
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
 				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
+			}else if(sys.getZahm()){
+				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
+				winUebergang();
 			}else {
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				gui.clearEntscheid();
 				monsterTod=true;
@@ -212,15 +216,18 @@ public class KampfUIController extends UICon{
 		int h = sys.kaempfen();
 		if (pve && h > 0) {
 			int i = sys.monsterAngriff();
-			gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
-			gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 			if(i>0) {
+				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
 				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
-			}else if(i == -Integer.MAX_VALUE){
+			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
+				winUebergang();
 			}else {
+				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
+				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				gui.clearEntscheid();
 				monsterTod=true;

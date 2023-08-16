@@ -37,6 +37,7 @@ public class KampfSys extends VorlageSys{
 		schaden = ich.getStrength()+ich.getMacht();
 		
 		if(ich.getGelaehmt()) {
+			ich.lowerLaehmung(1);
 			return 0; // null wenn gelähmt	
 		}else if(gegen.getHp()-schaden > 0) {
 			gegen.reduziereHp(schaden-gegen.getSchutz());
@@ -69,14 +70,17 @@ public class KampfSys extends VorlageSys{
 		if(gegen.getGelaehmt()) {
 			gegen.lowerLaehmung(1);
 			return 0;//	Monster greif nicht an/ist gelähmt
-		}else if(((Monster)gegen).getState() == "zahm") {
-			return -Integer.MAX_VALUE;	
 		}else if ((ich.getHp()+ich.getSchutz())>schaden) {
 			ich.reduziereHp(schaden-ich.getSchutz());
 			return schaden;	
 		}else {
-			ich.setHp(0);
-			return -schaden;
+			if(gegen.getState() == "zahm") {
+				zahm = true;
+				return -1;
+			}else {
+				ich.setHp(0);
+				return -schaden;	
+			}
 		}
 		
 	}
@@ -201,8 +205,12 @@ public class KampfSys extends VorlageSys{
 	public Item getDropItem() {
 		return gekauft;
 	}
+	public boolean getZahm() {
+		return zahm;
+	}
 	
 	
+	private boolean zahm = false;
 	private boolean getauscht;
 	private int schadenGesIch;
 	private int schadenGesGegen;
