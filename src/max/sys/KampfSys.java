@@ -34,13 +34,13 @@ public class KampfSys extends VorlageSys{
 		
 	}
 	public int kaempfen() {
-		schaden = ich.getStrength()+ich.getMacht();
-		
+		schaden = ich.getStrength();
 		if(ich.getGelaehmt()) {
 			ich.lowerLaehmung(1);
 			return 0; // null wenn gelähmt	
-		}else if(gegen.getHp()-schaden > 0) {
+		}else if((gegen.getHp()+gegen.getSchutz()-schaden)> 0 && (gegen.getHp()-ich.getMacht()) >0) {
 			gegen.reduziereHp(schaden-gegen.getSchutz());
+			gegen.reduziereHp(ich.getMacht());
 			return schaden;
 		}else {
 			if(ich.isUnsterblich()) {
