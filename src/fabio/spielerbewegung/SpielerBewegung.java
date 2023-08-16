@@ -33,7 +33,7 @@ public class SpielerBewegung {
                 this.karte = karte;
                 this.frame = frame;
                 this.feldaktionen = new FeldAktionen(frame, this);
-                this.alleSpieler = spielerListe; // Hier haben wir die Änderung vorgenommen
+                this.alleSpieler = spielerListe; // 
                 initSpielerBewegung();
                 frame.repaint();
         }
@@ -48,7 +48,7 @@ public class SpielerBewegung {
                 @Override
                 public boolean dispatchKeyEvent(KeyEvent e) {
                     if (isDialogOpen[0]) {
-                        return false; // Ignoriere Tastenanschläge, während der Dialog offen ist
+                        return false; // 
                     }
                     Spieler aktuellerSpieler = Spieler.getAktuellerSpieler();
                     int[] belegung = aktuellerSpieler.getBelegung();
