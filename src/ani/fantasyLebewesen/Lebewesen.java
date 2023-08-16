@@ -24,6 +24,7 @@ public abstract class Lebewesen {
 	protected static int totalPlayers = 0;
 	protected static final int MAX_PLAYERS = 10;
 	protected int bewegung;
+	public int aktuelleBewegungen = 10;
 	protected String name;
 	protected int schutz = 0;
 	private boolean armored;
@@ -53,7 +54,6 @@ public abstract class Lebewesen {
         }
 	}
 
-	
 
 	/**
 	 * Gibt den aktuellen Spieler zurück.
@@ -72,7 +72,19 @@ public abstract class Lebewesen {
 	        aktuellerSpieler = spieler;
 	}
 	
+	public void bewegungVerringern() {
+	    if (aktuelleBewegungen > 0) {
+	        aktuelleBewegungen--;
+	    }
+	}
+	public boolean hatBewegungen() {
+	    return aktuelleBewegungen > 0;
+	}
+	public void resetBewegungen() {
+	    this.aktuelleBewegungen = bewegung;
+	}
 
+	
 	public void setPosition(Point point) {
 	        this.position = point;
 	}	
@@ -91,15 +103,19 @@ public abstract class Lebewesen {
 	}
 	public void moveUp(int maxX, int maxY) {
 	        moveTo(position.x, position.y - 1, maxX, maxY);
+	        bewegungVerringern();
 	}
 	public void moveDown(int maxX, int maxY) {
 	        moveTo(position.x, position.y + 1, maxX, maxY);
+	        bewegungVerringern();
 	}
 	public void moveLeft(int maxX, int maxY) {
 	        moveTo(position.x - 1, position.y, maxX, maxY);
+	        bewegungVerringern();
 	}
 	public void moveRight(int maxX, int maxY) {
 	        moveTo(position.x + 1, position.y, maxX, maxY);
+	        bewegungVerringern();
 	}
 	
 	

@@ -43,48 +43,58 @@ public class SpielerBewegung {
          * Spielers zu steuern.
          */
         public void initSpielerBewegung() {
-                KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-                        @Override
-                        public boolean dispatchKeyEvent(KeyEvent e) {
-                                Spieler aktuellerSpieler = Spieler.getAktuellerSpieler();
-                                int[] belegung = aktuellerSpieler.getBelegung();
-                                if (e.getID() == KeyEvent.KEY_PRESSED) {
-                                        if(e.getKeyCode() == belegung[0]){
-                                                aktuellerSpieler.moveLeft(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-                                                spielerBewegt();
-                                                frame.repaint();
-                                        }else if(e.getKeyCode() == belegung[1]){
-                                                aktuellerSpieler.moveRight(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-                                                spielerBewegt();
-                                                frame.repaint();
-                                        }else if(e.getKeyCode() == belegung[2]){
-                                            aktuellerSpieler.moveUp(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-                                            spielerBewegt();
-                                            frame.repaint();
-	                                    }else if(e.getKeyCode() == belegung[3]){
-	                                        aktuellerSpieler.moveDown(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-	                                        spielerBewegt();
-	                                        frame.repaint();
-		                                }else if(e.getKeyCode() == belegung[4]){
-		                                	naechsterSpieler();
-                                            frame.repaint();
-		                                }
-                        }
-                                return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
-                        }
-                });
-                
+            KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+                @Override
+                public boolean dispatchKeyEvent(KeyEvent e) {
+                    Spieler aktuellerSpieler = Spieler.getAktuellerSpieler();
+                    int[] belegung = aktuellerSpieler.getBelegung();
+                    
+                    if (e.getID() == KeyEvent.KEY_PRESSED) {
+                        if (aktuellerSpieler.hatBewegungen()) {
+                            if (e.getKeyCode() == belegung[0]) {
+                                aktuellerSpieler.moveLeft(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+                                spielerBewegt();
+                                frame.repaint();
+                            } else if (e.getKeyCode() == belegung[1]) {
+                                aktuellerSpieler.moveRight(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+                                spielerBewegt();
+                                frame.repaint();
+                            } else if (e.getKeyCode() == belegung[2]) {
+                                aktuellerSpieler.moveUp(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+                                spielerBewegt();
+                                frame.repaint();
+                            } else if (e.getKeyCode() == belegung[3]) {
+                                aktuellerSpieler.moveDown(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+                                spielerBewegt();
+                                frame.repaint();
+                            } else if (e.getKeyCode() == belegung[4]) {
+                                naechsterSpieler();
+                                frame.repaint();
+                            }
+                        } 
+                    } else if (!aktuellerSpieler.hatBewegungen()) {
+                        System.out.println("next");
+                        naechsterSpieler();
+                        frame.repaint();
+                    }
+                    
+                    return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls reagieren.
+                }
+            });
         }
+
+                
 
         /**
          * Methode, um den nächsten Spieler auszuwählen.
          */
         public void naechsterSpieler() {
-                if (alleSpieler != null && !alleSpieler.isEmpty()) {
-                        int currentIndex = alleSpieler.indexOf(Spieler.getAktuellerSpieler());
-                        int nextIndex = (currentIndex + 1) % alleSpieler.size();
-                        Spieler.setAktuellerSpieler(alleSpieler.get(nextIndex));
-                }
+            if (alleSpieler != null && !alleSpieler.isEmpty()) {
+                int currentIndex = alleSpieler.indexOf(Spieler.getAktuellerSpieler());
+                int nextIndex = (currentIndex + 1) % alleSpieler.size();
+                Spieler.setAktuellerSpieler(alleSpieler.get(nextIndex));
+                alleSpieler.get(nextIndex).resetBewegungen();
+            }
         }
 
         /**

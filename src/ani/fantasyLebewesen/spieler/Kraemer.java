@@ -16,6 +16,7 @@ public class Kraemer extends Spieler {
 		gold = 2000;
 		bewegung = 15;
 		hp = hpmax;
+		resetBewegungen();
 		setBild(col);
 	}
 	public static String getBeschreibung() {

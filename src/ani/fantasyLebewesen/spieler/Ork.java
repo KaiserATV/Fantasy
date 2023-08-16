@@ -16,6 +16,7 @@ public class Ork extends Spieler {
 		gold = 1;
 		bewegung = 8;
 		hp = hpmax;
+		resetBewegungen();
 		setBild(color);
 	}
 	public static String getBeschreibung() {

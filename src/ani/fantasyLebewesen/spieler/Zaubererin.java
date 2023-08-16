@@ -16,6 +16,7 @@ public class Zaubererin extends Spieler {
 		gold = 369;
 		bewegung = 9;
 		hp = hpmax;
+		resetBewegungen();
 		setBild(color);
 	}
 	public static String getBeschreibung() {

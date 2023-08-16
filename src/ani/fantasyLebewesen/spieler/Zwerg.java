@@ -16,6 +16,7 @@ public class Zwerg extends Spieler {
 		gold = 169;
 		bewegung = 9;
 		hp = hpmax;
+		resetBewegungen();
 		setBild(color);
 	}
 	public static String getBeschreibung() {

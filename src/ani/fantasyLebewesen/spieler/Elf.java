@@ -19,6 +19,7 @@ public class Elf extends Spieler {
 		gold = 150;
 		bewegung = 12;
 		hp = hpmax;
+		resetBewegungen();
 		setBild(color);
 	}
 	public static String getBeschreibung() {
