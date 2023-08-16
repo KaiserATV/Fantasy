@@ -88,8 +88,7 @@ public class KampfUIController extends UICon{
 					gui.setAngriff();
 					itemMenu = false;
 					angriffsMenu = true;
-					gui.addAktion(sys.getNamenEins()+" benutzt "+ sys.getItemName(sys.getItem(g))+" und bekommt "+sys.getItemEffekt(sys.getItem(g)));
-					sys.itemBenutzen(sys.getItem(g));
+					gui.addAktion(sys.itemBenutzen(sys.getItem(g)));
 					gui.removeItem(g);
 					naechsterZugItem();
 				}
@@ -219,6 +218,8 @@ public class KampfUIController extends UICon{
 				gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
 				gui.addAktion(sys.getNamenEins()+" hat noch "+sys.getLebenEins()+" Leben!");
 				gui.setInfoWidth(sys.bestimmeBreite());	
+			}else if(i == -Integer.MAX_VALUE){
+				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 			}else {
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				gui.clearEntscheid();

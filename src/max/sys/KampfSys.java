@@ -7,6 +7,7 @@ import java.util.List;
 import ani.fantasyItems.Item;
 import ani.fantasyItems.useables.Useables;
 import ani.fantasyItems.useables.consumables.Consumeables;
+import ani.fantasyItems.useables.scroll.Scroll;
 import ani.fantasyLebewesen.Lebewesen;
 import ani.fantasyLebewesen.nsc.Monster;
 import ani.fantasyLebewesen.spieler.Spieler;
@@ -35,8 +36,10 @@ public class KampfSys extends VorlageSys{
 	public int kaempfen() {
 		schaden = ich.getStrength()+ich.getMacht();
 		
-		gegen.reduziereHp(schaden-gegen.getSchutz());
-		if(gegen.getHp() > 0) {
+		if(ich.getGelaehmt()) {
+			return 0; // null wenn gelähmt	
+		}else if(gegen.getHp()-schaden > 0) {
+			gegen.reduziereHp(schaden-gegen.getSchutz());
 			return schaden;
 		}else {
 			gewonnen(ich);
@@ -63,7 +66,12 @@ public class KampfSys extends VorlageSys{
 	}
 	public int monsterAngriff() {
 		schaden = ((Monster) gegen).getStrength();
-		if((ich.getHp()+ich.getSchutz())>schaden) {
+		if(gegen.getGelaehmt()) {
+			gegen.lowerLaehmung(1);
+			return 0;//	Monster greif nicht an/ist gelähmt
+		}else if(((Monster)gegen).getState() == "zahm") {
+			return -Integer.MAX_VALUE;	
+		}else if ((ich.getHp()+ich.getSchutz())>schaden) {
 			ich.reduziereHp(schaden-ich.getSchutz());
 			return schaden;	
 		}else {
@@ -92,7 +100,12 @@ public class KampfSys extends VorlageSys{
 	}
 	
 	public String itemBenutzen(Item i) {
-		String name = ich.bag.get(i).getName();
+		String name = ich.bag.get(i).anwendenText(ich);
+		if(i instanceof Scroll) {
+			ich.bag.get(i).anwenden(gegen);
+		}else {
+			ich.bag.get(i).anwenden(ich);
+		}
 		ich.bag.removeBag(ich.bag.getBag().indexOf(i));
 		return name;
 	}

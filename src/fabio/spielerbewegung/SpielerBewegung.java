@@ -151,6 +151,7 @@ public class SpielerBewegung {
                 this.feldaktionen = feldaktionen;
         }
         public void removeSpieler(Spieler s) {
+        	System.out.println("removed");
         	alleSpieler.remove(s);
         }
         

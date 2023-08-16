@@ -39,8 +39,4 @@ public abstract class Monster extends NSC {
 		return null;
 	}
 
-
-
-
-
 }

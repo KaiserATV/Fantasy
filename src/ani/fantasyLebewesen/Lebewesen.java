@@ -12,8 +12,9 @@ import ani.fantasyLebewesen.spieler.Spieler;
 
 
 public abstract class Lebewesen { 
-	//braucht Name, Leben, Stärke, Gold
 
+
+	protected int laehmungsCounter = 0;
 	protected BufferedImage spielerGesamt;
 	private static Spieler aktuellerSpieler;
 	private Point position; // Verwende einen Punkt, um die Position zu speichern
@@ -241,11 +242,22 @@ public abstract class Lebewesen {
 		this.gelaehmt = lahm;
 	}
 	
-	
+	public void setLaehmung(int i) {
+		laehmungsCounter = i;
+		
+	}
+	public void lowerLaehmung(int i) {
+		laehmungsCounter -= i;
+		if(i == 0) {
+			this.gelaehmt = false;
+		}
+		
+	}
 	
 	
 	public BufferedImage getSpielerGesamt() {
 		return spielerGesamt;
 	}
+	
 	
 }

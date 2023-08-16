@@ -16,11 +16,12 @@ public class AugenHypnos extends Scroll {
 	@Override
 	public void anwenden(Lebewesen spieler) {
 		spieler.setGelaehmt(true);
+		spieler.setLaehmung(2);//anzahl der Runden die gelähmt - mind 1
 	}
 
 	@Override
 	public String anwendenText(Lebewesen spieler) {
-		return "Die Augen von Hypnos beginnen zu leuchten und ziehen "+spieler.getName()+" in ihren Bann...";
+		return "Die Augen von "+spieler.getName()+" beginnen zu leuchten und ziehen jeden in ihren Bann...";
 	}
 	
 	
