@@ -3,11 +3,14 @@ package ani.fantasyShops;
 
 import ani.fantasyItems.useables.consumables.food.*;
 import ani.fantasyLebewesen.spieler.Spieler;
+
+import java.awt.Point;
+
 import ani.fantasyItems.useables.consumables.drinks.*;
 
 public class Taverne extends Shops {
-		public Taverne() {
-			super();
+		public Taverne(Point position) {
+			super(position);
 			wareTaverne();	
 		}
 		

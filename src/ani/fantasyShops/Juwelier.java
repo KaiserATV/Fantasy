@@ -1,11 +1,13 @@
 package ani.fantasyShops;
 
 
+import java.awt.Point;
+
 import ani.fantasyItems.equippable.jewelry.*;
 
 public class Juwelier extends Shops {
-		public Juwelier() {
-			super();
+		public Juwelier(Point position) {
+			super(position);
 			wareJuwel();
 		}
 	

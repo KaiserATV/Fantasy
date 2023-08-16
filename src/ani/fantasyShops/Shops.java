@@ -1,5 +1,6 @@
 package ani.fantasyShops;
 
+import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -9,7 +10,9 @@ import ani.fantasyItems.Item;
 
 public abstract class Shops {
 	protected static Random zufall = new Random();
-	Shops() {
+	protected Point position;
+	Shops(Point position) {
+		this.position = position;
 		n = zufall.nextInt(10)+1;
 	}
 	public abstract String getName();

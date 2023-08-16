@@ -1,5 +1,6 @@
 package ani.fantasyShops;
 
+import java.awt.Point;
 import java.util.Random;
 
 
@@ -8,8 +9,8 @@ import ani.fantasyItems.schmiedegut.*;
 
 public class Schmiede extends Shops {
 	Random zufall = new Random();
-	public Schmiede() {
-		super();
+	public Schmiede(Point position) {
+		super(position);
 		wareSchmied();
 	}
 	

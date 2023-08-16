@@ -1,6 +1,8 @@
 package ani.fantasyShops;
 
 
+import java.awt.Point;
+
 import ani.fantasyItems.Item;
 import ani.fantasyItems.equippable.jewelry.*;
 import ani.fantasyItems.useables.scroll.*;
@@ -18,8 +20,8 @@ public class TravelingMerchant extends Shops {
 		// ein Lebensmittel
 	// Auswahl wird zufällig bestimmt
 	
-		public TravelingMerchant() {
-			super();
+		public TravelingMerchant(Point position) {
+			super(position);
 			wareBuch();
 			wareJuwel();
 			wareSchmied();

@@ -1,10 +1,12 @@
 package ani.fantasyShops;
 
+import java.awt.Point;
+
 import ani.fantasyItems.useables.scroll.*;
 
 public class Buchhandlung extends Shops {
-	public Buchhandlung() {
-		super();
+	public Buchhandlung(Point position) {
+		super(position);
 		wareBuch();
 	}
 		@Override
