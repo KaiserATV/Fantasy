@@ -70,7 +70,7 @@ public class SpielerBewegung {
                             } else if (e.getKeyCode() == belegung[4]) {
                                 naechsterSpieler();
                                 Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
-                                JOptionPane.showMessageDialog(frame, "Du h. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
+                                JOptionPane.showMessageDialog(frame, "Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
                                 frame.repaint();
                             }
                         } 
