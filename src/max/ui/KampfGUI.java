@@ -159,13 +159,13 @@ public class KampfGUI extends GUIVorlage{
 		items.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == rechts) {
+				if(e.getKeyCode() == rechts && items.getSelectedIndex()>0) {
 					items.setSelectedIndex(items.getSelectedIndex()+1);
-				}else if(e.getKeyCode() == links) {
+				}else if(e.getKeyCode() == links && items.getSelectedIndex()<d.getSize()) {
 					items.setSelectedIndex(items.getSelectedIndex()-1);
-				}else if(e.getKeyCode() == oben) {
+				}else if(e.getKeyCode() == oben && items.getSelectedIndex()>2) {
 					items.setSelectedIndex(items.getSelectedIndex()+2);
-				}else if(e.getKeyCode() == unten) {
+				}else if(e.getKeyCode() == unten && items.getSelectedIndex()< d.getSize()-1) {
 					items.setSelectedIndex(items.getSelectedIndex()-2);
 				}
 			}
