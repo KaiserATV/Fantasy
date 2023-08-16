@@ -43,9 +43,13 @@ public class SpielerBewegung {
          * Spielers zu steuern.
          */
         public void initSpielerBewegung() {
+        	final boolean[] isDialogOpen = {false};
             KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
                 @Override
                 public boolean dispatchKeyEvent(KeyEvent e) {
+                    if (isDialogOpen[0]) {
+                        return false; // Ignoriere Tastenanschläge, während der Dialog offen ist
+                    }
                     Spieler aktuellerSpieler = Spieler.getAktuellerSpieler();
                     int[] belegung = aktuellerSpieler.getBelegung();
                     
@@ -70,22 +74,37 @@ public class SpielerBewegung {
                             } else if (e.getKeyCode() == belegung[4]) {
                                 naechsterSpieler();
                                 Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
-                                JOptionPane.showMessageDialog(frame, "Du h. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
-                                frame.repaint();
-                            }
-                        } 
-                    } else if (!aktuellerSpieler.hatBewegungen()) {
-                        naechsterSpieler();
-                     // Erstellt ein Popup mit dem Namen des nächsten Spielers
-                        Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
-                        JOptionPane.showMessageDialog(frame, "Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
-                        frame.repaint();
+                                SwingUtilities.invokeLater(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                    	isDialogOpen[0] = true;
+                                        JOptionPane.showMessageDialog(frame, "Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
+                                        isDialogOpen[0] = false;
+                                        frame.repaint();
+                                    }
+                                });
+                            } 
+                        } else if (!aktuellerSpieler.hatBewegungen()) {
+                            naechsterSpieler();
+                            // Erstellt ein Popup mit dem Namen des nächsten Spielers
+                            Spieler nextSpieler = alleSpieler.get((alleSpieler.indexOf(Spieler.getAktuellerSpieler()) + 1) % alleSpieler.size());
+                            SwingUtilities.invokeLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                	isDialogOpen[0] = true;
+                                    JOptionPane.showMessageDialog(frame, "Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null, JOptionPane.INFORMATION_MESSAGE);
+                                    isDialogOpen[0] = false;
+                                    frame.repaint();
+                                }
+                            });
+                        }
                     }
                     
                     return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls reagieren.
                 }
             });
         }
+
 
                 
 
