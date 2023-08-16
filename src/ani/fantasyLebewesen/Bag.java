@@ -20,12 +20,6 @@ public class Bag {
 	public void setBag(List<Item> bag) {
 		this.bag = bag;
 	}
-	public void printBag() {
-		for (Item i: bag) {
-			System.out.println(i);
-		}
-		System.out.println();
-	}
 	public Item get(Item i){
 		return bag.get(bag.indexOf(i));
 	}

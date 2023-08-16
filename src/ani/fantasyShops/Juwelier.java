@@ -40,22 +40,5 @@ public class Juwelier extends Shops {
 		}
 	}	
 	
-	
-//	@Override
-//	public void kaufen(Spieler player, Item item) { 
-//		item.kaufenAsString();
-//		int i = Arrays.asList(inventar).indexOf(item);
-//		//Objekt umpacken
-//		inventarry j = inventar.get(i);
-//		player.getBag().add(j);
-//		inventar.remove(i); 			// oder ketten.remove(0)
-//		//Bezahlvorgang
-//		int gold = player.getGold();
-//		gold = gold - j.getPrice();
-//		player.setGold(gold);
-//	}
-
-	
-	
 
 }

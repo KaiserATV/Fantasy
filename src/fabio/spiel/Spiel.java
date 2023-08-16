@@ -64,7 +64,6 @@ public class Spiel {
     		addNamen(spieler.getName());
         }
         public void spielern() {
-        	System.out.println(alleSpieler.size());
         	// Aktuellen Spieler setzen (zum Beispiel zu Beginn des Spiels)
 	        Spieler.setAktuellerSpieler(alleSpieler.get(0));
 

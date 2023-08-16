@@ -24,19 +24,15 @@ public class Kraemer extends Spieler {
 	private void setBild(Color c) {
 		try {
 			if(c == Color.red) {
-				System.out.println("r");
 					this.spielerGesamt = ImageIO.read(new File("src/img/klassen/GanzKraemer_Rot.png"));
 	//			spielerKopf = ImageIO.read(new File("src/img/klassen/GanzElf_Rot.png"));
 			}else if(c == Color.blue) {
-				System.out.println("b");
 				this.spielerGesamt = ImageIO.read(new File("src/img/klassen/GanzKraemer_Blau.png"));
 	//			spielerKopf = ImageIO.read(new File("src/img/klassen/GanzElf_Rot.png"));
 			}else if(c == Color.green) {
-				System.out.println("gr");
 				this.spielerGesamt = ImageIO.read(new File("src/img/klassen/GanzKraemer_Gruen.png"));
 	//			spielerKopf = ImageIO.read(new File("src/img/klassen/GanzElf_Rot.png"));
 			}else {
-				System.out.println("ge");
 				this.spielerGesamt = ImageIO.read(new File("src/img/klassen/GanzKraemer_Gelb.png"));
 	//			spielerKopf = ImageIO.read(new File("src/img/klassen/GanzElf_Rot.png"));
 			}
