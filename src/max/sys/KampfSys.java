@@ -118,7 +118,7 @@ public class KampfSys extends VorlageSys{
 		}else {
 			ich.bag.get(i).anwenden(ich);
 		}
-		ich.bag.removeBag(ich.bag.getBag().indexOf(i));
+		ich.bag.removeBag(i);
 		return name;
 	}
 	
@@ -167,12 +167,8 @@ public class KampfSys extends VorlageSys{
 		return ich.bag.get(x).getEffekt();
 	}
 	public Item getItem(int index) {
-		int i = 0;
-		for(Item item:ich.bag.getBag()) {
-			if(i == index) {
-				return item;
-			}
-			i++;
+		if(index < ich.bag.getBag().size()) {
+			return ich.bag.getBag().get(index);	
 		}
 		return null;
 	}

@@ -14,8 +14,8 @@ public class Bag {
 	public void addBag(Item i) {
 		bag.add(i);
 	}
-	public void removeBag(int index) {
-		bag.remove(index);
+	public void removeBag(Item i) {
+		bag.remove(i);
 	}
 	public void setBag(List<Item> bag) {
 		this.bag = bag;

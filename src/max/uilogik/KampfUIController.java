@@ -244,7 +244,6 @@ public class KampfUIController extends UICon{
 	
 	
 	
-	
 	private void naechsterZug() {
 		int h = sys.kaempfen();
 		if (pve && h > 0) {
