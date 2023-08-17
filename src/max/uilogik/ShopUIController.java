@@ -97,12 +97,19 @@ public class ShopUIController extends UICon{
 	private KeyAdapter zurueckMenu = new KeyAdapter() {
 		@Override 
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == zurueck) {
+			if(e.getKeyCode() == zurueck && gui.getItemsRows()>1) {
 				gui.clearKaufMenu();
 				gui.clearErgebnis();
 				gui.setEntscheid();
 				gui.clearAktion();
 				gui.setAktion("Willst du etwas anderes Kaufen?");
+				gui.addAktion(sys.getStats());
+			}else {
+				gui.clearKaufMenu();
+				gui.clearErgebnis();
+				gui.setEntscheid();
+				gui.clearAktion();
+				gui.setAktion("Dieser Laden ist leer!");
 				gui.addAktion(sys.getStats());
 			}
 		}
@@ -125,7 +132,7 @@ public class ShopUIController extends UICon{
 	private KeyAdapter setMenu = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == auswahl) {
+			if(e.getKeyCode() == auswahl && gui.getItemsRows()>0) {
 				gui.clearEntscheid();
 				gui.clearBild();
 				gui.setKaufMenu();

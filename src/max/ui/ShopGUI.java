@@ -72,9 +72,6 @@ public class ShopGUI extends GUIVorlage{
 		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), null);
 		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), null);
 		
-		
-		
-		
 	}
 	
 	public void setKaufMenuData(String[][] daten) {
@@ -138,7 +135,6 @@ public class ShopGUI extends GUIVorlage{
 		inventar.setSelectionBackground(Color.decode("#1a1d49"));
 		inventar.setSelectionForeground(Color.decode("#d9dbf4"));
 		
-		
 	}
 	public void inventarListen(int rechts, int links) {
 		inventar.addKeyListener(new KeyAdapter() {
@@ -163,6 +159,11 @@ public class ShopGUI extends GUIVorlage{
 		}else {
 			
 		}	
+		if(dtm.getRowCount() == 0) {
+			
+		}else {
+			inventar.setRowSelectionInterval(0, 0);	
+		}
 	}
 	public void setKaufMenu() {
 		contentPane.add(scrollHuelle);	
@@ -180,6 +181,9 @@ public class ShopGUI extends GUIVorlage{
 	}
 	public int getSelected() {
 		return inventar.getSelectedRow();
+	}
+	public int getItemsRows() {
+		return dtm.getRowCount();
 	}
 	
 	private DefaultTableModel dtm;
