@@ -87,8 +87,12 @@ public abstract class Spieler extends Lebewesen {
 		if(ausgeruesteteWaffe != null) {
 			ausgeruesteteWaffe.remove(this);
 		}
-		ausgeruesteteWaffe =  (Weapons) w;
-		w.anwenden(this);
+		if(w != null) {
+			
+		}else {
+			ausgeruesteteWaffe =  (Weapons) w;
+			w.anwenden(this);	
+		}
 	}
 	
 	public Equippable getBling() {

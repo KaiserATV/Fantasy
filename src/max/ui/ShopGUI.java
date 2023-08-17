@@ -11,6 +11,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 
 import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
@@ -50,10 +51,11 @@ public class ShopGUI extends GUIVorlage{
 	 * @param aus KeyListener welcher bei auswahl feuert (inventar)
 	 */
 	public void setTravKeys(int rechts, int links, KeyAdapter zu, int auswahl, KeyAdapter aus) {
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "HEY");
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "HEY");
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "HEY");
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "HEY");
+		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "none");
+		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "none");
+		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "none");
+		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
+		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
 		
 		inventar.getActionMap().put("HEY", null);
 		

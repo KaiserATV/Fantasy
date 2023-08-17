@@ -13,6 +13,7 @@ import java.util.HashSet;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -154,6 +155,12 @@ public class KampfGUI extends GUIVorlage{
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(rechts,0))));
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(links,0))));     
 		
+		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "none");
+		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "none");
+		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "none");
+		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
+		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
+		
 		items.setFocusTraversalKeysEnabled(false);
 		
 		items.addKeyListener(new KeyAdapter() {
@@ -163,23 +170,21 @@ public class KampfGUI extends GUIVorlage{
 					items.setSelectedIndex(items.getSelectedIndex()+1);
 				}else if(e.getKeyCode() == links && items.getSelectedIndex()<d.getSize()) {
 					items.setSelectedIndex(items.getSelectedIndex()-1);
-				}else if(e.getKeyCode() == oben && items.getSelectedIndex()>2) {
-					items.setSelectedIndex(items.getSelectedIndex()+2);
-				}else if(e.getKeyCode() == unten && items.getSelectedIndex()< d.getSize()-1) {
-					items.setSelectedIndex(items.getSelectedIndex()-2);
 				}
 			}
 		});
+		
 		items.addListSelectionListener(new ListSelectionListener() {
-
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				items.ensureIndexIsVisible(items.getSelectedIndex());
 			}
 			
 		});
+		
 		buttonLinks2.addKeyListener(zu);
 		buttonRechts2.addKeyListener(zu);	
+		
 		items.addKeyListener(zu);
 		items.addKeyListener(aus);
 	}

@@ -112,7 +112,7 @@ public class KampfSys extends VorlageSys{
 	}
 	
 	public String itemBenutzen(Item i) {
-		String name = ich.bag.get(i).anwendenText(ich);
+		String name = i.anwendenText(ich);
 		if(i instanceof Scroll) {
 			((Scroll)ich.bag.get(i)).anwenden(ich,gegen);
 		}else {
