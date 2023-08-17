@@ -21,7 +21,7 @@ public class Volares extends Monster {
 		hp = hpmax;
 		strength = zufall.nextInt(3)+8;
 		try {
-			spielerGesamt = ImageIO.read(new File("src/img/tree.png"));
+			spielerGesamt = ImageIO.read(new File("src/img/Volares.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	

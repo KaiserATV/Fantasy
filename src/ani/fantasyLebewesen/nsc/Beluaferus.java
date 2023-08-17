@@ -18,7 +18,7 @@ public class Beluaferus extends Monster {
 		hp = hpmax;
 		strength = zufall.nextInt(4)+5;
 		try {
-			spielerGesamt = ImageIO.read(new File("src/img/tree2.png"));
+			spielerGesamt = ImageIO.read(new File("src/img/Beluaferus.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
