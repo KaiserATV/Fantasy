@@ -45,6 +45,7 @@ public class KampfSys extends VorlageSys{
 		}else {
 			if(ich.isUnsterblich()) {
 				schaden = 1-ich.getHp();
+				ich.setBling(null);
 				return schaden;
 			}else {
 				gewonnen(ich);
@@ -214,6 +215,9 @@ public class KampfSys extends VorlageSys{
 	}
 	public boolean getZahm() {
 		return zahm;
+	}
+	public boolean getUnsterblich() {
+		return ich.isUnsterblich();
 	}
 	
 	

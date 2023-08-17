@@ -194,6 +194,9 @@ public class KampfUIController extends UICon{
 				gui.setAktion(s);
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 				winUebergang();
+			}else if(sys.getUnsterblich()) {
+				gui.setAktion(s);
+				gui.addAktion(sys.getNamenEins()+"'s Kette beginnt zu glühen und zerbricht.... "+sys.getNamenEins()+" lives to die another day!");
 			}else {
 				gui.setAktion(s);
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
@@ -222,6 +225,8 @@ public class KampfUIController extends UICon{
 			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 				winUebergang();
+			}else if(sys.getUnsterblich()) {
+				gui.addAktion(sys.getNamenEins()+"'s Kette beginnt zu glühen und zerbricht.... "+sys.getNamenEins()+" lives to die another day!");
 			}else {
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
@@ -251,6 +256,8 @@ public class KampfUIController extends UICon{
 			}else if(sys.getZahm()){
 				gui.addAktion("Da "+sys.getNamenZwei()+" nun zahm ist überlässt es "+sys.getNamenEins()+" den Inhalt des Rucksackes...");
 				winUebergang();
+			}else if(sys.getUnsterblich()) {
+				gui.addAktion(sys.getNamenEins()+"'s Kette beginnt zu glühen und zerbricht.... "+sys.getNamenEins()+" lives to die another day!");
 			}else {
 				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
@@ -266,10 +273,14 @@ public class KampfUIController extends UICon{
 			gui.setInfoWidth(sys.bestimmeBreite());
 			gui.setInfo(sys.getNamenZwei());
 		}else {
-			winUebergang();
-			if(!pve) {
-				bewegung.removeSpieler(sys.getSpielerZwei());	
-			}
+			if(sys.getUnsterblich()) {
+				gui.addAktion(sys.getNamenEins()+"'s Kette beginnt zu glühen und zerbricht.... "+sys.getNamenEins()+" lives to die another day!");
+				}else {
+					winUebergang();
+					if(!pve) {
+						bewegung.removeSpieler(sys.getSpielerZwei());	
+					}
+				}
 		}
 	}
 	
