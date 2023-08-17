@@ -334,10 +334,10 @@ public abstract class GUIVorlage {
 	
 	protected KeyboardFocusManager kfm;
     protected JButton[] buttons = new JButton[6];
-    protected Font schrift = new Font("DejaVu Sans", Font.PLAIN, 17);
     
     protected JFrame main;
     
+    protected Font schrift = new Font("DejaVu Sans", Font.PLAIN, 17);
     protected JPanel contentPane = new JPanel();
     protected JPanel bildEbene = new JPanel();
     protected JPanel entscheid = new JPanel();

@@ -38,6 +38,7 @@ public class SpielerBewegung {
 		this.feldaktionen = new FeldAktionen(frame, this);
 		this.alleSpieler = spielerListe;
 		this.alleSpielerUr = spielerListe;
+		
 		initSpielerBewegung();
 		frame.repaint();
 	}
@@ -154,7 +155,7 @@ public class SpielerBewegung {
 	}
 	
 	private void gewonnen() {
-		frame.setContentPane(new WinPane(alleSpielerUr,frame.WIDTH,frame.HEIGHT));
+		frame.setContentPane(new WinPane(alleSpielerUr).getContentPane());
 		frame.repaint();
 		frame.revalidate();
 		

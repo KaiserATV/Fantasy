@@ -1,5 +1,6 @@
 package fabio.spiel;
 
+import java.awt.Font;
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.WindowAdapter;

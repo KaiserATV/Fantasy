@@ -43,6 +43,7 @@ public class SpielerDialog extends Dialog {
         s= spiel;
         initComponents();
     }
+	
     private Spiel s;
     private int[] beleg = new int[6]; 
     private String[] farben = new String[] { "Rot", "Blau", "Grün", "Gelb" };   

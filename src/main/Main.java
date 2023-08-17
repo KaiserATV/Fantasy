@@ -1,5 +1,6 @@
 package main;
 
+import java.awt.Font;
 import java.util.Random;
 
 import fabio.spiel.Spiel;
@@ -13,5 +14,4 @@ public class Main {
 		Spiel jetzt = new Spiel();
 		
 	}
-	
 }
