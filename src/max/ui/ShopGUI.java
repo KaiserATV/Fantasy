@@ -50,12 +50,29 @@ public class ShopGUI extends GUIVorlage{
 	 * @param aus KeyListener welcher bei auswahl feuert (inventar)
 	 */
 	public void setTravKeys(int rechts, int links, KeyAdapter zu, int auswahl, KeyAdapter aus) {
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "HEY");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "HEY");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "HEY");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "HEY");
+		
+		inventar.getActionMap().put("HEY", null);
+		
+		
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(rechts,0))));
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(links,0))));     
 		
 		inventar.setFocusTraversalKeysEnabled(false);
 		inventar.addKeyListener(aus);
 		inventar.addKeyListener(zu);
+		
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), null);
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), null);
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), null);
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), null);
+		
+		
+		
+		
 	}
 	
 	public void setKaufMenuData(String[][] daten) {

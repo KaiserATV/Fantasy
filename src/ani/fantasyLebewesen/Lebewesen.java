@@ -120,9 +120,15 @@ public abstract class Lebewesen {
 	
 	
 	public void draw(Graphics g, int cellSize) {
+	    if (spielerGesamt != null) {
+	        g.drawImage(spielerGesamt, position.x * cellSize, position.y * cellSize, cellSize, cellSize, null);
+	    } else {
+	        // Fallback: Zeichne einen Kreis, wenn kein Bild vorhanden ist
 	        g.setColor(color);
 	        g.fillOval(position.x * cellSize, position.y * cellSize, cellSize, cellSize);
+	    }
 	}
+
 	
 	// Nachfolgend sind die Getter- und Setter-Methoden:
 	
