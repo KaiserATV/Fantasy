@@ -3,6 +3,7 @@ package fabio.spielerbewegung;
 import java.awt.KeyEventDispatcher;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -13,6 +14,7 @@ import ani.fantasyLebewesen.Lebewesen;
 import ani.fantasyLebewesen.spieler.Spieler;
 import fabio.gui.aktionen.FeldAktionen;
 import fabio.gui.karte.Karte;
+import max.ui.WinPane;
 
 public class SpielerBewegung {
 
@@ -20,6 +22,7 @@ public class SpielerBewegung {
 	private JFrame frame; // Das Fenster, in dem sich das Spielfeld befindet
 	private FeldAktionen feldaktionen; // Eine Sammlung von Aktionen, die auf dem Spielfeld ausgelöst werden können
 	private List<Spieler> alleSpieler;
+	private List<Spieler> alleSpielerUr;
 	private int aktuellerSpielerIndex = 0;
 
 	/**
@@ -33,7 +36,8 @@ public class SpielerBewegung {
 		this.karte = karte;
 		this.frame = frame;
 		this.feldaktionen = new FeldAktionen(frame, this);
-		this.alleSpieler = spielerListe; //
+		this.alleSpieler = spielerListe;
+		this.alleSpielerUr = spielerListe;
 		initSpielerBewegung();
 		frame.repaint();
 	}
@@ -139,7 +143,21 @@ public class SpielerBewegung {
 
 	public void removeSpieler(Spieler s) {
 		System.out.println("removed");
+		s.setPlatzierung(alleSpieler.size()-1);
 		alleSpieler.remove(s);
+	
+		if(alleSpieler.size() == 1) {
+			gewonnen();
+		}
+	
+	
+	}
+	
+	private void gewonnen() {
+		frame.setContentPane(new WinPane(alleSpielerUr,frame.WIDTH,frame.HEIGHT));
+		frame.repaint();
+		frame.revalidate();
+		
 	}
 
 	public void setFeldaktionen(FeldAktionen feldaktionen) {

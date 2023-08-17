@@ -77,6 +77,7 @@ public class Spiel {
 		spiel.alleSpieler.add(spieler);
 		//
 		addNamen(spieler.getName());
+		
 	}
 
 	public void spielern() {
@@ -89,7 +90,6 @@ public class Spiel {
 
 		if (alleSpieler.size() != 0 && alleSpieler.size() < 5) {
 			// Aktuellen Spieler bewegen (anhand von Koordinaten)
-
 			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler);
 			// KartenPanel-Instanz aus dem Karte-Objekt holen
 			Karte.KartenPanel kartenPanel = spiel.karte.new KartenPanel();

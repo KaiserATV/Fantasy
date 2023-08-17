@@ -26,6 +26,7 @@ public abstract class Spieler extends Lebewesen {
 	private int macht = 0;
 	private boolean unsichtbar;
 	private boolean unsterblich; 
+	private int platzierung = 0;
 	
 	
 	// Rucksack 
@@ -56,6 +57,13 @@ public abstract class Spieler extends Lebewesen {
 		this.macht = macht;
 	}
 
+	
+	public int getPlatzierung() {
+		return platzierung;
+	}
+	public void setPlatzierung(int i) {
+		platzierung = i;
+	}
 
 
 	public boolean isUnsichtbar() {
