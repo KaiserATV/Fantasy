@@ -161,7 +161,7 @@ public class KampfGUI extends GUIVorlage{
 		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
 		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
 		
-		items.setFocusTraversalKeysEnabled(false);
+//		items.setFocusTraversalKeysEnabled(false);
 		
 		items.addKeyListener(new KeyAdapter() {
 			@Override
