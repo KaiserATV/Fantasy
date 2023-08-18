@@ -32,7 +32,6 @@ public class ShopGUI extends GUIVorlage{
 		aktionText.setForeground(Color.white);
 		aktionText.setBackground(Color.black);
 		info.setBackground(Color.decode("#e0bd0f"));
-		bildEbene.setBackground(Color.gray);
 		entscheid.setBackground(Color.black);
 		
 		

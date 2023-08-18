@@ -27,7 +27,6 @@ public class KampfGUI extends GUIVorlage{
 	public KampfGUI(JFrame x) {
 		super(x);
 		info.setBackground(Color.red);
-		bildEbene.setBackground(Color.DARK_GRAY);
 		contentPane.setBackground(Color.black);
 		
 		 //Menu für Entscheidung über Angriff oder Items

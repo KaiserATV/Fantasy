@@ -1,6 +1,7 @@
 package fabio.gui.aktionen;
 
 import java.awt.Point;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -35,44 +36,65 @@ public class FeldAktionen {
 	}
 
 	public void betreteBuchhandlung(Spieler ich) {
-		Buchhandlung b;
+		Buchhandlung b=null;
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Buchhandlung) {
 			b = (Buchhandlung) shopsAtPositions.get(position);
 		} else {
+			try {
 			b = new Buchhandlung(position);
+			}catch(IOException e) {
+				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
+				e.printStackTrace();
+			}
+			
 			shopsAtPositions.put(position, b);
 		}
 		shopLaufen(ich, b);
 	}
 
 	public void betreteJuwelier(Spieler ich) {
-		Juwelier j;
+		Juwelier j=null;
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Juwelier) {
 			j = (Juwelier) shopsAtPositions.get(position);
 		} else {
-			j = new Juwelier(position);
+			try {
+				j = new Juwelier(position);
+			}catch(IOException e) {
+				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
+				e.printStackTrace();
+			}
 			shopsAtPositions.put(position, j);
 		}
 		shopLaufen(ich, j);
 	}
 
 	public void betreteSchmiede(Spieler ich) {
-		Schmiede s;
+		Schmiede s=null;
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Schmiede) {
 			s = (Schmiede) shopsAtPositions.get(position);
 		} else {
-			s = new Schmiede(position);
+			try {
+				s = new Schmiede(position);
+			}catch(IOException e) {
+				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
+				e.printStackTrace();
+			}
 			shopsAtPositions.put(position, s);
 		}
 		shopLaufen(ich, s);
 	}
 
 	public void betreteTaverne(Spieler ich) {
-		Taverne t;
+		Taverne t=null;
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Taverne) {
 			t = (Taverne) shopsAtPositions.get(position);
 		} else {
-			t = new Taverne(position);
+			try {
+				t = new Taverne(position);
+			}catch(IOException e) {
+				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
+				e.printStackTrace();
+			}
 			shopsAtPositions.put(position, t);
 		}
 		shopLaufen(ich, t);
@@ -120,9 +142,13 @@ public class FeldAktionen {
 	public void wahrscheinlichkeitHaendlerTreffen(Spieler ich) {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
-
-		TravelingMerchant t = new TravelingMerchant(position);
-
+		TravelingMerchant t=null;
+		try {
+			t = new TravelingMerchant(position);
+		}catch(IOException e) {
+			System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
+			e.printStackTrace();
+		}
 		if (chance < 8) { // 8% Chance auf fahrenden Händler
 			shopLaufen(ich, t);
 		}

@@ -23,6 +23,8 @@ public class ShopUIController extends UICon{
 		
 		gui = new ShopGUI(y);
 		sys = new ShopSys(p,s);
+		
+		gui.setBackground(s.getHintergrund());
 
 		urGeld = sys.getSpielerVermoegen();
 		

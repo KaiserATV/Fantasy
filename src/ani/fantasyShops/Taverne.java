@@ -5,13 +5,18 @@ import ani.fantasyItems.useables.consumables.food.*;
 import ani.fantasyLebewesen.spieler.Spieler;
 
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import ani.fantasyItems.useables.consumables.drinks.*;
 
 public class Taverne extends Shops {
-		public Taverne(Point position) {
+		public Taverne(Point position) throws IOException {
 			super(position);
 			wareTaverne();	
+			hintergrund = ImageIO.read(new File("src/img/shops/taverneBild.png"));
 		}
 		
 		

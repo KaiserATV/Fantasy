@@ -2,6 +2,10 @@ package ani.fantasyShops;
 
 
 import java.awt.Point;
+import java.io.File;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import ani.fantasyItems.Item;
 import ani.fantasyItems.equippable.jewelry.*;
@@ -12,20 +16,16 @@ import ani.fantasyItems.useables.consumables.drinks.*;
 import ani.fantasyItems.useables.consumables.food.*;
 
 public class TravelingMerchant extends Shops {
-		
-	// hat eine Auswahl der Waren von anderen Händlern
-		// eine Schriftrolle
-		// ein Schmuckstück
-		// eine Waffe oder Rüstung
-		// ein Lebensmittel
-	// Auswahl wird zufällig bestimmt
 	
-		public TravelingMerchant(Point position) {
+	
+	
+		public TravelingMerchant(Point position) throws IOException {
 			super(position);
 			wareBuch();
 			wareJuwel();
 			wareSchmied();
 			wareTaverne();	
+			hintergrund = ImageIO.read(new File("src/img/shops/karrenBild.png"));
 		}
 		
 		
@@ -125,19 +125,4 @@ public class TravelingMerchant extends Shops {
 			System.out.println("Etwas ist schief gegangen...");
 		}
 	}
-	
-//	@Override
-//	public void kaufen(Spieler player, Item item) { 
-//		item.kaufenAsString();
-//		int i = Arrays.asList(inventar).indexOf(item);
-//		//Objekt umpacken
-//		item = inventar.get(i);
-//		player.getBag().add(item);
-//		inventar.remove(i);
-//		//Bezahlvorgang
-//		int gold = player.getGold();
-//		gold = gold - item.getPrice();
-//		player.setGold(gold);
-//		//potenzielle Ausgabe zu Vorgang
-//	}
 }
