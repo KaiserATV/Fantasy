@@ -61,15 +61,13 @@ public class KampfUIController extends UICon{
 	};
 	private void back() {
 		if(angriffsMenu) {
-			gui.clearAngriff();
 			angriffsMenu = false;
 			entscheidMenu = true;
-			gui.setEntscheid();
+			gui.setEntscheid(1);
 		}else if(itemMenu) {
-			gui.clearItems();
 			itemMenu = false;
 			angriffsMenu = true;
-			gui.setAngriff();
+			gui.setAngriff(0);
 		}
 	}
 	
@@ -82,8 +80,7 @@ public class KampfUIController extends UICon{
 			if(e.getKeyCode() == auswahl) {
 				int g = gui.getSelectedIndex();
 				if(itemMenu && g < (sys.getUsables().length-1)) {	
-					gui.clearItems();
-					gui.setAngriff();
+					gui.setAngriff(0);
 					itemMenu = false;
 					angriffsMenu = true;
 					gui.addAktion(sys.itemBenutzen(sys.getItem(g)));
@@ -108,8 +105,7 @@ public class KampfUIController extends UICon{
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == auswahl) {
-					gui.clearErgebnis();
-					gui.setEntscheid();
+					gui.setEntscheid(0);
 					entscheidMenu = true;
 					if(!pve) {
 						tauschen();
@@ -130,8 +126,7 @@ public class KampfUIController extends UICon{
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
-				gui.clearEntscheid();
-				gui.setAngriff();
+				gui.setAngriff(0);
 				entscheidMenu = false;
 				angriffsMenu = true;
 			}
@@ -144,8 +139,7 @@ public class KampfUIController extends UICon{
 				angriffsMenu = false;
 				gui.clearAktion();
 				gui.addAktion(sys.getNamenEins()+" greift "+ sys.getNamenZwei()+" an!");
-				gui.clearAngriff();
-				gui.setErgebnis();
+				gui.setErgebnis(1);
 				gui.addErgebnis("");
 				naechsterZug();
 			}
@@ -164,8 +158,7 @@ public class KampfUIController extends UICon{
 						tauschen();
 					}else {
 						naechsterZugItem(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
-						gui.clearEntscheid();
-						gui.setErgebnis();
+						gui.setErgebnis(1);
 					}
 					e.getComponent().setVisible(false);
 				}
@@ -176,7 +169,6 @@ public class KampfUIController extends UICon{
 		@Override 
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
-				gui.clearAngriff();
 				gui.setItems();//Muss implementiert werden
 				angriffsMenu = false;
 				itemMenu = true;
@@ -201,9 +193,8 @@ public class KampfUIController extends UICon{
 				gui.setAktion(s);
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
-				gui.clearEntscheid();
 				monsterTod=true;
-				gui.setErgebnis();
+				gui.setErgebnis(1);
 				bewegung.removeSpieler(sys.getSpielerEins());
 			}
 		}else if(!pve){
@@ -230,9 +221,8 @@ public class KampfUIController extends UICon{
 			}else {
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
-				gui.clearEntscheid();
 				monsterTod=true;
-				gui.setErgebnis();
+				gui.setErgebnis(1);
 				bewegung.removeSpieler(sys.getSpielerEins());
 			}
 		}else if(!pve){
@@ -261,9 +251,8 @@ public class KampfUIController extends UICon{
 				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
-				gui.clearEntscheid();
 				monsterTod=true;
-				gui.setErgebnis();
+				gui.setErgebnis(1);
 				bewegung.removeSpieler(sys.getSpielerEins());
 			}
 		}else if(!pve && h > 0){
@@ -287,7 +276,6 @@ public class KampfUIController extends UICon{
 		gui.setInfoWidth(0);
 		gui.setAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
 		gui.addAktion("Und bekommt:");
-		gui.clearAngriff();
 		sys.addLootBag();
 		gui.setErgebnisListener(lootMenu);
 		
@@ -318,7 +306,6 @@ public class KampfUIController extends UICon{
 				case 3:
 					if(extra != null) {
 						if(sys.anlegbar()) {
-							gui.clearErgebnis();
 							gui.addAnlegen(ergebnisGen(extra)+" Anlegen? - Derzeit: "+sys.getStatsWeniger());
 						}
 					}else {
@@ -352,15 +339,13 @@ public class KampfUIController extends UICon{
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			sys.anlegen();
-			gui.clearAnlegen();
-			gui.setErgebnis();
+			gui.setErgebnis(0);
 		}
 	};
 	private ActionListener anlegenRechts = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gui.clearAnlegen();
-			gui.setErgebnis();
+			gui.setErgebnis(0);
 		}	
 	};
 	

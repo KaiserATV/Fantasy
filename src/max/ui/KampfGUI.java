@@ -35,7 +35,7 @@ public class KampfGUI extends GUIVorlage{
 		
 		//BIlder kampfHintergrund 1,2,3,4 möglich
 		try {
-			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund2.png")).getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
+			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund2.png")).getScaledInstance((int)Math.floor(bildEbene.getPreferredSize().getWidth()),(int)Math.floor(bildEbene.getPreferredSize().getHeight()), Image.SCALE_FAST)));
 		} catch (IOException e) {
 			System.out.println("Etwas ist schiefgelaufen beim Hintergrund setzten...");
 			e.printStackTrace();
@@ -85,8 +85,8 @@ public class KampfGUI extends GUIVorlage{
 		 
 		
         scrollHuelle.setVisible(true);
-        scrollHuelle.setBounds(0,800,1000,200);
-        angriff.setBounds(0,800,1000,200);
+        scrollHuelle.setPreferredSize(new Dimension(1000,200));
+        angriff.setPreferredSize(new Dimension(1000,200));
         
         buttonLinks.setFocusable(true);
         buttonRechts.setFocusable(true);
@@ -101,11 +101,18 @@ public class KampfGUI extends GUIVorlage{
         contentPane.repaint();
 	}
 	
+	
 	@Override
-	public void setErgebnis() {
-		 contentPane.add(ergebnis);
-		 ergebnis.repaint();
-		 ergebnis.requestFocusInWindow();
+	/**
+	 * @param i - 1 wenn aus angriff
+	 */
+	public void setErgebnis(int i) {
+		if(i == 1) {
+			layout.replace(angriff, ergebnis);	
+		}else {
+			layout.replace(anlegen, ergebnis);
+		}
+		ergebnis.requestFocusInWindow();
 	 }
 	/**
 	 * Funktion um die Items, die ein Spieler hat zu initialisieren
@@ -128,8 +135,8 @@ public class KampfGUI extends GUIVorlage{
 		
 		items.setMinimumSize(new Dimension(1000,200));
 		items.setBackground(Color.black);
-        scroll.setSize(1000,200);
-        scroll.getViewport().getView().setSize(1000, 200);
+        scroll.setPreferredSize(new Dimension(1000,200));
+        scroll.getViewport().getView().setPreferredSize(new Dimension(1000, 200));
 		scroll.getInsets(null);
 		scroll.setBackground(Color.black);
 		
@@ -143,11 +150,9 @@ public class KampfGUI extends GUIVorlage{
 	 * fügt die items zu der contentpane hinzu
 	 */
 	public void setItems() {
-		contentPane.add(scrollHuelle);
+		layout.replace(angriff, scrollHuelle);
 		items.setSelectedIndex(0);
 		items.requestFocusInWindow();
-		scrollHuelle.repaint();
-		
 	}
 	/**
 	 * Entfernt ein Item aus der Liste der Items
@@ -207,30 +212,23 @@ public class KampfGUI extends GUIVorlage{
 	}
     /**
      * Fügt die Angriffsebene der contentpane hinzu
+     * @param zahl 1- wenn von items, 0 - wenn von entscheid
      */
-	 public void setAngriff() {
-    	contentPane.add(angriff);
+	 public void setAngriff(int i) {
+		 if(i == 1) {
+			 layout.replace(items, angriff);
+		 }else {
+			 layout.replace(entscheid, angriff);
+		 }
     	contentPane.repaint();
     	buttonLinks2.requestFocusInWindow();
-	 }
-	 /**
-	  * Entfernt die Angriffseben von der Contentpane
-	  */
-	 public void clearAngriff() {
-		 contentPane.remove(angriff);
-	 }   
+	 } 
 	 /**
 	  * Funktion um den ausgewählten Indey von den Items zu bestimmen
 	  * @return den ausgewählten Index
 	  */
 	 public int getSelectedIndex() {
 		 return items.getSelectedIndex();
-	 }
-	 /**
-	  * Funktion um die Items von der Contentpane zu entfernen
-	  */
-	 public void clearItems() {
-		 contentPane.remove(scrollHuelle);
 	 }
 	 /**
 	  * Funktion um Bild von der ersten Person zu setzen
@@ -258,11 +256,29 @@ public class KampfGUI extends GUIVorlage{
 			}
 			ergebnis.addKeyListener(l);
 		}
-	  
+	 
+	 @Override
+	 public void setEntscheid(int i) {
+		 if(i == 1) {
+			 layout.replace(angriff, entscheid);	 
+		 }else {
+			 layout.replace(ergebnis, entscheid);
+		 }
+		 buttonLinks.requestFocusInWindow();
+	 }
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 
 	DefaultListModel<String> d = new DefaultListModel<String>();
 	private JPanel angriff = new JPanel();
 	private JList<String> items = new JList<String>();
 	private JLabel spieler1 = new JLabel();
 	private JLabel spieler2= new JLabel();
+	
+	
 }

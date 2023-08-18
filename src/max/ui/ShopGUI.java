@@ -156,18 +156,15 @@ public class ShopGUI extends GUIVorlage{
 		}
 	}
 	public void setKaufMenu() {
-		contentPane.add(scrollHuelle);	
+		layout.replace(bildEbene, scrollHuelle);
 		scrollHuelle.repaint();    	
 		inventar.requestFocusInWindow();
 		inventar.setRowSelectionInterval(0, 0);
 	}
 	
 	public void clearKaufMenu() {
-		contentPane.remove(scrollHuelle);
+		layout.replace(scrollHuelle, bildEbene);
 		contentPane.repaint();
-	}
-	public void clearBild() {
-		contentPane.remove(bildEbene);
 	}
 	public int getSelected() {
 		return inventar.getSelectedRow();
@@ -175,7 +172,19 @@ public class ShopGUI extends GUIVorlage{
 	public int getItemsRows() {
 		return dtm.getRowCount();
 	}
+	@Override
+	public void setErgebnis(int i) {
+		layout.replace(entscheid, ergebnis);
+	}
+	@Override
+	public void setEntscheid(int i) {
+		layout.replace(ergebnis, entscheid);
+		buttonLinks.requestFocusInWindow();
+	}
+	
 	
 	private DefaultTableModel dtm;
 	private JTable inventar;
+	
+	
 }

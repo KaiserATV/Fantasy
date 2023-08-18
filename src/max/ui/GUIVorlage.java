@@ -12,6 +12,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
 import java.awt.image.BufferedImage;
 
+import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -128,25 +129,45 @@ public abstract class GUIVorlage {
 		}
         
         //Setzen Position
-        infoText.setBounds(0, 0, 1000, 50);
-        info.setBounds(0, 0, 1000, 50);
+        infoText.setPreferredSize(new Dimension(1000, 50));
+        infoText.setHorizontalTextPosition(JLabel.CENTER);
+        info.setPreferredSize(new Dimension(1000, 50));
 
-        bildEbene.setBounds(0,50,1000,650);
+        bildEbene.setPreferredSize(new Dimension(1000,650));
         
-        aktionText.setBounds(0,700, 1000,100);
+        aktionText.setPreferredSize(new Dimension(1000,100));
         
-        entscheid.setBounds(0, 800, 1000, 200);
+        entscheid.setPreferredSize(new Dimension(1000, 200));
 
-        ergebnis.setBounds(0,800,1000,200);
+        ergebnis.setPreferredSize(new Dimension(1000,200));
         
-        anlegen.setBounds(0,800,1000,200);
+        anlegen.setPreferredSize(new Dimension(1000,200));
         
-        contentPane.add(info);
-        contentPane.add(bildEbene);
-        contentPane.add(aktionText);
-        contentPane.add(entscheid);
-
-        contentPane.setVisible(true);
+        
+        layout = new GroupLayout(contentPane);
+        
+        layout.setVerticalGroup(
+        		layout.createSequentialGroup()
+        			.addGroup(layout.createParallelGroup()
+        					.addComponent(info)
+        					.addComponent(infoText))
+        			.addComponent(bildEbene)
+        			.addComponent(aktionText)
+        			.addComponent(entscheid)
+        );
+        layout.setHorizontalGroup(
+        		layout.createParallelGroup()
+        		.addGroup(layout.createParallelGroup()
+        				.addComponent(info)
+        				.addComponent(infoText))
+        		.addComponent(bildEbene)
+        		.addComponent(aktionText)
+        		.addComponent(entscheid)
+        	);
+        
+        contentPane.setLayout(layout);
+        
+        
         main.setContentPane(contentPane);
         
         
@@ -255,10 +276,7 @@ public abstract class GUIVorlage {
 	/**
 	 * Fügt die Ergebnisebene hinzu
 	 */
-	 public void setErgebnis() {
-		 contentPane.add(ergebnis);
-		 contentPane.repaint();
-	 }
+	 public abstract void setErgebnis(int i);
 	/**
 	 * Setzt den Text des Ergebnis zu dem String
 	 * @param s - String welcher gesetzt wird
@@ -274,12 +292,6 @@ public abstract class GUIVorlage {
 		 ergebnis.append("\n"+s);
 	 }
 	 /**
-	  * entfernt ergebnis von der Contentpane
-	  */
-	 public void clearErgebnis() {
-		 contentPane.remove(ergebnis);
-	 }
-	 /**
 	  * 
 	  * @return - den Text von ergebnis
 	  */
@@ -290,26 +302,18 @@ public abstract class GUIVorlage {
 	  * Funktion um die Anlegen-Ebene hinzuzufügen
 	  */
 	 public void addAnlegen() {
-		 contentPane.add(anlegen);
-		 anlegenLinks.requestFocusInWindow();
-		 contentPane.repaint();
-	 }/**
+			layout.replace(ergebnis, anlegen);
+		}
+	 /**
 	  * Funktion um die Anlegen-Ebene hinzuzufügen
 	  * @param String s - text des Textfeldes
 	  */
 	 public void addAnlegen(String s) {
 		 abfrage.setVisible(true);
 		 abfrage.setText(s);
-		 contentPane.add(anlegen);
+		 layout.replace(ergebnis,anlegen);
 		 anlegenLinks.requestFocusInWindow();
 		 contentPane.repaint();
-	 }
-	 /**
-	  * Funktion um die Anlegen-Ebene zu entfernen
-	  */
-	 public void clearAnlegen() {
-		 abfrage.setVisible(false);
-		 contentPane.remove(anlegen);
 	 }
 	 /**
 	  * Funktion um den Buttons in der Anlegen-Ebene ihre Funktion zuzuweisen
@@ -322,18 +326,10 @@ public abstract class GUIVorlage {
 	 }
 	 /**
 	  * Fügt Entscheid der contentpane hinzu
+	  * @param i = 1, wenn aus angriff
 	  */
-	 public void setEntscheid() {
-    	contentPane.add(entscheid);
-    	contentPane.repaint();
-    	buttonLinks.requestFocusInWindow();
-	 }
-	 /**
-	  * entfernt entscheid von der contentpane
-	  */
-	 public void clearEntscheid() {
-		contentPane.remove(entscheid);
-	 }
+	 public abstract void setEntscheid(int i); 
+	 
 	 
 	 public void setBackground(BufferedImage b) {
 		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
@@ -377,6 +373,8 @@ public abstract class GUIVorlage {
 	
 	private Container urCP;
 	private Dimension urD;
+	
+	protected GroupLayout layout;
 	
     
 }

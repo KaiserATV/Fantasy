@@ -61,7 +61,6 @@ public class ShopUIController extends UICon{
 				if(sys.kannKaufen(sel)) {
 					if(sys.kaufen(sel)) {
 						if(sys.anlegbar()) {
-							gui.clearErgebnis();
 							gui.addAnlegen();
 						}
 						kaufItem = "--> "+sys.getSpielerName() + " kauft "+sys.getGekauftNamen() + " bei " +sys.getLadenName() + " fuer "+sys.getGekauftPreis() +" Gold!";
@@ -102,15 +101,13 @@ public class ShopUIController extends UICon{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == zurueck && gui.getItemsRows()>1) {
 				gui.clearKaufMenu();
-				gui.clearErgebnis();
-				gui.setEntscheid();
+				gui.setEntscheid(0);
 				gui.clearAktion();
 				gui.setAktion("Willst du etwas anderes Kaufen?");
 				gui.addAktion(sys.getStats());
 			}else if(e.getKeyCode() == zurueck && gui.getItemsRows() == 0) {
 				gui.clearKaufMenu();
-				gui.clearErgebnis();
-				gui.setEntscheid();
+				gui.setEntscheid(0);
 				gui.clearAktion();
 				gui.setAktion("Dieser Laden ist leer!");
 				gui.addAktion(sys.getStats());
@@ -136,10 +133,8 @@ public class ShopUIController extends UICon{
 		@Override
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl && gui.getItemsRows()>0) {
-				gui.clearEntscheid();
-				gui.clearBild();
 				gui.setKaufMenu();
-				gui.setErgebnis();
+				gui.setErgebnis(0);
 			}
 		}
 	};
@@ -149,15 +144,13 @@ public class ShopUIController extends UICon{
 		public void actionPerformed(ActionEvent e) {
 			sys.anlegen();
 			gui.addAktion(sys.getAnlegText());
-			gui.clearAnlegen();
-			gui.setErgebnis();
+			gui.setErgebnis(0);
 		}
 	};
 	private ActionListener anlegenRechts = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gui.clearAnlegen();
-			gui.setErgebnis();
+			gui.setErgebnis(0);
 		}	
 	};
 	
