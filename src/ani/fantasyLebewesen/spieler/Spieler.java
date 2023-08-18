@@ -88,10 +88,10 @@ public abstract class Spieler extends Lebewesen {
 			ausgeruesteteWaffe.remove(this);
 		}
 		if(w != null) {
-			
-		}else {
 			ausgeruesteteWaffe =  (Weapons) w;
-			w.anwenden(this);	
+			w.anwenden(this);
+		}else {
+			ausgeruesteteWaffe = null;	
 		}
 	}
 	
@@ -102,8 +102,13 @@ public abstract class Spieler extends Lebewesen {
 		if(ausgeruestetesBling != null) {
 			ausgeruestetesBling.remove(this);
 		}
-		ausgeruestetesBling = (Equippable) b;
-		b.anwenden(this);
+		if(b != null) {
+			ausgeruestetesBling = (Equippable) b;
+			b.anwenden(this);	
+		}else {
+			ausgeruestetesBling = null;
+		}
+		
 	}	
 	
 	public Armor getArmor() {
@@ -113,8 +118,13 @@ public abstract class Spieler extends Lebewesen {
 		if(ausgeruesteteRuestung != null) {
 			ausgeruesteteRuestung.remove(this);
 		}
-		ausgeruesteteRuestung = (Armor) item;
-		ausgeruesteteRuestung.anwenden(this);
+		if(item != null) {
+			ausgeruesteteRuestung = (Armor) item;
+			ausgeruesteteRuestung.anwenden(this);	
+		}else {
+			ausgeruesteteRuestung = null;
+		}
+		
 	}	
 	
 	public String getStats() {

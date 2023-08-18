@@ -55,6 +55,8 @@ public class ShopUIController extends UICon{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
 				int sel = gui.getSelected();
+				
+				
 				if(sys.kannKaufen(sel)) {
 					if(sys.kaufen(sel)) {
 						if(sys.anlegbar()) {
@@ -83,9 +85,9 @@ public class ShopUIController extends UICon{
 					
 					gui.addErgebnisMulti("Du hast noch "+sys.getSpielerVermoegen()+" Gold!");
 					ergebnisZeile+=2;
-					
-					
-				}else {
+				}else if(gui.getItemsRows() == 0) {
+					gui.addErgebnisMulti("Dieser Laden ist leer! - Leere kann nicht gekauft werden!");
+				}else if(!sys.kannKaufen(sel)){
 					gui.addErgebnisMulti("Das kann "+sys.getSpielerName()+" nicht kaufen! Du hast "+sys.getSpielerVermoegen()+ " Gold!");
 					
 				}
@@ -104,7 +106,7 @@ public class ShopUIController extends UICon{
 				gui.clearAktion();
 				gui.setAktion("Willst du etwas anderes Kaufen?");
 				gui.addAktion(sys.getStats());
-			}else {
+			}else if(e.getKeyCode() == zurueck && gui.getItemsRows() == 0) {
 				gui.clearKaufMenu();
 				gui.clearErgebnis();
 				gui.setEntscheid();

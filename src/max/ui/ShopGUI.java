@@ -67,10 +67,6 @@ public class ShopGUI extends GUIVorlage{
 		inventar.addKeyListener(aus);
 		inventar.addKeyListener(zu);
 		
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), null);
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), null);
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), null);
-		inventar.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), null);
 		
 	}
 	
