@@ -22,6 +22,7 @@ public class Spiel {
 	private static SpielerBewegung spielerBewegung;
 	private Karte karte = new Karte();
 	private List<Spieler> alleSpieler = new ArrayList<>();
+	private List<Spieler> alleSpielerUr = new ArrayList<>();
 	private Spiel spiel;
 	private List<String> alleNamen = new ArrayList<>();
 
@@ -77,6 +78,8 @@ public class Spiel {
 		// Spieler zur Liste hinzufügen
 		spiel.alleSpieler.add(spieler);
 		//
+		spiel.alleSpielerUr.add(spieler);
+		//
 		addNamen(spieler.getName());
 		
 	}
@@ -91,7 +94,7 @@ public class Spiel {
 
 		if (alleSpieler.size() != 0 && alleSpieler.size() < 5) {
 			// Aktuellen Spieler bewegen (anhand von Koordinaten)
-			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler);
+			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler,spiel.alleSpielerUr);
 			// KartenPanel-Instanz aus dem Karte-Objekt holen
 			Karte.KartenPanel kartenPanel = spiel.karte.new KartenPanel();
 			// Das KartenPanel neu zeichnen, um die Spielerpositionen zu aktualisieren

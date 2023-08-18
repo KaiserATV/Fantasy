@@ -32,12 +32,13 @@ public class SpielerBewegung {
 	 * @param karte Das Spielfeld.
 	 * @param frame Das Fenster, in dem sich das Spielfeld befindet.
 	 */
-	public SpielerBewegung(Karte karte, JFrame frame, List<Spieler> spielerListe) {
+	public SpielerBewegung(Karte karte, JFrame frame, List<Spieler> spielerListe, List<Spieler> ur) {
 		this.karte = karte;
 		this.frame = frame;
 		this.feldaktionen = new FeldAktionen(frame, this);
 		this.alleSpieler = spielerListe;
-		this.alleSpielerUr = spielerListe;
+		this.alleSpielerUr = ur;
+		
 		
 		initSpielerBewegung();
 		frame.repaint();
