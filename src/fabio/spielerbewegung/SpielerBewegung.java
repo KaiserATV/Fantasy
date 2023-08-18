@@ -144,7 +144,6 @@ public class SpielerBewegung {
 	}
 
 	public void removeSpieler(Spieler s) {
-		System.out.println("removed");
 		s.setPlatzierung(alleSpieler.size()-1);
 		alleSpieler.remove(s);
 	
@@ -156,7 +155,6 @@ public class SpielerBewegung {
 	}
 	
 	private void gewonnen() {
-		System.out.println(alleSpielerUr.size());
 		frame.setContentPane(new WinPane(alleSpielerUr).getContentPane());
 		frame.repaint();
 		frame.revalidate();
