@@ -178,7 +178,7 @@ public class KampfUIController extends UICon{
 	private void naechsterZugItem(String s) {
 		if (pve) {
 			int i = sys.monsterAngriff();
-			if(i>0) {
+			if(i>=0) {
 				gui.setAktion(s);
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.setInfoWidth(sys.bestimmeBreite());	
@@ -210,7 +210,7 @@ public class KampfUIController extends UICon{
 	private void naechsterZugItem() {
 		if (pve) {
 			int i = sys.monsterAngriff();
-			if(i>0) {
+			if(i>=0) {
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.setInfoWidth(sys.bestimmeBreite());	
 			}else if(sys.getZahm()){
@@ -236,9 +236,9 @@ public class KampfUIController extends UICon{
 	
 	private void naechsterZug() {
 		int h = sys.kaempfen();
-		if (pve && h > 0) {
+		if (pve && h >= 0) {
 			int i = sys.monsterAngriff();
-			if(i>0) {
+			if(i>=0) {
 				gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.setInfoWidth(sys.bestimmeBreite());	
