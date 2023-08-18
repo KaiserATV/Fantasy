@@ -153,20 +153,20 @@ public abstract class GUIVorlage {
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup()
-        					.addComponent(info,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        					.addComponent(infoText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-        			.addComponent(bildEbene,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        			.addComponent(aktionText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        			.addComponent(entscheid,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(info,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(infoText,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        			.addComponent(bildEbene,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        			.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        			.addComponent(entscheid,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         );
         layout.setHorizontalGroup(
         		layout.createParallelGroup()
         		.addGroup(layout.createParallelGroup()
-        				.addComponent(info,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        				.addComponent(infoText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-        		.addComponent(bildEbene,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        		.addComponent(aktionText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        		.addComponent(entscheid,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(info,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(infoText,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        		.addComponent(bildEbene,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        		.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        		.addComponent(entscheid,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         	);
         
         contentPane.setLayout(layout);
