@@ -5,6 +5,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.GroupLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -182,7 +184,23 @@ public abstract class GUIVorlage {
  
         
         
-        
+        main.addComponentListener(new ComponentAdapter() {
+        	@Override
+        	public void componentResized(ComponentEvent e) {
+        		double scaleWidth = main.getWidth()/1000;
+        		double scaleHeight = main.getHeight()/1000;
+        		
+        		Icon tmp;
+        		tmp = bildEbene.getIcon() ; 
+        	
+        		
+        		
+        		
+        		
+        		
+        		
+        	}
+        });
         
         
         

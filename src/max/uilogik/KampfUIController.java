@@ -80,7 +80,7 @@ public class KampfUIController extends UICon{
 			if(e.getKeyCode() == auswahl) {
 				int g = gui.getSelectedIndex();
 				if(itemMenu && g < (sys.getUsables().length-1)) {	
-					gui.setAngriff(0);
+					gui.setAngriff(1);
 					itemMenu = false;
 					angriffsMenu = true;
 					gui.addAktion(sys.itemBenutzen(sys.getItem(g)));
