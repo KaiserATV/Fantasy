@@ -25,7 +25,6 @@ public class ShopUIController extends UICon{
 		sys = new ShopSys(p,s);
 		
 		gui.setBackground(s.getHintergrundOhnePixl());
-//		gui.setBackground(s.getHintergrundPixl());
 
 		urGeld = sys.getSpielerVermoegen();
 		

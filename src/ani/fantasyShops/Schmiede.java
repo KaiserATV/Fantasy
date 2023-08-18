@@ -15,7 +15,6 @@ public class Schmiede extends Shops {
 	public Schmiede(Point position) throws IOException {
 		super(position);
 		wareSchmied();
-		hintergrundMitPixl = ImageIO.read(new File("src/img/shops/schmiedeBild_pixl.png"));
 		hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/schmiedeBild.png"));
 	}
 	

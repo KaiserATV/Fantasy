@@ -35,7 +35,7 @@ public class KampfGUI extends GUIVorlage{
 		
 		//BIlder kampfHintergrund 1,2,3,4 möglich
 		try {
-			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund4.png")).getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
+			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund2.png")).getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
 		} catch (IOException e) {
 			System.out.println("Etwas ist schiefgelaufen beim Hintergrund setzten...");
 			e.printStackTrace();
@@ -77,7 +77,12 @@ public class KampfGUI extends GUIVorlage{
 		spieler2.setVisible(true);
 		spieler1.setSize(400,400);
 		spieler2.setSize(175,175);
-		
+		 
+		spieler1.setLocation(50, 130); 
+		spieler2.setLocation(700, 225);
+		bildEbene.add(spieler1);
+		bildEbene.add(spieler2);
+		 
 		
         scrollHuelle.setVisible(true);
         scrollHuelle.setBounds(0,800,1000,200);
@@ -234,8 +239,6 @@ public class KampfGUI extends GUIVorlage{
 	 public void setSpieler1Bild(BufferedImage b) {
 		 Image bScale = b.getScaledInstance(spieler1.getWidth(), spieler1.getHeight(), Image.SCALE_FAST);
 		 spieler1.setIcon(new ImageIcon(bScale));
-		 bildEbene.add(spieler1);
-		 spieler1.setLocation(50, 130);
 	 }
 	 /**
 	  * Funktion um Bild von der ersten Person zu setzen
@@ -244,8 +247,6 @@ public class KampfGUI extends GUIVorlage{
 	 public void setSpieler2Bild(BufferedImage b) {
 		 Image bScale = b.getScaledInstance(spieler2.getWidth(), spieler2.getHeight(),Image.SCALE_FAST);
 		 spieler2.setIcon(new ImageIcon(bScale));
-		 bildEbene.add(spieler2);
-		 spieler2.setLocation(700, 225);
 	 }
 	 /**
 	  * fügt dem ergebnis ein Keylistener hinzu 
