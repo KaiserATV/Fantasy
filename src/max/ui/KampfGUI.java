@@ -75,11 +75,11 @@ public class KampfGUI extends GUIVorlage{
 		//Spielerbilder
 		spieler1.setVisible(true);
 		spieler2.setVisible(true);
-		spieler1.setSize(400,400);
+		spieler1.setSize(300,300);
 		spieler2.setSize(175,175);
 		 
-		spieler1.setLocation(50, 130); 
-		spieler2.setLocation(700, 225);
+		spieler1.setLocation(50, 350); 
+		spieler2.setLocation(420, 225);
 		bildEbene.add(spieler1);
 		bildEbene.add(spieler2);
 		 
