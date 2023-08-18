@@ -155,6 +155,7 @@ public class SpielerBewegung {
 	}
 	
 	private void gewonnen() {
+		System.out.println(alleSpielerUr.size());
 		frame.setContentPane(new WinPane(alleSpielerUr).getContentPane());
 		frame.repaint();
 		frame.revalidate();
