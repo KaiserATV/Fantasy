@@ -92,7 +92,7 @@ public class SpielerBewegung {
 							frame.repaint();
 						} else if (e.getKeyCode() == belegung[4]) {
 					        spielerBewegt();
-					        naechsterSpieler();
+					        
 					        Spieler nextSpieler = alleSpieler.get(
 					                (alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
 					        isDialogOpen[0] = true;
@@ -100,9 +100,10 @@ public class SpielerBewegung {
 					                "Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(),
 					                null, JOptionPane.INFORMATION_MESSAGE);
 					        isDialogOpen[0] = false;
+					        naechsterSpieler();
 						}
 					} else if (!aktuellerSpieler.hatBewegungen()) {
-						naechsterSpieler();
+						
 						// Erstellt ein Popup mit dem Namen des nächsten Spielers
 						Spieler nextSpieler = alleSpieler
 								.get((alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
@@ -114,12 +115,13 @@ public class SpielerBewegung {
 										"Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null,
 										JOptionPane.INFORMATION_MESSAGE);
 								isDialogOpen[0] = false;
+								naechsterSpieler();
 							}
 						});
 					}
 				}
 
-				return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
+				return true; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
 								// reagieren.
 			}
 		});
