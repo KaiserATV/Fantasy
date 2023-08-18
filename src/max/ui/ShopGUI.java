@@ -50,7 +50,7 @@ public class ShopGUI extends GUIVorlage{
 	 * @param auswahl Key für Auswahl
 	 * @param aus KeyListener welcher bei auswahl feuert (inventar)
 	 */
-	public void setTravKeys(int rechts, int links, KeyAdapter zu, int auswahl, KeyAdapter aus) {
+	public void setTravKeys(int rechts, int links, int oben, int unten ,KeyAdapter zu, int auswahl, KeyAdapter aus) {
 		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "none");
 		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "none");
 		inventar.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "none");
@@ -66,6 +66,14 @@ public class ShopGUI extends GUIVorlage{
 		inventar.setFocusTraversalKeysEnabled(false);
 		inventar.addKeyListener(aus);
 		inventar.addKeyListener(zu);
+		
+		
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(links,0), "selectPreviousRow");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectNextRow");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
+		inventar.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
+		
+		
 		
 		
 	}
@@ -132,20 +140,7 @@ public class ShopGUI extends GUIVorlage{
 		inventar.setSelectionForeground(Color.decode("#d9dbf4"));
 		
 	}
-	public void inventarListen(int rechts, int links) {
-		inventar.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == rechts && inventar.getSelectedRow()+1 != inventar.getRowCount() && inventar.getRowCount()>0) {
-					inventar.setRowSelectionInterval(inventar.getSelectedRow()+1, inventar.getSelectedRow()+1);
-					inventar.scrollRectToVisible(new Rectangle(inventar.getCellRect(inventar.getSelectedRow(), 0, false)));
-				}else if(e.getKeyCode() == links && inventar.getSelectedRow() != 0 && inventar.getRowCount()>0) {
-					inventar.setRowSelectionInterval(inventar.getSelectedRow()-1, inventar.getSelectedRow()-1);
-					inventar.scrollRectToVisible(new Rectangle(inventar.getCellRect(inventar.getSelectedRow(), 0, false)));
-				}	
-			}
-		});
-	}
+	
 	
 	public void removeZeile(int i) {
 		if(dtm.getRowCount()>1) {

@@ -155,24 +155,24 @@ public class KampfGUI extends GUIVorlage{
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(rechts,0))));
 		contentPane.setFocusTraversalKeys(KeyboardFocusManager.BACKWARD_TRAVERSAL_KEYS, new HashSet<KeyStroke>(Arrays.asList(KeyStroke.getKeyStroke(links,0))));     
 		
-		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "none");
-		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "none");
-		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "none");
-		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
-		items.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
 		
-//		items.setFocusTraversalKeysEnabled(false);
+		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_LEFT,0), "none");
+		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_RIGHT,0), "none");
+		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_UP,0), "none");
+		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
+		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
+			
 		
-		items.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == rechts && items.getSelectedIndex()>0) {
-					items.setSelectedIndex(items.getSelectedIndex()+1);
-				}else if(e.getKeyCode() == links && items.getSelectedIndex()<d.getSize()) {
-					items.setSelectedIndex(items.getSelectedIndex()-1);
-				}
-			}
-		});
+
+		items.setFocusTraversalKeysEnabled(false);
+	
+		
+		items.getInputMap().put(KeyStroke.getKeyStroke(links,0), "selectPreviousColumn");
+		items.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectNextColumn");
+		items.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
+		items.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
+	
+		
 		
 		items.addListSelectionListener(new ListSelectionListener() {
 			@Override
