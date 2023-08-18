@@ -16,7 +16,7 @@ public class Taverne extends Shops {
 		public Taverne(Point position) throws IOException {
 			super(position);
 			wareTaverne();	
-			hintergrund = ImageIO.read(new File("src/img/shops/taverneBild.png"));
+			hintergrund = ImageIO.read(new File("src/img/shops/taverneBild_pixl.png"));
 		}
 		
 		

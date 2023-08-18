@@ -12,7 +12,7 @@ public class Buchhandlung extends Shops {
 	public Buchhandlung(Point position) throws IOException {
 		super(position);
 		wareBuch();
-		hintergrund = ImageIO.read(new File("src/img/shops/buchhandlungBild.png"));
+		hintergrund = ImageIO.read(new File("src/img/shops/buchhandlungBild_pixl.png"));
 	}
 		@Override
 		public String getName() {

@@ -25,7 +25,7 @@ public class TravelingMerchant extends Shops {
 			wareJuwel();
 			wareSchmied();
 			wareTaverne();	
-			hintergrund = ImageIO.read(new File("src/img/shops/karrenBild.png"));
+			hintergrund = ImageIO.read(new File("src/img/shops/karrenBild_pixl.png"));
 		}
 		
 		

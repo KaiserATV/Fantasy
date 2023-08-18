@@ -13,7 +13,7 @@ public class Juwelier extends Shops {
 		public Juwelier(Point position) throws IOException {
 			super(position);
 			wareJuwel();
-			hintergrund = ImageIO.read(new File("src/img/shops/juwelierBild.png"));
+			hintergrund = ImageIO.read(new File("src/img/shops/juwelierBild_pixl.png"));
 		}
 	
 		@Override
