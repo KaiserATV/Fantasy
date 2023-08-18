@@ -190,8 +190,7 @@ public abstract class GUIVorlage {
         		double scaleWidth = main.getWidth()/1000;
         		double scaleHeight = main.getHeight()/1000;
         		
-        		Icon tmp;
-        		tmp = bildEbene.getIcon() ; 
+//        		BufferedImage tmp = background.getScaledInstance(aktionZeilen, ergebnisZeilen, aktionZeilen)
         	
         		
         		
@@ -362,6 +361,7 @@ public abstract class GUIVorlage {
 	 
 	 
 	 public void setBackground(BufferedImage b) {
+		 background = b;
 		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
 	 }
 	 
@@ -403,6 +403,8 @@ public abstract class GUIVorlage {
 	
 	private Container urCP;
 	private Dimension urD;
+	
+	protected BufferedImage background;
 	
 	protected GroupLayout layout;
 	

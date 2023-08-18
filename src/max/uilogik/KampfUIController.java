@@ -255,7 +255,7 @@ public class KampfUIController extends UICon{
 				gui.setErgebnis(1);
 				bewegung.removeSpieler(sys.getSpielerEins());
 			}
-		}else if(!pve && h > 0){
+		}else if(!pve && h > -1){
 			gui.setAktion(sys.getNamenEins() +"greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
 			gui.setInfoWidth(sys.bestimmeBreite());
