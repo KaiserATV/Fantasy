@@ -189,8 +189,11 @@ public abstract class GUIVorlage {
         	public void componentResized(ComponentEvent e) {
         		double scaleWidth = main.getWidth()/1000;
         		double scaleHeight = main.getHeight()/1000;
+        		System.out.println(scaleHeight);
         		
-//        		BufferedImage tmp = background.getScaledInstance(aktionZeilen, ergebnisZeilen, aktionZeilen)
+        		Image tmp = background.getScaledInstance((int)Math.floor(1000*scaleWidth),(int) Math.floor(1000*scaleHeight), Image.SCALE_FAST);
+        		
+        		bildEbene.setIcon(new ImageIcon(tmp));
         	
         		
         		
