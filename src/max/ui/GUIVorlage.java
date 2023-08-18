@@ -153,20 +153,20 @@ public abstract class GUIVorlage {
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup()
-        					.addComponent(info,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        					.addComponent(infoText,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-        			.addComponent(bildEbene,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(info,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(infoText,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        			.addComponent(bildEbene,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        			.addComponent(entscheid,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        			.addComponent(entscheid,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         );
         layout.setHorizontalGroup(
         		layout.createParallelGroup()
         		.addGroup(layout.createParallelGroup()
-        				.addComponent(info,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        				.addComponent(infoText,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-        		.addComponent(bildEbene,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(info,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(infoText,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        		.addComponent(bildEbene,100,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         		.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        		.addComponent(entscheid,0,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        		.addComponent(entscheid,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         	);
         
         contentPane.setLayout(layout);
