@@ -71,10 +71,6 @@ public class ShopGUI extends GUIVorlage{
 		inventar.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectNextRow");
 		inventar.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
 		inventar.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
-		
-		
-		
-		
 	}
 	
 	public void setKaufMenuData(String[][] daten) {
@@ -174,7 +170,12 @@ public class ShopGUI extends GUIVorlage{
 	}
 	@Override
 	public void setErgebnis(int i) {
-		layout.replace(entscheid, ergebnis);
+		if(i == 0) {
+			layout.replace(entscheid, ergebnis);	
+		}else {
+			layout.replace(anlegen, ergebnis);
+		}
+		
 	}
 	@Override
 	public void setEntscheid(int i) {

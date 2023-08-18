@@ -1,5 +1,6 @@
 package max.ui;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Image;
@@ -47,8 +48,9 @@ public class KampfGUI extends GUIVorlage{
         angriff.setFocusable(false);
         angriff.setLayout(null);
         angriff.setBackground(Color.BLACK);
-        angriff.add(buttonLinks2);
-        angriff.add(buttonRechts2);
+        angriff.setLayout(new BorderLayout());
+        angriff.add(buttonLinks2,BorderLayout.LINE_START);
+        angriff.add(buttonRechts2,BorderLayout.LINE_END);
        
       
         //Menu für Items

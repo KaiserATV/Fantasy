@@ -144,13 +144,13 @@ public class ShopUIController extends UICon{
 		public void actionPerformed(ActionEvent e) {
 			sys.anlegen();
 			gui.addAktion(sys.getAnlegText());
-			gui.setErgebnis(0);
+			gui.setErgebnis(1);
 		}
 	};
 	private ActionListener anlegenRechts = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			gui.setErgebnis(0);
+			gui.setErgebnis(1);
 		}	
 	};
 	

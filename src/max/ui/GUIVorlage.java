@@ -1,4 +1,5 @@
 package max.ui;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -67,25 +68,26 @@ public abstract class GUIVorlage {
         
         //Menu für entscheidung ob angelegt oder nicht
         anlegen.setVisible(true);
+        anlegen.setLayout(new BorderLayout());
         anlegen.setBackground(Color.black);
-        anlegen.add(anlegenLinks);
-        anlegen.add(anlegenRechts);
+        anlegen.add(anlegenLinks,BorderLayout.LINE_START);
+        anlegen.add(anlegenRechts, BorderLayout.LINE_END);
         abfrage.setVisible(false);
-        abfrage.setBounds(0,0,1000,40);
+        abfrage.setPreferredSize(new Dimension(1000,40));
         abfrage.setFocusable(false);
         abfrage.setBorder(null);
         abfrage.setEditable(false);
         abfrage.setBackground(Color.black);
         abfrage.setForeground(Color.white);
         abfrage.setFont(schrift);
-        anlegen.add(abfrage);
+        anlegen.add(abfrage, BorderLayout.PAGE_START);
         
         
         //Menu für Entscheidung ob Flucht oder Angriff
         entscheid.setVisible(true);
-        entscheid.setLayout(null);
-        entscheid.add(buttonLinks);
-        entscheid.add(buttonRechts);
+        entscheid.setLayout(new BorderLayout());
+        entscheid.add(buttonLinks,BorderLayout.LINE_START);
+        entscheid.add(buttonRechts,BorderLayout.LINE_END);
         
         //Menu für Ergebnis
         ergebnis.setVisible(true);
@@ -97,12 +99,12 @@ public abstract class GUIVorlage {
         
         
         //Button Design
-        buttonLinks.setBounds(100, 50,300, 50);
-        buttonRechts.setBounds(600, 50, 300, 50);
-        buttonLinks2.setBounds(100, 50,300, 50);
-        buttonRechts2.setBounds(600, 50, 300, 50);
-        anlegenLinks.setBounds(100, 50,300, 50);
-        anlegenRechts.setBounds(600, 50, 300, 50);
+        buttonLinks.setPreferredSize(new Dimension(300, 50));
+        buttonRechts.setPreferredSize(new Dimension(300, 50));
+        buttonLinks2.setPreferredSize(new Dimension(300, 50));
+        buttonRechts2.setPreferredSize(new Dimension(300, 50));
+        anlegenLinks.setPreferredSize(new Dimension(300, 50));
+        anlegenRechts.setPreferredSize(new Dimension(300, 50));
         buttons[0] = buttonLinks;
         buttons[1] = buttonLinks2;
         buttons[2] = anlegenLinks;
@@ -149,20 +151,20 @@ public abstract class GUIVorlage {
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup()
-        					.addComponent(info)
-        					.addComponent(infoText))
-        			.addComponent(bildEbene)
-        			.addComponent(aktionText)
-        			.addComponent(entscheid)
+        					.addComponent(info,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(infoText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        			.addComponent(bildEbene,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        			.addComponent(aktionText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        			.addComponent(entscheid,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         );
         layout.setHorizontalGroup(
         		layout.createParallelGroup()
         		.addGroup(layout.createParallelGroup()
-        				.addComponent(info)
-        				.addComponent(infoText))
-        		.addComponent(bildEbene)
-        		.addComponent(aktionText)
-        		.addComponent(entscheid)
+        				.addComponent(info,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(infoText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        		.addComponent(bildEbene,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        		.addComponent(aktionText,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        		.addComponent(entscheid,GroupLayout.PREFERRED_SIZE,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         	);
         
         contentPane.setLayout(layout);
@@ -303,6 +305,7 @@ public abstract class GUIVorlage {
 	  */
 	 public void addAnlegen() {
 			layout.replace(ergebnis, anlegen);
+			anlegenLinks.requestFocusInWindow();
 		}
 	 /**
 	  * Funktion um die Anlegen-Ebene hinzuzufügen

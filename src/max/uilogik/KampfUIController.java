@@ -67,7 +67,7 @@ public class KampfUIController extends UICon{
 		}else if(itemMenu) {
 			itemMenu = false;
 			angriffsMenu = true;
-			gui.setAngriff(0);
+			gui.setAngriff(1);
 		}
 	}
 	
