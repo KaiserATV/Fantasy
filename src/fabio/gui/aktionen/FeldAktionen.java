@@ -143,13 +143,13 @@ public class FeldAktionen {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
 		TravelingMerchant t=null;
+		if (chance < 8) { // 8% Chance auf fahrenden Händler
 		try {
 			t = new TravelingMerchant(position);
 		}catch(IOException e) {
 			System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
 			e.printStackTrace();
 		}
-		if (chance < 8) { // 8% Chance auf fahrenden Händler
 			shopLaufen(ich, t);
 		}
 	}
