@@ -8,9 +8,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.GroupLayout;
@@ -40,8 +43,7 @@ public abstract class GUIVorlage {
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);
         
-        contentPane.setPreferredSize(new Dimension(1000,1000));
-        contentPane.setLayout(null);
+        contentPane.setPreferredSize(main.getPreferredSize());
         
         //Feld für Infos - Farbe in Unterklassen implementieren
         info.setVisible(true);
@@ -178,6 +180,13 @@ public abstract class GUIVorlage {
         
         buttonLinks.requestFocusInWindow();
  
+        
+        
+        
+        
+        
+        
+        
     }
     /**
      *  Setzt Breite des Info Container

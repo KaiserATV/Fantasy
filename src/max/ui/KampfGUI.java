@@ -43,6 +43,11 @@ public class KampfGUI extends GUIVorlage{
 		}
 		
 		
+		
+		
+		
+		
+		
 		 //Menu für Entscheidung über Angriff oder Items
         angriff.setVisible(true);
         angriff.setFocusable(false);
@@ -218,7 +223,7 @@ public class KampfGUI extends GUIVorlage{
      */
 	 public void setAngriff(int i) {
 		 if(i == 1) {
-			 layout.replace(items, angriff);
+			 layout.replace(scrollHuelle, angriff);
 		 }else {
 			 layout.replace(entscheid, angriff);
 		 }
