@@ -125,7 +125,7 @@ public class SpielerBewegung {
 					}
 				}
 
-				return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
+				return true; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
 								// reagieren.
 			}
 		});

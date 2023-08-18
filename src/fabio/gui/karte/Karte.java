@@ -31,6 +31,36 @@ public class Karte {
 	public enum FeldTyp {
 		WEG, BAUM, Juwelier, Buchhandlung, Schmiede, Taverne
 	}
+	
+	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+	static double heightRatio = screenSize.getHeight() / 1080.0;
+	private static int FELD_HOEHE = (int) (20 * heightRatio);
+	private static int FELD_BREITE = FELD_HOEHE;
+	private static final int KARTE_BREITE = 50;
+	private static final int KARTE_HOEHE = KARTE_BREITE;
+	private static final int GEBAEUDE_RATIO = 30;
+	private static final int MAX_VERBINDUNGEN_VON_ECKE = 40;
+	private static final String WEG_BILD_PATH = getBasePath() + "Weg.png";
+	private static final String BAUM_BILD_PATH = getBasePath() + "Laub.png";
+	private static final String GEBAEUDE_BILD_PATH = getBasePath() + "Haus.png";
+
+	private static String getBasePath() {
+		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator;
+	}
+
+	private FeldTyp[][] karte;
+	private JPanel contentPane = new JPanel();
+	private JFrame frame;
+	JPanel zentralPanel = new JPanel(null);
+	private Image wegBild;
+	private Image baumBild;
+	private Image gebaeudeBild;
+
+	private List<Point> kartenecken;
+
+	private Map<FeldTyp, Point> gebaeudePositionen;
+
+	private List<Spieler> spielerListe = new ArrayList<>();
 
 	/**
 	 * Zeichnet die Karte und den Spieler.
@@ -80,35 +110,6 @@ public class Karte {
 		}
 	}
 
-	static Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	static double heightRatio = screenSize.getHeight() / 1080.0;
-	private static int FELD_HOEHE = (int) (20 * heightRatio);
-	private static int FELD_BREITE = FELD_HOEHE;
-	private static final int KARTE_BREITE = 50;
-	private static final int KARTE_HOEHE = KARTE_BREITE;
-	private static final int GEBAEUDE_RATIO = 30;
-	private static final int MAX_VERBINDUNGEN_VON_ECKE = 40;
-	private static final String WEG_BILD_PATH = getBasePath() + "Weg.png";
-	private static final String BAUM_BILD_PATH = getBasePath() + "Laub.png";
-	private static final String GEBAEUDE_BILD_PATH = getBasePath() + "Haus.png";
-
-	private static String getBasePath() {
-		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator;
-	}
-
-	private FeldTyp[][] karte;
-	private JPanel contentPane = new JPanel();
-	private JFrame frame;
-	JPanel zentralPanel = new JPanel(null);
-	private Image wegBild;
-	private Image baumBild;
-	private Image gebaeudeBild;
-
-	private List<Point> kartenecken;
-
-	private Map<FeldTyp, Point> gebaeudePositionen;
-
-	private List<Spieler> spielerListe = new ArrayList<>();
 
 	public Karte() {
 		karte = new FeldTyp[KARTE_BREITE][KARTE_HOEHE];
@@ -185,30 +186,7 @@ public class Karte {
 	 * @param start Der Startpunkt des Weges.
 	 * @param ziel  Der Endpunkt des Weges.
 	 */
-	private void erstelleWeg(Point start, Point ziel) {
-		int x = start.x;
-		int y = start.y;
-
-		while (x != ziel.x || y != ziel.y) {
-			if (x < ziel.x) {
-				x++;
-			} else if (x > ziel.x) {
-				x--;
-			}
-
-			if (y < ziel.y) {
-				y++;
-			} else if (y > ziel.y) {
-				y--;
-			}
-
-			if (karte[x][y] != FeldTyp.Juwelier && karte[x][y] != FeldTyp.Buchhandlung
-					&& karte[x][y] != FeldTyp.Schmiede) {
-				karte[x][y] = FeldTyp.WEG;
-			}
-		}
-	}
-
+	
 	/**
 	 * Findet das nächstgelegene Gebäude zu einem gegebenen Startpunkt.
 	 *
@@ -267,6 +245,31 @@ public class Karte {
 	public int getNUM_CELLS() {
 		return karte.length;
 	}
+	
+	private void erstelleWeg(Point start, Point ziel) {
+		int x = start.x;
+		int y = start.y;
+
+		while (x != ziel.x || y != ziel.y) {
+			if (x < ziel.x) {
+				x++;
+			} else if (x > ziel.x) {
+				x--;
+			}
+
+			if (y < ziel.y) {
+				y++;
+			} else if (y > ziel.y) {
+				y--;
+			}
+
+			if (karte[x][y] != FeldTyp.Juwelier && karte[x][y] != FeldTyp.Buchhandlung
+					&& karte[x][y] != FeldTyp.Schmiede) {
+				karte[x][y] = FeldTyp.WEG;
+			}
+		}
+	}
+
 
 	/**
 	 * Initialisiert die Karte mit Bäumen, erstellt zufällig Gebäude und verbindet
