@@ -7,9 +7,12 @@ import java.awt.KeyboardFocusManager;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.HashSet;
 
+import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -28,6 +31,15 @@ public class KampfGUI extends GUIVorlage{
 		super(x);
 		info.setBackground(Color.red);
 		contentPane.setBackground(Color.black);
+		
+		
+		try {
+			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund4.png")).getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
+		} catch (IOException e) {
+			System.out.println("Etwas ist schiefgelaufen beim Hintergrund setzten...");
+			e.printStackTrace();
+		}
+		
 		
 		 //Menu für Entscheidung über Angriff oder Items
         angriff.setVisible(true);
