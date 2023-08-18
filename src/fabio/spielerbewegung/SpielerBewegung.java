@@ -91,20 +91,15 @@ public class SpielerBewegung {
 							spielerBewegt();
 							frame.repaint();
 						} else if (e.getKeyCode() == belegung[4]) {
-							naechsterSpieler();
-							Spieler nextSpieler = alleSpieler.get(
-									(alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
-							SwingUtilities.invokeLater(new Runnable() {
-								@Override
-								public void run() {
-									isDialogOpen[0] = true;
-									JOptionPane.showMessageDialog(frame,
-											"Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(),
-											null, JOptionPane.INFORMATION_MESSAGE);
-									isDialogOpen[0] = false;
-									frame.repaint();
-								}
-							});
+					        spielerBewegt();
+					        naechsterSpieler();
+					        Spieler nextSpieler = alleSpieler.get(
+					                (alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
+					        isDialogOpen[0] = true;
+					        JOptionPane.showMessageDialog(frame,
+					                "Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(),
+					                null, JOptionPane.INFORMATION_MESSAGE);
+					        isDialogOpen[0] = false;
 						}
 					} else if (!aktuellerSpieler.hatBewegungen()) {
 						naechsterSpieler();
@@ -119,13 +114,12 @@ public class SpielerBewegung {
 										"Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null,
 										JOptionPane.INFORMATION_MESSAGE);
 								isDialogOpen[0] = false;
-								frame.repaint();
 							}
 						});
 					}
 				}
 
-				return true; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
+				return false; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
 								// reagieren.
 			}
 		});
