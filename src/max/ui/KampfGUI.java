@@ -33,6 +33,7 @@ public class KampfGUI extends GUIVorlage{
 		contentPane.setBackground(Color.black);
 		
 		
+		//BIlder kampfHintergrund 1,2,3,4 möglich
 		try {
 			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund4.png")).getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
 		} catch (IOException e) {
