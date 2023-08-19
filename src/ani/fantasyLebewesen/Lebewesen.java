@@ -265,13 +265,13 @@ public abstract class Lebewesen {
 		this.gelaehmt = lahm;
 	}
 	
-	public void setLaehmung(int i) {
+	public void setLaehmungsCounter(int i) {
 		laehmungsCounter = i;
 		
 	}
 	public void lowerLaehmung(int i) {
 		laehmungsCounter -= i;
-		if(i == 0) {
+		if(laehmungsCounter == 0) {
 			this.gelaehmt = false;
 		}
 		

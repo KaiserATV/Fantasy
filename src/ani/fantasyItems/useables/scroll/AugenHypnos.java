@@ -17,7 +17,7 @@ public class AugenHypnos extends Scroll {
 	@Override
 	public void anwenden(Spieler ich, Lebewesen gegen) {
 		gegen.setGelaehmt(true);
-		gegen.setLaehmung(2);//anzahl der Runden die gelähmt - mind 1
+		gegen.setLaehmungsCounter(2);//anzahl der Runden die gelähmt - mind 1
 	}
 
 	@Override
