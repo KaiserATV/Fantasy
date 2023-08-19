@@ -37,8 +37,9 @@ public class ShopGUI extends GUIVorlage{
 		
 		
 		scrollHuelle.setVisible(true);
-		scrollHuelle.setBounds(bildEbene.getBounds());
+		scrollHuelle.setPreferredSize(bildEbene.getPreferredSize());
 		scrollHuelle.setLayout(new BorderLayout());
+		
 		
 	}
 	/**

@@ -101,7 +101,7 @@ public class ShopUIController extends UICon{
 	private KeyAdapter zurueckMenu = new KeyAdapter() {
 		@Override 
 		public void keyPressed(KeyEvent e) {
-			if(e.getKeyCode() == zurueck && gui.getItemsRows()>1) {
+			if(e.getKeyCode() == zurueck && gui.getItemsRows()>=1) {
 				gui.clearKaufMenu();
 				gui.setEntscheid(0);
 				gui.clearAktion();

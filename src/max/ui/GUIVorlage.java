@@ -155,7 +155,7 @@ public abstract class GUIVorlage {
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
         			.addGroup(layout.createParallelGroup()
-        					.addComponent(info,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        					.addComponent(info)
         					.addComponent(infoText,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
         			.addComponent(bildEbene,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)

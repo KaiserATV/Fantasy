@@ -23,12 +23,12 @@ public class BufferedImagesSammlung {
 	String path = getBasePath();
 	String shopPath = getShopPath();
 	try {
-		beluaferus = ImageIO.read(new File(path+"beluaferus.png"));
-		volares = ImageIO.read(new File(path+"volares.png"));
 		haus = ImageIO.read(new File(path+"haus.png"));
-		kampfHintergrund = ImageIO.read(new File(path+"kampfHintergrund.png"));
 		laub = ImageIO.read(new File(path+"laub.png"));
 		weg = ImageIO.read(new File(path+"weg.png"));
+		beluaferus = ImageIO.read(new File(path+"beluaferus.png"));
+		volares = ImageIO.read(new File(path+"volares.png"));
+		kampfHintergrund = ImageIO.read(new File(path+"kampfHintergrund.png"));
 		buchhandlungBild = ImageIO.read(new File(shopPath+"buchhandlungBild.png"));
 		juwelierBild = ImageIO.read(new File(shopPath+"juwelierBild.png"));
 		karrenBild = ImageIO.read(new File(shopPath+"karrenBild.png"));
