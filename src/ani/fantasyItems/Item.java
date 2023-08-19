@@ -67,16 +67,30 @@ public abstract class Item {
 		int pos = zufall.nextInt(3);
 		if(best == 0) {
 			if(this instanceof Bow) {
-				strength -= 2;	
+				if(this.strength>2) {
+					strength -= 2;	
+				}else {
+					strength = 1;
+				}
+					
 			}else if(this instanceof Sword) {
-				strength -= 1;
+				if(this.strength>1) {
+					strength -= 1;	
+				}else {
+					strength = 1;
+				}
+				
 			}else {
-				schutz -= 1;
+				if(this.schutz>1) {
+					schutz -= 1;			
+				}else {
+					schutz =1;
+				}
+		
 			}
 			this.setPrice(this.getPrice()-100);
 			return negAttr[pos];
 		}else if(best == 1) {
-			
 			return neutralAttr[pos];
 		}else {
 			if(this instanceof Bow) {
