@@ -39,6 +39,9 @@ public class KampfSys extends VorlageSys{
 		
 	}
 	public int kaempfen() {
+		if(unsterblich) {
+			unsterblich = false;	
+		}
 		schaden = ich.getStrength();
 		if(ich.getGelaehmt()) {
 			ich.lowerLaehmung(1);
@@ -51,20 +54,21 @@ public class KampfSys extends VorlageSys{
 			if(gegen instanceof Spieler && ((Spieler)gegen).isUnsterblich()) {
 				schaden = gegen.getHp()-1;
 				((Spieler)gegen).removeBling();
-				return schaden;
+				gegen.setHp(1);
+				unsterblich=true;
+				return -schaden;
 			}else {
-				gewonnen(ich);
+				gewonnen();
 				return -schaden;	
 			}
 		}
 	}
 	
-	public void gewonnen(Lebewesen s) {
-		if (s == ich) {
+	public void gewonnen() {
 			gegen.setHp(0);
-		}else {
-			ich.setHp(0);
-		}
+			if(gegen instanceof Spieler) {
+				verlierer = (Spieler)gegen;	
+			}
 	}
 	
 	
@@ -75,6 +79,9 @@ public class KampfSys extends VorlageSys{
 		return (int) Math.ceil((((double) gegen.getHp())/gegen.getHpMax())*1000);
 	}
 	public int monsterAngriff() {
+		if(unsterblich) {
+			unsterblich = false;	
+		}
 		schaden = ((Monster) gegen).getStrength();
 		if(gegen.getGelaehmt()) {
 			gegen.lowerLaehmung(1);
@@ -90,9 +97,12 @@ public class KampfSys extends VorlageSys{
 				if(ich.isUnsterblich()) {
 					schaden = ich.getHp()-1;
 					ich.removeBling();
-					return schaden;
+					ich.setHp(1);
+					unsterblich=true;
+					return -schaden;
 				}else {
 					ich.setHp(0);
+					verlierer = ich;
 					return -schaden;	
 				}	
 			}
@@ -219,12 +229,16 @@ public class KampfSys extends VorlageSys{
 		return zahm;
 	}
 	public boolean getUnsterblich() {
-		return ich.isUnsterblich();
+		return unsterblich;
+	}
+	public Spieler getVerlierer() {
+		return verlierer;
 	}
 	
 	
 	private boolean zahm = false;
 	private boolean getauscht;
+	private boolean unsterblich;
 	private int schadenGesIch;
 	private int schadenGesGegen;
 	private int schaden;
@@ -237,6 +251,6 @@ public class KampfSys extends VorlageSys{
 	private int lootGold;
 	private Consumeables lootCon;
 	private Item lootItem;
-	
+	private Spieler verlierer;
 	
 }

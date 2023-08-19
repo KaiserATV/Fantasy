@@ -97,12 +97,16 @@ public class KampfGUI extends GUIVorlage{
 	
 	@Override
 	/**
-	 * @param i - 1 wenn aus angriff
+	 * @param i - 1 wenn aus angriff, 2 wenn aus entscheid, 3 wenn aus items
 	 */
 	public void setErgebnis(int i) {
 		if(i == 1) {
 			layout.replace(angriff, ergebnis);	
-		}else {
+		}else if(i == 2) {
+			layout.replace(entscheid, ergebnis);
+		}else if(i== 3){
+			layout.replace(items, ergebnis);
+		}else{
 			layout.replace(anlegen, ergebnis);
 		}
 		ergebnis.requestFocusInWindow();
@@ -125,7 +129,7 @@ public class KampfGUI extends GUIVorlage{
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		
-		items.setMinimumSize(new Dimension(width,200));
+		items.setPreferredSize(new Dimension(width,200));
 		items.setBackground(Color.black);
         scroll.setPreferredSize(new Dimension(width,200));
         scroll.getViewport().getView().setPreferredSize(new Dimension(width, 200));
@@ -134,8 +138,14 @@ public class KampfGUI extends GUIVorlage{
 		
 		scrollHuelle.setBackground(Color.black);
 		scrollHuelle.add(scroll);
-		scroll.repaint();
-		
+		scroll.repaint();	
+	}
+	
+	public void setNewItemData(String[] neu) {
+		d.removeAllElements();
+		for(String s:neu) {
+			d.addElement(s);
+		}
 	}
 	
 	/*
@@ -143,8 +153,8 @@ public class KampfGUI extends GUIVorlage{
 	 */
 	public void setItems() {
 		layout.replace(angriff, scrollHuelle);
-		items.setSelectedIndex(0);
 		items.requestFocusInWindow();
+		items.setSelectedIndex(0);
 	}
 	/**
 	 * Entfernt ein Item aus der Liste der Items
@@ -220,6 +230,7 @@ public class KampfGUI extends GUIVorlage{
 	  * @return den ausgewählten Index
 	  */
 	 public int getSelectedIndex() {
+		 System.out.println(items.getSelectedIndex());
 		 return items.getSelectedIndex();
 	 }
 	 /**

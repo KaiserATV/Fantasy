@@ -44,7 +44,7 @@ public abstract class GUIVorlage {
         
         
         width = ursprung.getWidth();      
-        System.out.println(width);
+//        System.out.println(width);
         
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);

@@ -86,7 +86,7 @@ public class KampfUIController extends UICon{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
 				int g = gui.getSelectedIndex();
-				if(itemMenu && g < (sys.getUsables().length-1)) {	
+				if(itemMenu && g < (sys.getUsables().length-1)&& g >=0) {	
 					gui.setAngriff(1);
 					itemMenu = false;
 					angriffsMenu = true;
@@ -118,6 +118,7 @@ public class KampfUIController extends UICon{
 						tauschen();
 					}else if(monsterTod) {
 						gui.beenden();
+						bewegung.removeSpieler(sys.getVerlierer());
 					}else {
 						gui.setAktion("Was wird "+sys.getNamenEins() + " tun?");
 						gui.addAktion(sys.getNamenEins()+" Leben: "+sys.getLebenEins());
@@ -162,10 +163,11 @@ public class KampfUIController extends UICon{
 					gui.beenden();	
 				}else {
 					if(!pve) {
+						gui.setAktion(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
 						tauschen();
 					}else {
 						naechsterZugItem(sys.getNamenEins()+" versucht zu fliehen und scheitert!");
-						gui.setErgebnis(1);
+						gui.setErgebnis(2);
 					}
 					e.getComponent().setVisible(false);
 				}
@@ -176,7 +178,6 @@ public class KampfUIController extends UICon{
 		@Override 
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
-				gui.setItemData(sys.getUsables());
 				gui.setItems();
 				angriffsMenu = false;
 				itemMenu = true;
@@ -202,8 +203,7 @@ public class KampfUIController extends UICon{
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				monsterTod=true;
-				gui.setErgebnis(1);
-				bewegung.removeSpieler(sys.getSpielerEins());
+				gui.setErgebnis(3);
 			}
 		}else if(!pve){
 			gui.setAktion(s);
@@ -230,8 +230,7 @@ public class KampfUIController extends UICon{
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				monsterTod=true;
-				gui.setErgebnis(1);
-				bewegung.removeSpieler(sys.getSpielerEins());
+				gui.setErgebnis(3);
 			}
 		}else if(!pve){
 			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
@@ -260,29 +259,26 @@ public class KampfUIController extends UICon{
 				gui.addAktion(sys.getNamenEins()+" nimmt "+i+" Schaden von "+sys.getNamenZwei()+" !");
 				gui.addAktion(sys.getNamenEins()+" stirbt an "+sys.getNamenZwei()+"!");	
 				monsterTod=true;
-				gui.setErgebnis(1);
-				bewegung.removeSpieler(sys.getSpielerEins());
+				gui.setErgebnis(3);
 			}
 		}else if(!pve && h >= 0){
-			gui.setAktion(sys.getNamenEins() +"greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
+			gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+h+" Schaden!");
 			gui.addAktion(sys.getNamenZwei()+" hat noch "+sys.getLebenZwei()+" Leben!");
 			gui.setInfoWidth(sys.bestimmeBreite());
 			gui.setInfo(sys.getNamenZwei());
 		}else {
+			gui.setAktion(sys.getNamenEins() +" greift an und macht "+sys.getNamenZwei()+ " "+-h+" Schaden!");
 			if(sys.getUnsterblich()) {
 				gui.addAktion(sys.getNamenEins()+"'s Kette beginnt zu glühen und zerbricht.... "+sys.getNamenEins()+" lives to die another day!");
 				}else {
 					winUebergang();
-					if(!pve) {
-						bewegung.removeSpieler(sys.getSpielerZwei());	
-					}
 				}
 		}
 	}
 	
 	private void winUebergang() {
 		gui.setInfoWidth(0);
-		gui.setAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
+		gui.addAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
 		gui.addAktion("Und bekommt:");
 		sys.addLootBag();
 		gui.setErgebnisListener(lootMenu);
@@ -308,6 +304,9 @@ public class KampfUIController extends UICon{
 					if(extra != null) {
 						gui.addErgebnisMulti(ergebnisGen(extra));
 					}else if(extra == null && cons == null) {
+						if(!pve) {
+							bewegung.removeSpieler(sys.getVerlierer());
+						}
 						gui.beenden();
 					}
 				break;
@@ -316,11 +315,18 @@ public class KampfUIController extends UICon{
 						if(sys.anlegbar()) {
 							gui.addAnlegen(ergebnisGen(extra)+" Anlegen? - Derzeit: "+sys.getStatsWeniger());
 						}
-					}else {
+					}else if(!pve) {
+						bewegung.removeSpieler(sys.getVerlierer());
 						gui.beenden();	
+					}else {
+						gui.beenden();
 					}
+					
 				break;
 				default:
+					if(!pve) {
+						bewegung.removeSpieler(sys.getSpielerZwei());
+					}
 					gui.beenden();
 				}
 				zaehler++;
@@ -365,7 +371,7 @@ public class KampfUIController extends UICon{
 		gui.setSpieler2Bild(sys.getBildZwei());
 		gui.setInfoWidth(sys.bestimmeBreite());
 		gui.setInfo(sys.getNamenZwei());
-		gui.setItemData(sys.getUsables());
+		gui.setNewItemData(sys.getUsables());
 		gui.clearAktion();
 		gui.setAktion("Was wird "+ sys.getNamenEins() +" tun?");
 	}
