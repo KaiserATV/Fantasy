@@ -156,7 +156,7 @@ public class SpielerBewegung {
 		s.setPlatzierung(alleSpieler.size()-1);
 		alleSpieler.remove(s);
 	
-		if(alleSpieler.size() == 1) {
+		if(alleSpieler.size() <= 1) {
 			gewonnen();
 		}
 	
