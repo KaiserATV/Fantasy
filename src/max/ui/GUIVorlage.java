@@ -181,21 +181,6 @@ public abstract class GUIVorlage {
         
         
         buttonLinks.requestFocusInWindow();
- 
-        
-        
-        main.addComponentListener(new ComponentAdapter() {
-        	@Override
-        	public void componentResized(ComponentEvent e) {
-        		double scaleWidth = main.getWidth()/1000;
-        		double scaleHeight = main.getHeight()/1000;
-        		System.out.println(scaleHeight);
-        		
-        		bildEbene.setIcon(new ImageIcon(background.getScaledInstance((int)Math.floor(1000*scaleWidth), (int)Math.floor(650*scaleHeight), aktionZeilen)));
-        			
-        	}
-        });
-        
         
         
         

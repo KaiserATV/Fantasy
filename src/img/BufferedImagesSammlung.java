@@ -35,7 +35,7 @@ public class BufferedImagesSammlung {
 		schmiedeBild = ImageIO.read(new File(shopPath+"schmiedeBild.png"));
 		taverneBild = ImageIO.read(new File(shopPath+"taverneBild.png"));
 		}catch (IOException e) {
-			System.out.println("Fehller bei Bilderstellung!");
+			System.out.println("Fehler bei Bilderstellung!\n"+e.getCause());
 			e.printStackTrace();
 		}
 	}
