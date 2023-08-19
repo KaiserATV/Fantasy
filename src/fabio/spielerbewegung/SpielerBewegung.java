@@ -25,6 +25,7 @@ public class SpielerBewegung {
 	private List<Spieler> alleSpieler;
 	private List<Spieler> alleSpielerUr;
 	private int aktuellerSpielerIndex = 0;
+	private BufferedImagesSammlung bis;
 
 	/**
 	 * Konstruktor, der die notwendigen Parameter initialisiert und die
@@ -41,6 +42,7 @@ public class SpielerBewegung {
 		this.feldaktionen = new FeldAktionen(frame, this, b);
 		this.alleSpieler = spielerListe;
 		this.alleSpielerUr = ur;
+		bis = b;
 		
 		
 		initSpielerBewegung();
@@ -164,7 +166,7 @@ public class SpielerBewegung {
 	}
 	
 	private void gewonnen() {
-		frame.setContentPane(new WinPane(alleSpielerUr).getContentPane());
+		frame.setContentPane(new WinPane(alleSpielerUr,bis).getContentPane());
 		frame.repaint();
 		frame.revalidate();
 		

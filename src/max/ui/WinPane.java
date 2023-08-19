@@ -20,6 +20,7 @@ import javax.swing.SwingConstants;
 
 import ani.fantasyLebewesen.spieler.Spieler;
 import fabio.spiel.Spiel;
+import img.BufferedImagesSammlung;
 import ani.fantasyLebewesen.nsc.Beluaferus;
 import ani.fantasyLebewesen.nsc.Volares;
 
@@ -30,9 +31,9 @@ public class WinPane extends JPanel  {
 	
 	private ImageIcon spieler1 = null;
 	
-	private ImageIcon spieler2 = new ImageIcon(new Beluaferus().getSpielerGesamt().getScaledInstance(250, 250,Image.SCALE_FAST));
-	private ImageIcon spieler3 = new ImageIcon(new Volares().getSpielerGesamt().getScaledInstance(250, 250,Image.SCALE_FAST));
-	private ImageIcon spieler4 = new ImageIcon(new Volares().getSpielerGesamt().getScaledInstance(250, 250,Image.SCALE_FAST));	
+	private ImageIcon spieler2 = null;
+	private ImageIcon spieler3 = null;
+	private ImageIcon spieler4 = null;	
 	
 	
 	private JLabel bild1 = new JLabel();
@@ -57,7 +58,7 @@ public class WinPane extends JPanel  {
 	
 	
 	
-	public WinPane(List<Spieler> as) {	
+	public WinPane(List<Spieler> as, BufferedImagesSammlung b) {	
 		alleSpieler = as;
 	
 		for(Spieler s: alleSpieler) {
@@ -66,9 +67,21 @@ public class WinPane extends JPanel  {
 		
 		
 		bild1.setIcon(spieler1);
-		bild2.setIcon(spieler2);
-		bild3.setIcon(spieler3);
-		bild4.setIcon(spieler4);
+		if(spieler2 != null) {
+			bild2.setIcon(spieler2);	
+		}else {
+			bild2.setIcon(new ImageIcon(b.getBeluaferus().getScaledInstance(250, 250, Image.SCALE_FAST)));
+		}
+		if(spieler3 != null) {
+			bild3.setIcon(spieler3);	
+		}else {
+			bild3.setIcon(new ImageIcon(b.getVolares().getScaledInstance(250, 250, Image.SCALE_FAST)));
+		}
+		if(spieler4 != null) {
+			bild4.setIcon(spieler4);	
+		}else {
+			bild4.setIcon(new ImageIcon(b.getVolares().getScaledInstance(250, 250, Image.SCALE_FAST)));
+		}
 		
 		
 		
