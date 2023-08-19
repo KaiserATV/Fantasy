@@ -27,6 +27,7 @@ public abstract class Spieler extends Lebewesen {
 	private boolean unsichtbar;
 	private boolean unsterblich; 
 	private int platzierung = 0;
+	private boolean imGebaeude = false;
 	
 	
 	// Rucksack 
@@ -160,4 +161,16 @@ public abstract class Spieler extends Lebewesen {
 			return ausgeruestetesBling;
 		}
 	}
+	
+	public void betrittGebaeude() {
+        this.imGebaeude = true;
+    }
+
+    public void verlaesstGebaeude() {
+        this.imGebaeude = false;
+    }
+
+    public boolean istImGebaeude() {
+        return this.imGebaeude;
+    }
 }
