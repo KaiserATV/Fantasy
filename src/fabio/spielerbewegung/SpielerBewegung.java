@@ -189,37 +189,47 @@ public class SpielerBewegung {
 	 * dem sich der Spieler gerade befindet und führt die entsprechende Aktion aus.
 	 */
 	private void spielerBewegt() {
-		Spieler aktuellerSpieler = Lebewesen.getAktuellerSpieler();
-		Karte.FeldTyp aktuellesFeld = karte.getFeldTypAtPosition(aktuellerSpieler.getPosition());
-		frame.repaint();
-		switch (aktuellesFeld) {
-		case Juwelier:
-			feldaktionen.betreteJuwelier(aktuellerSpieler);
-			break;
-		case Buchhandlung:
-			feldaktionen.betreteBuchhandlung(aktuellerSpieler);
-			break;
-		case Schmiede:
-			feldaktionen.betreteSchmiede(aktuellerSpieler);
-			break;
-		case Taverne:
-			feldaktionen.betreteTaverne(aktuellerSpieler);
-		case BAUM:
-			feldaktionen.wahrscheinlichkeitMonsterInteraktion(aktuellerSpieler);
-			break;
-		case WEG:
-			feldaktionen.wahrscheinlichkeitHaendlerTreffen(aktuellerSpieler);
-			break;
-		}
-		for (Spieler s : alleSpieler) {
-			if (s.getPosition().equals(aktuellerSpieler.getPosition()) && !s.equals(Lebewesen.getAktuellerSpieler())) {
-				feldaktionen.spielerKampf(aktuellerSpieler, s);
-			}
-		}
+	    Spieler aktuellerSpieler = Lebewesen.getAktuellerSpieler();
 
-		// Zeige die Änderungen an der Spielerposition auf der Karte an
-		frame.repaint();
+	    // Prüfe zuerst, ob es einen Kampf mit einem anderen Spieler gibt
+	    boolean kampfGefunden = false;
+	    for (Spieler s : alleSpieler) {
+	        if (s.getPosition().equals(aktuellerSpieler.getPosition()) && !s.equals(Lebewesen.getAktuellerSpieler())) {
+	            feldaktionen.spielerKampf(aktuellerSpieler, s);
+	            kampfGefunden = true;
+	            break;
+	        }
+	    }
+
+	    // Wenn kein Kampf gefunden wurde, fahre mit den anderen Aktionen fort
+	    if (!kampfGefunden) {
+	        Karte.FeldTyp aktuellesFeld = karte.getFeldTypAtPosition(aktuellerSpieler.getPosition());
+	        switch (aktuellesFeld) {
+	            case Juwelier:
+	                feldaktionen.betreteJuwelier(aktuellerSpieler);
+	                break;
+	            case Buchhandlung:
+	                feldaktionen.betreteBuchhandlung(aktuellerSpieler);
+	                break;
+	            case Schmiede:
+	                feldaktionen.betreteSchmiede(aktuellerSpieler);
+	                break;
+	            case Taverne:
+	                feldaktionen.betreteTaverne(aktuellerSpieler);
+	                break;
+	            case BAUM:
+	                feldaktionen.wahrscheinlichkeitMonsterInteraktion(aktuellerSpieler);
+	                break;
+	            case WEG:
+	                feldaktionen.wahrscheinlichkeitHaendlerTreffen(aktuellerSpieler);
+	                break;
+	        }
+	    }
+
+	    // Zeige die Änderungen an der Spielerposition auf der Karte an
+	    frame.repaint();
 	}
+
 
 }
 
