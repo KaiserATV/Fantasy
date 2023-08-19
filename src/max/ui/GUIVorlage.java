@@ -1,6 +1,7 @@
 package max.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
@@ -43,39 +44,34 @@ public abstract class GUIVorlage {
         urD = main.getSize();
         
         
-        width = ursprung.getWidth();      
-//        System.out.println(width);
+        width = ursprung.getWidth();    
         
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);
         
-        contentPane.setPreferredSize(main.getPreferredSize());
         
         //Feld für Infos - Farbe in Unterklassen implementieren
-        info.setVisible(true);
         info.setFocusable(false);
-        infoText.setVisible(true);
+        info.setLayout(new BorderLayout());
+        info.add(infoText, BorderLayout.CENTER);
+//        infoText.add(infoFarbe);
         infoText.setFont(schrift);
         infoText.setFocusable(false);
-        contentPane.add(infoText);
         infoText.setHorizontalAlignment(JLabel.CENTER);
         infoText.setVerticalAlignment(JLabel.CENTER);
         
         //Feld für Bilder
-        bildEbene.setVisible(true);
         bildEbene.setFocusable(false);
         bildEbene.setLayout(null);
         
         
         //Menu für Ausgabe über Aktionen - 
-        aktionText.setVisible(true);
         aktionText.setFont(schrift);
         aktionText.setFocusable(false);
         aktionText.setBackground(Color.black);
         aktionText.setForeground(Color.white);
         
         //Menu für entscheidung ob angelegt oder nicht
-        anlegen.setVisible(true);
         anlegen.setLayout(new BorderLayout());
         anlegen.setBackground(Color.black);
         anlegen.add(anlegenLinks,BorderLayout.LINE_START);
@@ -92,13 +88,11 @@ public abstract class GUIVorlage {
         
         
         //Menu für Entscheidung ob Flucht oder Angriff
-        entscheid.setVisible(true);
         entscheid.setLayout(new BorderLayout());
         entscheid.add(buttonLinks,BorderLayout.LINE_START);
         entscheid.add(buttonRechts,BorderLayout.LINE_END);
         
         //Menu für Ergebnis
-        ergebnis.setVisible(true);
         ergebnis.setFont(schrift);
         ergebnis.setForeground(Color.white);
         ergebnis.setBackground(Color.black);
@@ -116,7 +110,6 @@ public abstract class GUIVorlage {
         buttons[5] = anlegenRechts;
         for(JButton b:buttons) {
             b.setPreferredSize(new Dimension(Math.floorDiv(width, 4), 50));
-        	b.setVisible(true);
         	b.setFont(schrift);
 			b.setForeground(Color.white);
 			b.setBackground(Color.black);
@@ -135,10 +128,9 @@ public abstract class GUIVorlage {
 		}
         
         //Setzen Position
-        infoText.setPreferredSize(new Dimension(width, 50));
         infoText.setHorizontalTextPosition(JLabel.CENTER);
         info.setPreferredSize(new Dimension(width, 50));
-
+        
         bildEbene.setPreferredSize(new Dimension(width,650));
         
         aktionText.setPreferredSize(new Dimension(width,100));
@@ -154,33 +146,36 @@ public abstract class GUIVorlage {
         
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
-        			.addGroup(layout.createParallelGroup()
-        					.addComponent(info)
-        					.addComponent(infoText,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
+        			.addComponent(info,20, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
         			.addComponent(bildEbene,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(entscheid,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         );
         layout.setHorizontalGroup(
         		layout.createParallelGroup()
-        		.addGroup(layout.createParallelGroup()
-        				.addComponent(info,20,width,Short.MAX_VALUE)
-        				.addComponent(infoText,20,width,Short.MAX_VALUE))
+        		.addComponent(info,20,GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
         		.addComponent(bildEbene,100,width,Short.MAX_VALUE)
         		.addComponent(aktionText,50,width,Short.MAX_VALUE)
         		.addComponent(entscheid,10,width,Short.MAX_VALUE)
         	);
         
+//        contentPane.setPreferredSize(main.getSize());
+//        contentPane.setPreferredSize(main.getPreferredSize());(?)
+        contentPane.setPreferredSize(new Dimension(1000,1000));
+        layout.preferredLayoutSize(contentPane);
+        
         contentPane.setLayout(layout);
         
+        
+//        infoText.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+//        infoFarbe.setBackground(Color.red);
         
         main.setContentPane(contentPane);
         
         
-        main.pack();
-        
-        
         buttonLinks.requestFocusInWindow();
+        
+        main.pack();
         
         
         
@@ -190,8 +185,9 @@ public abstract class GUIVorlage {
      * @param w - Die Breite in Pixel
      */
     public void setInfoWidth(int w){
-		 info.setBounds(0, 0, w, 50);
-		 info.repaint();
+//    	infoFarbe.setSize(new Dimension(w,50));
+    	
+    	
 	 }
    /**
     * Setzt den infoText
@@ -361,8 +357,9 @@ public abstract class GUIVorlage {
     protected JPanel anlegen = new JPanel();
    
     
-    protected JPanel info = new JPanel(new FlowLayout());
+    protected JPanel info = new JPanel();
     protected JPanel aktion = new JPanel(new FlowLayout());
+    protected JPanel infoFarbe = new JPanel();
     
     protected JLabel infoText = new JLabel();
     protected JTextArea aktionText = new JTextArea();

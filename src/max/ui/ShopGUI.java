@@ -26,7 +26,7 @@ public class ShopGUI extends GUIVorlage{
 		super(x);
 		
 		
-		infoText.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 2, Color.black));
+		infoFarbe.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 2, Color.black));
 		info.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
 		
 		aktionText.setForeground(Color.white);

@@ -30,8 +30,9 @@ import javax.swing.event.ListSelectionListener;
 public class KampfGUI extends GUIVorlage{
 	public KampfGUI(JFrame x) {
 		super(x);
-		info.setBackground(Color.red);
 		contentPane.setBackground(Color.black);
+		info.setBackground(Color.red);
+		infoText.setForeground(Color.black);
 		
 		
 		 //Menu für Entscheidung über Angriff oder Items
@@ -126,17 +127,17 @@ public class KampfGUI extends GUIVorlage{
 		scroll = new JScrollPane(items);
 		
 		scroll.setBorder(null);
-        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+//        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		
-		items.setPreferredSize(new Dimension(width,200));
-		items.setBackground(Color.black);
+		items.setPreferredSize(new Dimension(width-20,180));
+//		items.setBackground(Color.black);
         scroll.setPreferredSize(new Dimension(width,200));
         scroll.getViewport().getView().setPreferredSize(new Dimension(width, 200));
 		scroll.getInsets(null);
-		scroll.setBackground(Color.black);
+//		scroll.setBackground(Color.black);
 		
-		scrollHuelle.setBackground(Color.black);
+		scrollHuelle.setBackground(Color.white);
 		scrollHuelle.add(scroll);
 		scroll.repaint();	
 	}
@@ -191,20 +192,30 @@ public class KampfGUI extends GUIVorlage{
 		items.setFocusTraversalKeysEnabled(false);
 	
 		
-		items.getInputMap().put(KeyStroke.getKeyStroke(links,0), "selectPreviousColumn");
-		items.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectNextColumn");
-		items.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
-		items.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
+//		items.getInputMap().put(KeyStroke.getKeyStroke(links,0), "selectNext");
+//		items.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectPrevious");
+//		items.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
+//		items.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
 	
 		
-		
-		items.addListSelectionListener(new ListSelectionListener() {
+		items.addKeyListener(new KeyAdapter() {
 			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				items.ensureIndexIsVisible(items.getSelectedIndex());
+			public void keyPressed(KeyEvent e) {
+				System.out.println(items.getSelectedIndex());
+				if(e.getKeyCode() == rechts && items.getSelectedIndex()<items.getModel().getSize()) {
+					items.setSelectedIndex(items.getSelectedIndex()+1);
+					System.out.println("rechts");
+					items.ensureIndexIsVisible(items.getSelectedIndex());
+				}else if(e.getKeyCode() == links && items.getSelectedIndex()>0) {
+					items.setSelectedIndex(items.getSelectedIndex()-1);
+					System.out.println("links");
+					items.ensureIndexIsVisible(items.getSelectedIndex());
+				}
+				
 			}
-			
 		});
+		
+		
 		
 		buttonLinks2.addKeyListener(zu);
 		buttonRechts2.addKeyListener(zu);	
