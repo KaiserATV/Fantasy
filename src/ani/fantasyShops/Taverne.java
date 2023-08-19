@@ -2,21 +2,16 @@ package ani.fantasyShops;
 
 
 import ani.fantasyItems.useables.consumables.food.*;
-import ani.fantasyLebewesen.spieler.Spieler;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 import ani.fantasyItems.useables.consumables.drinks.*;
 
 public class Taverne extends Shops {
-		public Taverne(Point position) throws IOException {
+		public Taverne(Point position) {
 			super(position);
 			wareTaverne();	
-			hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/taverneBild.png"));
 		}
 		
 		

@@ -1,9 +1,6 @@
 package ani.fantasyLebewesen.nsc;
 
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 
 import ani.fantasyItems.Item;
 import ani.fantasyItems.equippable.jewelry.GeschmeideUnsterb;
@@ -20,11 +17,6 @@ public class Volares extends Monster {
 		hpmax = 15;
 		hp = hpmax;
 		strength = zufall.nextInt(3)+8;
-		try {
-			spielerGesamt = ImageIO.read(new File("src/img/Volares.png"));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}	
 	}
 	public Item lootExtra() {
 		int i=zufall.nextInt(100);

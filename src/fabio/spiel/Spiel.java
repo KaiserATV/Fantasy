@@ -1,6 +1,6 @@
 package fabio.spiel;
 
-import java.awt.Font;
+
 import java.awt.Point;
 import java.awt.Window;
 import java.awt.event.WindowAdapter;
@@ -16,15 +16,18 @@ import fabio.gui.karte.Karte;
 import fabio.gui.karte.Karte.FeldTyp;
 import fabio.gui.spielerDialog.SpielerDialog;
 import fabio.spielerbewegung.SpielerBewegung;
+import img.BufferedImagesSammlung;
 
 public class Spiel {
 
+	private BufferedImagesSammlung bilder = new BufferedImagesSammlung();
 	private static SpielerBewegung spielerBewegung;
-	private Karte karte = new Karte();
+	private Karte karte = new Karte(bilder);
 	private List<Spieler> alleSpieler = new ArrayList<>();
 	private List<Spieler> alleSpielerUr = new ArrayList<>();
 	private Spiel spiel;
 	private List<String> alleNamen = new ArrayList<>();
+	
 
 	public Spiel() {
 		// Spiel-Instanz erstellen
@@ -94,7 +97,7 @@ public class Spiel {
 
 		if (alleSpieler.size() != 0 && alleSpieler.size() < 5) {
 			// Aktuellen Spieler bewegen (anhand von Koordinaten)
-			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler,spiel.alleSpielerUr);
+			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler,spiel.alleSpielerUr,bilder);
 			// KartenPanel-Instanz aus dem Karte-Objekt holen
 			Karte.KartenPanel kartenPanel = spiel.karte.new KartenPanel();
 			// Das KartenPanel neu zeichnen, um die Spielerpositionen zu aktualisieren

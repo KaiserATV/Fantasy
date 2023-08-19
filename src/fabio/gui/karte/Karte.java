@@ -25,6 +25,7 @@ import javax.swing.JScrollPane;
 import javax.swing.WindowConstants;
 
 import ani.fantasyLebewesen.spieler.Spieler;
+import img.BufferedImagesSammlung;
 
 public class Karte {
 
@@ -40,13 +41,6 @@ public class Karte {
 	private static final int KARTE_HOEHE = KARTE_BREITE;
 	private static final int GEBAEUDE_RATIO = 30;
 	private static final int MAX_VERBINDUNGEN_VON_ECKE = 40;
-	private static final String WEG_BILD_PATH = getBasePath() + "Weg.png";
-	private static final String BAUM_BILD_PATH = getBasePath() + "Laub.png";
-	private static final String GEBAEUDE_BILD_PATH = getBasePath() + "Haus.png";
-
-	private static String getBasePath() {
-		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator;
-	}
 
 	private FeldTyp[][] karte;
 	private JPanel contentPane = new JPanel();
@@ -111,12 +105,12 @@ public class Karte {
 	}
 
 
-	public Karte() {
+	public Karte(BufferedImagesSammlung b) {
 		karte = new FeldTyp[KARTE_BREITE][KARTE_HOEHE];
 
-		wegBild = new ImageIcon(WEG_BILD_PATH).getImage();
-		baumBild = new ImageIcon(BAUM_BILD_PATH).getImage();
-		gebaeudeBild = new ImageIcon(GEBAEUDE_BILD_PATH).getImage();
+		wegBild = new ImageIcon(b.getWeg()).getImage();
+		baumBild = new ImageIcon(b.getLaub()).getImage();
+		gebaeudeBild = new ImageIcon(b.getHaus()).getImage();
 
 		frame = new JFrame("Karte");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

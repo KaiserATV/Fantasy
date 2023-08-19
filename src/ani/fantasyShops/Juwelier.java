@@ -2,18 +2,14 @@ package ani.fantasyShops;
 
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 import ani.fantasyItems.equippable.jewelry.*;
 
 public class Juwelier extends Shops {
-		public Juwelier(Point position) throws IOException {
+		public Juwelier(Point position){
 			super(position);
 			wareJuwel();
-			hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/juwelierBild.png"));
 		}
 	
 		@Override

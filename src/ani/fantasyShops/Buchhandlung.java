@@ -1,18 +1,14 @@
 package ani.fantasyShops;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
 import ani.fantasyItems.useables.scroll.*;
 
 public class Buchhandlung extends Shops {
-	public Buchhandlung(Point position) throws IOException {
+	public Buchhandlung(Point position) {
 		super(position);
 		wareBuch();
-		hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/buchhandlungBild.png"));
 	}
 		@Override
 		public String getName() {

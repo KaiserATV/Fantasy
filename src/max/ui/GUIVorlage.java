@@ -42,6 +42,10 @@ public abstract class GUIVorlage {
         urCP = main.getContentPane();
         urD = main.getSize();
         
+        
+        width = ursprung.getWidth();      
+        System.out.println(width);
+        
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);
         
@@ -77,7 +81,7 @@ public abstract class GUIVorlage {
         anlegen.add(anlegenLinks,BorderLayout.LINE_START);
         anlegen.add(anlegenRechts, BorderLayout.LINE_END);
         abfrage.setVisible(false);
-        abfrage.setPreferredSize(new Dimension(1000,40));
+        abfrage.setPreferredSize(new Dimension(width,40));
         abfrage.setFocusable(false);
         abfrage.setBorder(null);
         abfrage.setEditable(false);
@@ -103,12 +107,7 @@ public abstract class GUIVorlage {
         
         
         //Button Design
-        buttonLinks.setPreferredSize(new Dimension(300, 50));
-        buttonRechts.setPreferredSize(new Dimension(300, 50));
-        buttonLinks2.setPreferredSize(new Dimension(300, 50));
-        buttonRechts2.setPreferredSize(new Dimension(300, 50));
-        anlegenLinks.setPreferredSize(new Dimension(300, 50));
-        anlegenRechts.setPreferredSize(new Dimension(300, 50));
+
         buttons[0] = buttonLinks;
         buttons[1] = buttonLinks2;
         buttons[2] = anlegenLinks;
@@ -116,6 +115,7 @@ public abstract class GUIVorlage {
         buttons[4] = buttonRechts2;
         buttons[5] = anlegenRechts;
         for(JButton b:buttons) {
+            b.setPreferredSize(new Dimension(Math.floorDiv(width, 4), 50));
         	b.setVisible(true);
         	b.setFont(schrift);
 			b.setForeground(Color.white);
@@ -135,19 +135,19 @@ public abstract class GUIVorlage {
 		}
         
         //Setzen Position
-        infoText.setPreferredSize(new Dimension(1000, 50));
+        infoText.setPreferredSize(new Dimension(width, 50));
         infoText.setHorizontalTextPosition(JLabel.CENTER);
-        info.setPreferredSize(new Dimension(1000, 50));
+        info.setPreferredSize(new Dimension(width, 50));
 
-        bildEbene.setPreferredSize(new Dimension(1000,650));
+        bildEbene.setPreferredSize(new Dimension(width,650));
         
-        aktionText.setPreferredSize(new Dimension(1000,100));
+        aktionText.setPreferredSize(new Dimension(width,100));
         
-        entscheid.setPreferredSize(new Dimension(1000, 200));
+        entscheid.setPreferredSize(new Dimension(width, 200));
 
-        ergebnis.setPreferredSize(new Dimension(1000,200));
+        ergebnis.setPreferredSize(new Dimension(width,200));
         
-        anlegen.setPreferredSize(new Dimension(1000,200));
+        anlegen.setPreferredSize(new Dimension(width,200));
         
         
         layout = new GroupLayout(contentPane);
@@ -164,11 +164,11 @@ public abstract class GUIVorlage {
         layout.setHorizontalGroup(
         		layout.createParallelGroup()
         		.addGroup(layout.createParallelGroup()
-        				.addComponent(info,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        				.addComponent(infoText,20,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE))
-        		.addComponent(bildEbene,100,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        		.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
-        		.addComponent(entscheid,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
+        				.addComponent(info,20,width,Short.MAX_VALUE)
+        				.addComponent(infoText,20,width,Short.MAX_VALUE))
+        		.addComponent(bildEbene,100,width,Short.MAX_VALUE)
+        		.addComponent(aktionText,50,width,Short.MAX_VALUE)
+        		.addComponent(entscheid,10,width,Short.MAX_VALUE)
         	);
         
         contentPane.setLayout(layout);
@@ -371,6 +371,7 @@ public abstract class GUIVorlage {
 	 
 	 
 	
+	protected int width;
 	protected KeyboardFocusManager kfm;
     protected JButton[] buttons = new JButton[6];
     

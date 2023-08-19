@@ -1,21 +1,16 @@
 package ani.fantasyShops;
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-import java.util.Random;
+import java.awt.image.BufferedImage;
 
-import javax.imageio.ImageIO;
 
 import ani.fantasyItems.weapons.*;
 import ani.fantasyItems.schmiedegut.*;
 
 public class Schmiede extends Shops {
-	Random zufall = new Random();
-	public Schmiede(Point position) throws IOException {
+	public Schmiede(Point position) {
 		super(position);
 		wareSchmied();
-		hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/schmiedeBild.png"));
 	}
 	
 	@Override

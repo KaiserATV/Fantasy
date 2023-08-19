@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -16,7 +17,7 @@ import max.ui.ShopGUI;
 
 public class ShopUIController extends UICon{
 
-	public ShopUIController(Spieler p, Shops s,JFrame y,SpielerBewegung b) {
+	public ShopUIController(Spieler p, Shops s,JFrame y,SpielerBewegung b, BufferedImage bi) {
 		super(p,b);
 		
 		ergebnisZeile = 0;
@@ -24,7 +25,7 @@ public class ShopUIController extends UICon{
 		gui = new ShopGUI(y);
 		sys = new ShopSys(p,s);
 		
-		gui.setBackground(s.getHintergrundOhnePixl());
+		gui.setBackground(bi);
 
 		urGeld = sys.getSpielerVermoegen();
 		

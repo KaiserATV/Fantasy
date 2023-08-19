@@ -14,6 +14,7 @@ import ani.fantasyLebewesen.Lebewesen;
 import ani.fantasyLebewesen.spieler.Spieler;
 import fabio.gui.aktionen.FeldAktionen;
 import fabio.gui.karte.Karte;
+import img.BufferedImagesSammlung;
 import max.ui.WinPane;
 
 public class SpielerBewegung {
@@ -34,10 +35,10 @@ public class SpielerBewegung {
 	 */
 	
 	
-	public SpielerBewegung(Karte karte, JFrame frame, List<Spieler> spielerListe, List<Spieler> ur) {
+	public SpielerBewegung(Karte karte, JFrame frame, List<Spieler> spielerListe, List<Spieler> ur, BufferedImagesSammlung b) {
 		this.karte = karte;
 		this.frame = frame;
-		this.feldaktionen = new FeldAktionen(frame, this);
+		this.feldaktionen = new FeldAktionen(frame, this, b);
 		this.alleSpieler = spielerListe;
 		this.alleSpielerUr = ur;
 		

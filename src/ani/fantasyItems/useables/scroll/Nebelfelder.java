@@ -8,7 +8,7 @@ public class Nebelfelder extends Scroll {
 	public Nebelfelder() {
 		this.setName(name);
 		this.setPrice(p);
-		this.effekt="Unsichtbarkeit";
+		this.effekt="Rüstungszerstörung";
 	}
 	
 	private String name = "Nebelfelder";

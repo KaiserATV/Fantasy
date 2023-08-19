@@ -11,7 +11,6 @@ import ani.fantasyItems.Item;
 
 public abstract class Shops {
 	protected static Random zufall = new Random();
-	protected BufferedImage hintergrundOhnePixl=null;
 	
 	protected Point position;
 	Shops(Point position) {
@@ -28,9 +27,6 @@ public abstract class Shops {
 	}
 	public void removeInv(int index) {
 		inventar.remove(index);
-	}
-	public BufferedImage getHintergrundOhnePixl() {
-		return hintergrundOhnePixl;
 	}
 	
 	protected ArrayList<Item> inventar = new ArrayList<Item>();

@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -19,22 +20,28 @@ import max.sys.KampfSys;
 import max.ui.KampfGUI;
 
 public class KampfUIController extends UICon{
-	public KampfUIController(Spieler p, Lebewesen z, JFrame y, SpielerBewegung b) {
+	public KampfUIController(Spieler p, Lebewesen z, JFrame y, SpielerBewegung b, BufferedImage bi, BufferedImage monster) {
 		super(p,b);
 		
+		
+		
 		gui = new KampfGUI(y);
-		sys = new KampfSys(p,z);
+		sys = new KampfSys(p,z, monster);
 		
 		bewegung = b;
 		
 		pve = sys.isPve();
+		
+		gui.setBackground(bi);
 		
 		gui.setInfo(sys.getNamenZwei());
 		gui.setInfoColor(Color.white);
 		
 		
 		gui.setSpieler1Bild(sys.getBildEins());
-		gui.setSpieler2Bild(sys.getBildZwei());
+		gui.setSpieler2Bild(sys.getBildZwei());	
+		
+		
 		
 		entscheidMenu = true;
 		angriffsMenu = false;

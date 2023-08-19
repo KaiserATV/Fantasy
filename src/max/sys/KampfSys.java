@@ -13,7 +13,7 @@ import ani.fantasyLebewesen.nsc.Monster;
 import ani.fantasyLebewesen.spieler.Spieler;
 
 public class KampfSys extends VorlageSys{
-	public KampfSys(Spieler i,Lebewesen g) {
+	public KampfSys(Spieler i,Lebewesen g, BufferedImage monster) {
 		weiter = true;
 		ich = i;
 		gegen = g;
@@ -30,7 +30,12 @@ public class KampfSys extends VorlageSys{
 		gekauft = lootItem;
 		
 		ichBild = ich.getSpielerGesamt();
-		gegenBild = gegen.getSpielerGesamt();
+		if(monster != null) {
+			gegenBild = monster;
+		}else {
+			gegenBild = gegen.getSpielerGesamt();	
+		}
+		
 		
 	}
 	public int kaempfen() {

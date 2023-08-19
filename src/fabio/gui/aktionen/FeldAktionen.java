@@ -1,7 +1,7 @@
 package fabio.gui.aktionen;
 
 import java.awt.Point;
-import java.io.IOException;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -20,6 +20,7 @@ import ani.fantasyShops.Shops;
 import ani.fantasyShops.Taverne;
 import ani.fantasyShops.TravelingMerchant;
 import fabio.spielerbewegung.SpielerBewegung;
+import img.BufferedImagesSammlung;
 import max.uilogik.KampfUIController;
 import max.uilogik.ShopUIController;
 
@@ -29,10 +30,12 @@ public class FeldAktionen {
 	private Point position;
 	private Map<Point, Shops> shopsAtPositions = new HashMap<>();
 	private JFrame frame;
+	private BufferedImagesSammlung bilder;
 
-	public FeldAktionen(JFrame jf, SpielerBewegung bew) {
+	public FeldAktionen(JFrame jf, SpielerBewegung bew, BufferedImagesSammlung bis) {
 		frame = jf;
 		bewegung = bew;
+		bilder = bis;
 	}
 
 	public void betreteBuchhandlung(Spieler ich) {
@@ -40,16 +43,10 @@ public class FeldAktionen {
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Buchhandlung) {
 			b = (Buchhandlung) shopsAtPositions.get(position);
 		} else {
-			try {
 			b = new Buchhandlung(position);
-			}catch(IOException e) {
-				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
-				e.printStackTrace();
-			}
-			
 			shopsAtPositions.put(position, b);
 		}
-		shopLaufen(ich, b);
+		shopLaufen(ich, b,bilder.getSchmiedeBild());
 	}
 
 	public void betreteJuwelier(Spieler ich) {
@@ -57,15 +54,11 @@ public class FeldAktionen {
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Juwelier) {
 			j = (Juwelier) shopsAtPositions.get(position);
 		} else {
-			try {
 				j = new Juwelier(position);
-			}catch(IOException e) {
-				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
-				e.printStackTrace();
-			}
+			
 			shopsAtPositions.put(position, j);
 		}
-		shopLaufen(ich, j);
+		shopLaufen(ich, j,bilder.getSchmiedeBild());
 	}
 
 	public void betreteSchmiede(Spieler ich) {
@@ -73,15 +66,11 @@ public class FeldAktionen {
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Schmiede) {
 			s = (Schmiede) shopsAtPositions.get(position);
 		} else {
-			try {
 				s = new Schmiede(position);
-			}catch(IOException e) {
-				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
-				e.printStackTrace();
-			}
+			
 			shopsAtPositions.put(position, s);
 		}
-		shopLaufen(ich, s);
+		shopLaufen(ich, s,bilder.getSchmiedeBild());
 	}
 
 	public void betreteTaverne(Spieler ich) {
@@ -89,68 +78,30 @@ public class FeldAktionen {
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Taverne) {
 			t = (Taverne) shopsAtPositions.get(position);
 		} else {
-			try {
+			
 				t = new Taverne(position);
-			}catch(IOException e) {
-				System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
-				e.printStackTrace();
-			}
+			
 			shopsAtPositions.put(position, t);
 		}
-		shopLaufen(ich, t);
+		shopLaufen(ich, t,bilder.getTaverneBild());
 	}
 
-	private void monsterLaufen(Spieler ich, Monster gegen) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung);
-			}
-		});
-	}
 
 	public void setPosition(Point newPosition) {
 		this.position = newPosition;
 	}
 
-	private void shopLaufen(Spieler ich, Shops s) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				ShopUIController shop = new ShopUIController(ich, s, frame, bewegung);
-			}
-		});
-	}
-
-	public void spielerKampf(Spieler eins, Spieler zwei) {
-		spielerLaufen(eins, zwei);
-	}
-
-	private void spielerLaufen(Spieler eins, Spieler zwei) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				KampfUIController kampf = new KampfUIController(eins, zwei, frame, bewegung);
-			}
-		});
-
-	}
+	
 
 	public void wahrscheinlichkeitHaendlerTreffen(Spieler ich) {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
 		TravelingMerchant t=null;
 		if (chance < 8) { // 8% Chance auf fahrenden Händler
-		try {
+			
 			t = new TravelingMerchant(position);
-		}catch(IOException e) {
-			System.out.println("Fehler bei Erstellung des Hintergrundbildes...");
-			e.printStackTrace();
-		}
-			shopLaufen(ich, t);
+		
+			shopLaufen(ich, t, bilder.getKarrenBild());
 		}
 	}
 
@@ -169,5 +120,45 @@ public class FeldAktionen {
 			monsterLaufen(ich, m);
 
 		}
+	}
+	
+	
+	private void shopLaufen(Spieler ich, Shops s, BufferedImage b) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				ShopUIController shop = new ShopUIController(ich, s, frame, bewegung, b);
+			}
+		});
+	}
+
+	public void spielerKampf(Spieler eins, Spieler zwei) {
+		spielerLaufen(eins, zwei);
+	}
+
+	private void spielerLaufen(Spieler eins, Spieler zwei) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				KampfUIController kampf = new KampfUIController(eins, zwei, frame, bewegung, bilder.getKampfHintergrund(), null);
+			}
+		});
+
+	}
+	private void monsterLaufen(Spieler ich, Monster gegen) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				if(gegen instanceof Volares) {
+					KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), bilder.getVolares());	
+				}else {
+					KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), bilder.getBeluaferus());
+				}
+				
+			}
+		});
 	}
 }

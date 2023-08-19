@@ -2,6 +2,7 @@ package max.uilogik;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 import ani.fantasyLebewesen.spieler.Spieler;
 import fabio.spielerbewegung.SpielerBewegung;

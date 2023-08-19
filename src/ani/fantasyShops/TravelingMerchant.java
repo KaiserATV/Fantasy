@@ -2,12 +2,7 @@ package ani.fantasyShops;
 
 
 import java.awt.Point;
-import java.io.File;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import ani.fantasyItems.Item;
+import java.awt.image.BufferedImage;
 import ani.fantasyItems.equippable.jewelry.*;
 import ani.fantasyItems.useables.scroll.*;
 import ani.fantasyItems.schmiedegut.Armor;
@@ -19,13 +14,12 @@ public class TravelingMerchant extends Shops {
 	
 	
 	
-		public TravelingMerchant(Point position) throws IOException {
+		public TravelingMerchant(Point position) {
 			super(position);
 			wareBuch();
 			wareJuwel();
 			wareSchmied();
 			wareTaverne();	
-			hintergrundOhnePixl = ImageIO.read(new File("src/img/shops/karrenBild.png"));
 		}
 		
 		

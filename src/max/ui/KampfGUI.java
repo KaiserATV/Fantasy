@@ -34,20 +34,6 @@ public class KampfGUI extends GUIVorlage{
 		contentPane.setBackground(Color.black);
 		
 		
-		//BIlder kampfHintergrund 1,2,3,4 möglich
-		try {
-			bildEbene.setIcon(new ImageIcon(ImageIO.read(new File("src/img/kampfHintergrund2.png")).getScaledInstance((int)Math.floor(bildEbene.getPreferredSize().getWidth()),(int)Math.floor(bildEbene.getPreferredSize().getHeight()), Image.SCALE_FAST)));
-		} catch (IOException e) {
-			System.out.println("Etwas ist schiefgelaufen beim Hintergrund setzten...");
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		
-		
-		
 		 //Menu für Entscheidung über Angriff oder Items
         angriff.setVisible(true);
         angriff.setFocusable(false);
@@ -92,8 +78,8 @@ public class KampfGUI extends GUIVorlage{
 		 
 		
         scrollHuelle.setVisible(true);
-        scrollHuelle.setPreferredSize(new Dimension(1000,200));
-        angriff.setPreferredSize(new Dimension(1000,200));
+        scrollHuelle.setPreferredSize(new Dimension(width,200));
+        angriff.setPreferredSize(new Dimension(width,200));
         
         buttonLinks.setFocusable(true);
         buttonRechts.setFocusable(true);
@@ -140,10 +126,10 @@ public class KampfGUI extends GUIVorlage{
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		
-		items.setMinimumSize(new Dimension(1000,200));
+		items.setMinimumSize(new Dimension(width,200));
 		items.setBackground(Color.black);
-        scroll.setPreferredSize(new Dimension(1000,200));
-        scroll.getViewport().getView().setPreferredSize(new Dimension(1000, 200));
+        scroll.setPreferredSize(new Dimension(width,200));
+        scroll.getViewport().getView().setPreferredSize(new Dimension(width, 200));
 		scroll.getInsets(null);
 		scroll.setBackground(Color.black);
 		
