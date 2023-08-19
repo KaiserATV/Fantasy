@@ -32,6 +32,8 @@ public class SpielerBewegung {
 	 * @param karte Das Spielfeld.
 	 * @param frame Das Fenster, in dem sich das Spielfeld befindet.
 	 */
+	
+	
 	public SpielerBewegung(Karte karte, JFrame frame, List<Spieler> spielerListe, List<Spieler> ur) {
 		this.karte = karte;
 		this.frame = frame;
@@ -54,78 +56,88 @@ public class SpielerBewegung {
 	public Karte getKarte() {
 		return karte;
 	}
+	
+	private boolean interaktionAktiv = false;
 
-	// Nachfolgend sind die Getter- und Setter-Methoden:
+    public void starteInteraktion() {
+        this.interaktionAktiv = true;
+    }
+
+    public void beendeInteraktion() {
+        this.interaktionAktiv = false;
+    }
+
+    public boolean istInteraktionAktiv() {
+        return this.interaktionAktiv;
+    }
 
 	/**
 	 * Initialisiert die Verwaltung der Tastenanschläge, um die Bewegung des
 	 * Spielers zu steuern.
 	 */
-	public void initSpielerBewegung() {
-		final boolean[] isDialogOpen = { false };
-		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
-			@Override
-			public boolean dispatchKeyEvent(KeyEvent e) {
-				if (isDialogOpen[0]) {
-					return false; //
-				}
-				Spieler aktuellerSpieler = Lebewesen.getAktuellerSpieler();
-				int[] belegung = aktuellerSpieler.getBelegung();
+    public void initSpielerBewegung() {
+    	final boolean[] isDialogOpen = { false };
 
-				if (e.getID() == KeyEvent.KEY_PRESSED) {
-					if (aktuellerSpieler.hatBewegungen()) {
-						if (e.getKeyCode() == belegung[0]) {
-							aktuellerSpieler.moveLeft(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-							spielerBewegt();
-							frame.repaint();
-						} else if (e.getKeyCode() == belegung[1]) {
-							aktuellerSpieler.moveRight(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-							spielerBewegt();
-							frame.repaint();
-						} else if (e.getKeyCode() == belegung[2]) {
-							aktuellerSpieler.moveUp(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-							spielerBewegt();
-							frame.repaint();
-						} else if (e.getKeyCode() == belegung[3]) {
-							aktuellerSpieler.moveDown(karte.getNUM_CELLS(), karte.getNUM_CELLS());
-							spielerBewegt();
-							frame.repaint();
-						} else if (e.getKeyCode() == belegung[4]) {
-					        spielerBewegt();
-					        
-					        Spieler nextSpieler = alleSpieler.get(
-					                (alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
-					        isDialogOpen[0] = true;
-					        JOptionPane.showMessageDialog(frame,
-					                "Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName(),
-					                null, JOptionPane.INFORMATION_MESSAGE);
-					        isDialogOpen[0] = false;
-					        naechsterSpieler();
-						}
-					} else if (!aktuellerSpieler.hatBewegungen()) {
-						
-						// Erstellt ein Popup mit dem Namen des nächsten Spielers
-						Spieler nextSpieler = alleSpieler
-								.get((alleSpieler.indexOf(Lebewesen.getAktuellerSpieler()) + 1) % alleSpieler.size());
-						SwingUtilities.invokeLater(new Runnable() {
-							@Override
-							public void run() {
-								isDialogOpen[0] = true;
-								JOptionPane.showMessageDialog(frame,
-										"Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName(), null,
-										JOptionPane.INFORMATION_MESSAGE);
-								isDialogOpen[0] = false;
-								naechsterSpieler();
-							}
-						});
-					}
-				}
+    	KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+    		@Override
+    		public boolean dispatchKeyEvent(KeyEvent e) {
+    			if (isDialogOpen[0]) {
+    				return false; // Ignoriert den Tastenanschlag, wenn ein Dialog geöffnet ist.
+    			}
+    			Spieler aktuellerSpieler = Lebewesen.getAktuellerSpieler();
+    			int[] belegung = aktuellerSpieler.getBelegung();
 
-				return true; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls
-								// reagieren.
-			}
-		});
-	}
+    			if (e.getID() == KeyEvent.KEY_RELEASED && aktuellerSpieler.hatBewegungen()) {
+    				if (e.getKeyCode() == belegung[0]) {
+    						aktuellerSpieler.moveLeft(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+    						spielerBewegt();
+    						frame.repaint();
+    				} else if (e.getKeyCode() == belegung[1]) {
+    						aktuellerSpieler.moveRight(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+    						spielerBewegt();
+    						frame.repaint();
+    				} else if (e.getKeyCode() == belegung[2]) {
+    						aktuellerSpieler.moveUp(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+    						spielerBewegt();
+    						frame.repaint();
+    				} else if (e.getKeyCode() == belegung[3]) {
+    						aktuellerSpieler.moveDown(karte.getNUM_CELLS(), karte.getNUM_CELLS());
+    						spielerBewegt();
+    						frame.repaint();
+    				}
+  
+    			}
+
+    			if (e.getID() == KeyEvent.KEY_PRESSED) {
+    				if (e.getKeyCode() == belegung[4]) {
+    					Spieler nextSpieler = alleSpieler.get(
+    							(alleSpieler.indexOf(aktuellerSpieler) + 1) % alleSpieler.size());
+    					showDialogAndMoveToNextSpieler("Du hast deinen Zug beendet. Nächster Spieler: " + nextSpieler.getName());
+    				} else if (!aktuellerSpieler.hatBewegungen()) {
+    					Spieler nextSpieler = alleSpieler.get(
+    							(alleSpieler.indexOf(aktuellerSpieler) + 1) % alleSpieler.size());
+    					showDialogAndMoveToNextSpieler("Du bist erschöpft. Nächster Spieler: " + nextSpieler.getName());
+    				}
+    			}
+
+    			return true; // Der Tastenanschlag wird nicht verbraucht, andere Listener können ebenfalls reagieren.
+    		}
+
+    		private void showDialogAndMoveToNextSpieler(String message) {
+    			SwingUtilities.invokeLater(new Runnable() {
+    				@Override
+    				public void run() {
+    					isDialogOpen[0] = true;
+    					JOptionPane.showMessageDialog(frame, message, null, JOptionPane.INFORMATION_MESSAGE);
+    					isDialogOpen[0] = false;
+    					naechsterSpieler();
+    					frame.repaint();
+    				}
+    			});
+    		}
+    	});
+    }
+
 
 	/**
 	 * Methode, um den nächsten Spieler auszuwählen.

@@ -68,6 +68,7 @@ public class ShopUIController extends UICon{
 					}else {
 						bewegung.naechsterSpieler();
 						gui.beenden();
+						
 					}
 					if(ergebnisZeile== 6) {
 						String alt = gui.getErgebnis();
