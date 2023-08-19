@@ -17,9 +17,9 @@ public class Nebelfelder extends Scroll {
 
 	@Override
 	public void anwenden(Spieler ich, Lebewesen gegen) {
-		ich.setArmor(null);
+		ich.removeArmor();
 		if(gegen instanceof Spieler) {
-			((Spieler)gegen).setArmor(null);
+			((Spieler)gegen).removeArmor();
 		}
 	}
 

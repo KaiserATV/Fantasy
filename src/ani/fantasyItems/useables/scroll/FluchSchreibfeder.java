@@ -17,9 +17,9 @@ public class FluchSchreibfeder extends Scroll {
 
 	@Override
 	public void anwenden(Spieler ich, Lebewesen gegen) {
-		ich.setWaffe(null);
+		ich.removeWaffe();
 		if(gegen instanceof Spieler) {
-			((Spieler)gegen).setWaffe(null);
+			((Spieler)gegen).removeWaffe();
 		}
 	
 	}

@@ -176,7 +176,8 @@ public class KampfUIController extends UICon{
 		@Override 
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
-				gui.setItems();//Muss implementiert werden
+				gui.setItemData(sys.getUsables());
+				gui.setItems();
 				angriffsMenu = false;
 				itemMenu = true;
 			}

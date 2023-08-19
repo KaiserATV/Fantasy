@@ -48,9 +48,9 @@ public class KampfSys extends VorlageSys{
 			gegen.reduziereHp(ich.getMacht());
 			return schaden;
 		}else {
-			if(((Spieler)gegen).isUnsterblich()) {
-				schaden = 1-gegen.getHp();
-				((Spieler)gegen).setBling(null);
+			if(gegen instanceof Spieler && ((Spieler)gegen).isUnsterblich()) {
+				schaden = gegen.getHp()-1;
+				((Spieler)gegen).removeBling();
 				return schaden;
 			}else {
 				gewonnen(ich);
@@ -88,7 +88,8 @@ public class KampfSys extends VorlageSys{
 				return -1;
 			}else {
 				if(ich.isUnsterblich()) {
-					schaden = 1-ich.getHp();
+					schaden = ich.getHp()-1;
+					ich.removeBling();
 					return schaden;
 				}else {
 					ich.setHp(0);

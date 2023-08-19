@@ -85,30 +85,33 @@ public abstract class Spieler extends Lebewesen {
 		return ausgeruesteteWaffe;
 	}
 	public void setWaffe(Item w) {
-		if(ausgeruesteteWaffe != null) {
-			ausgeruesteteWaffe.remove(this);
-		}
 		if(w != null) {
 			ausgeruesteteWaffe =  (Weapons) w;
 			w.anwenden(this);
-		}else {
-			ausgeruesteteWaffe = null;	
 		}
+	}
+	public void removeWaffe() {
+		if(ausgeruesteteWaffe != null) {
+			ausgeruesteteWaffe.remove(this);
+		}
+			ausgeruesteteWaffe = null;	
 	}
 	
 	public Equippable getBling() {
 		return ausgeruestetesBling;
 	}
 	public void setBling(Item b) {
-		if(ausgeruestetesBling != null) {
-			ausgeruestetesBling.remove(this);
-		}
 		if(b != null) {
 			ausgeruestetesBling = (Equippable) b;
 			b.anwenden(this);	
-		}else {
-			ausgeruestetesBling = null;
 		}
+	}	
+	public void removeBling() {
+		if(ausgeruestetesBling != null) {
+			ausgeruestetesBling.remove(this);
+		}
+		
+		ausgeruestetesBling = null;
 		
 	}	
 	
@@ -125,8 +128,15 @@ public abstract class Spieler extends Lebewesen {
 		}else {
 			ausgeruesteteRuestung = null;
 		}
-		
 	}	
+	public void removeArmor() {
+		if(ausgeruesteteRuestung != null) {
+			ausgeruesteteRuestung.remove(this);
+		}
+			ausgeruesteteRuestung = null;
+	}
+	
+	
 	
 	public String getStats() {
 		return name +" hat "+hp+" Leben, "+(strength)+" Stärke, "+macht+" Macht, "+schutz+" Schutz, "+bewegung+" Bewegungsreichweite und "+gold+" Gold.";
