@@ -46,7 +46,7 @@ public class FeldAktionen {
 			b = new Buchhandlung(position);
 			shopsAtPositions.put(position, b);
 		}
-		shopLaufen(ich, b,bilder.getSchmiedeBild());
+		shopLaufen(ich, b,bilder.getBuchhandlungBild());
 	}
 
 	public void betreteJuwelier(Spieler ich) {
@@ -58,7 +58,7 @@ public class FeldAktionen {
 			
 			shopsAtPositions.put(position, j);
 		}
-		shopLaufen(ich, j,bilder.getSchmiedeBild());
+		shopLaufen(ich, j,bilder.getjuwelierBild());
 	}
 
 	public void betreteSchmiede(Spieler ich) {
@@ -109,15 +109,18 @@ public class FeldAktionen {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
 		Monster m;
+		BufferedImage b;
 
 		if (rand.nextInt(2) == 0) {
 			m = new Beluaferus();
+			b = bilder.getBeluaferus();
 		} else {
 			m = new Volares();
+			b = bilder.getVolares();
 		}
 
 		if (chance < 10) { // 10% Chance auf Monsterinteraktion
-			monsterLaufen(ich, m);
+			monsterLaufen(ich, m,b);
 
 		}
 	}
@@ -147,17 +150,12 @@ public class FeldAktionen {
 		});
 
 	}
-	private void monsterLaufen(Spieler ich, Monster gegen) {
+	private void monsterLaufen(Spieler ich, Monster gegen, BufferedImage b) {
 		SwingUtilities.invokeLater(new Runnable() {
 
 			@Override
 			public void run() {
-				if(gegen instanceof Volares) {
-					KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), bilder.getVolares());	
-				}else {
-					KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), bilder.getBeluaferus());
-				}
-				
+				KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), b);
 			}
 		});
 	}
