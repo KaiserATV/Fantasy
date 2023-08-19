@@ -121,7 +121,6 @@ public class KampfGUI extends GUIVorlage{
 		items.setVisibleRowCount((int) Math.ceil(it.length/2)+1);
 		scroll = new JScrollPane(items);
 		
-
 		scroll.setBorder(null);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);

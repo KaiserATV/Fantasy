@@ -178,7 +178,7 @@ public class KampfSys extends VorlageSys{
 		return null;
 	}
 	public boolean flucht() {
-		if(ich.getHp()>5 && ich.getGold()>100) {
+		if(ich.getHp()>5 && ich.getGold()>=100) {
 			ich.reduziereHp(5);
 			ich.setGold(ich.getGold()-100);
 			return true;
