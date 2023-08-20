@@ -112,7 +112,7 @@ public class Karte {
 		baumBild = new ImageIcon(b.getLaub()).getImage();
 		gebaeudeBild = new ImageIcon(b.getHaus()).getImage();
 
-		frame = new JFrame("Karte");
+		frame = new JFrame("FantasyGame 2.0");
 		frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		contentPane.setLayout(new GridBagLayout());
