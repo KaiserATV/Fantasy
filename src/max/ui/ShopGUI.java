@@ -150,6 +150,7 @@ public class ShopGUI extends GUIVorlage{
 			
 		}else {
 			inventar.setRowSelectionInterval(0, 0);	
+			inventar.scrollRectToVisible(inventar.getCellRect(0, 0, false));
 		}
 	}
 	public void setKaufMenu() {
