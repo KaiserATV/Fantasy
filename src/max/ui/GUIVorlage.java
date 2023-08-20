@@ -172,7 +172,7 @@ public abstract class GUIVorlage {
         
         
         System.out.println(info.getPreferredSize());
-        System.out.println(infoText.getPreferredSize());
+        System.out.println(infoText.getSize());
         
         main.setContentPane(contentPane);
         
