@@ -61,8 +61,6 @@ public abstract class GUIVorlage {
         info.repaint();
         infoText.setFont(schrift);
         infoText.setFocusable(false);
-        infoText.setHorizontalAlignment(SwingConstants.CENTER);
-        infoText.setVerticalAlignment(SwingConstants.CENTER);
         
         //Feld für Bilder
         bildEbene.setFocusable(false);
@@ -174,8 +172,9 @@ public abstract class GUIVorlage {
         infoText.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
         infoFarbe.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
         
-        System.out.println(info.getPreferredSize());
-        System.out.println(infoText.getSize());
+
+        infoText.setHorizontalAlignment(SwingConstants.CENTER);
+        infoText.setVerticalAlignment(SwingConstants.CENTER);
         
         main.setContentPane(contentPane);
         
