@@ -28,6 +28,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 
@@ -60,8 +61,8 @@ public abstract class GUIVorlage {
         info.repaint();
         infoText.setFont(schrift);
         infoText.setFocusable(false);
-        infoText.setHorizontalAlignment(JLabel.CENTER);
-        infoText.setVerticalAlignment(JLabel.CENTER);
+        infoText.setHorizontalAlignment(SwingConstants.CENTER);
+        infoText.setVerticalAlignment(SwingConstants.CENTER);
         
         //Feld für Bilder
         bildEbene.setFocusable(false);
