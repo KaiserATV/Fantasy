@@ -23,8 +23,6 @@ public class KampfUIController extends UICon{
 	public KampfUIController(Spieler p, Lebewesen z, JFrame y, SpielerBewegung b, BufferedImage bi, BufferedImage monster) {
 		super(p,b);
 		
-		
-		
 		gui = new KampfGUI(y);
 		sys = new KampfSys(p,z, monster);
 		
@@ -56,7 +54,17 @@ public class KampfUIController extends UICon{
 		gui.setTravKeys(rechts, links, oben, unten, zu, aus);
 	
 	}
+	//initialisiert die Buttons
+		private void buttonIni(){
+			gui.setKeyListenerLinks(linksEnt,0);
+			gui.setKeyListenerRechts(rechtsEnt,0);
+			gui.setKeyListenerLinks(linksAngr,1);
+			gui.setKeyListenerRechts(rechtsAngr,1);
+			gui.setErgebnisListener(weiter);
+			gui.anlegenListener(anlegenLinks, anlegenRechts);
+		}
 	
+	// listener um ein Menu zurückzugehen
 	private KeyAdapter zu = new KeyAdapter () {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -78,7 +86,7 @@ public class KampfUIController extends UICon{
 	
 	
 	
-	
+	//listener für auswahl eines Items
 	private KeyAdapter aus = new KeyAdapter() {
 		@Override 
 		public void keyPressed(KeyEvent e) {
@@ -97,14 +105,6 @@ public class KampfUIController extends UICon{
 	};
 	
 	
-	private void buttonIni(){
-		gui.setKeyListenerLinks(linksEnt,0);
-		gui.setKeyListenerRechts(rechtsEnt,0);
-		gui.setKeyListenerLinks(linksAngr,1);
-		gui.setKeyListenerRechts(rechtsAngr,1);
-		gui.setErgebnisListener(weiter);
-		gui.anlegenListener(anlegenLinks, anlegenRechts);
-	}
 	//skippt von der Anzeige des Geschehenen zum neuen Menu
 		private KeyAdapter weiter = new KeyAdapter() {
 			@Override
@@ -133,6 +133,7 @@ public class KampfUIController extends UICon{
 		};
 	
 
+	//Linker Button in Entscheidungsebene
 	private KeyAdapter linksEnt = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -142,6 +143,7 @@ public class KampfUIController extends UICon{
 			}
 		}
 	};
+	//Linker Button in AngriffsEbene
 	private KeyAdapter linksAngr = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -155,8 +157,7 @@ public class KampfUIController extends UICon{
 			}
 		}
 	};
-	
-	
+	//...
 	private KeyAdapter rechtsEnt = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -175,6 +176,7 @@ public class KampfUIController extends UICon{
 			}	
 		}
 	};
+	//...
 	private KeyAdapter rechtsAngr = new KeyAdapter() {
 		@Override 
 		public void keyPressed(KeyEvent e) {
@@ -185,6 +187,8 @@ public class KampfUIController extends UICon{
 			}
 		}
 	};
+	
+	//trifft den nächsten Zug, wenn ein item benutzt wurden ist und es eine ausgabe dazu gab
 	private void naechsterZugItem(String s) {
 		if (pve) {
 			int i = sys.monsterAngriff();
@@ -213,8 +217,6 @@ public class KampfUIController extends UICon{
 		}
 	}
 	
-	
-	
 	private void naechsterZugItem() {
 		if (pve) {
 			int i = sys.monsterAngriff();
@@ -239,7 +241,7 @@ public class KampfUIController extends UICon{
 	}
 	
 	
-	
+	//bestimmt die zu treffenden ausgaben für den wechse in den nächsten zug
 	private void naechsterZug() {
 		int h = sys.kaempfen();
 		if (pve && h >= 0) {
@@ -274,6 +276,7 @@ public class KampfUIController extends UICon{
 		}
 	}
 	
+	//übergang in die siegeseben
 	private void winUebergang() {
 		gui.setInfoWidth(0);
 		gui.addAktion(sys.getNamenEins()+" ("+sys.getLebenEins()+" HP) besiegt "+sys.getNamenZwei()+".");
@@ -283,6 +286,7 @@ public class KampfUIController extends UICon{
 		
 	}
 	
+	//listener für das lootmenu um weiter zu gehen
 	private KeyAdapter lootMenu = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -332,6 +336,7 @@ public class KampfUIController extends UICon{
 		}
 	};
 	
+	//Generiert den String, welcher die Ergebnis ausgabe darstellt
 	private String ergebnisGen(Item i) {
 		String verschieden= i.getName()+" mit ";
 			if(i instanceof Armor) {
@@ -346,7 +351,7 @@ public class KampfUIController extends UICon{
 	
 	
 	
-	
+	//LinkerButton in der AnlegenEbene
 	private ActionListener anlegenLinks = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -354,6 +359,7 @@ public class KampfUIController extends UICon{
 			gui.setErgebnis(0);
 		}
 	};
+	//...
 	private ActionListener anlegenRechts = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {

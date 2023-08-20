@@ -175,6 +175,16 @@ public abstract class GUIVorlage {
         main.pack();
         
     }
+    //Funktion, wenn menu beendet
+    public void beenden(){
+		main.setContentPane(urCP);
+		KeyboardFocusManager.setCurrentKeyboardFocusManager(kfm);
+		main.setSize(urD);
+	}
+    
+    
+    //Getter - Setter
+    
     /**
      *  Setzt Breite des Info Container
      * @param w - Die Breite in Pixel
@@ -228,11 +238,6 @@ public abstract class GUIVorlage {
      */
 	public void clearAktion() {
 		setAktion("");
-	}
-	public void beenden(){
-		main.setContentPane(urCP);
-		KeyboardFocusManager.setCurrentKeyboardFocusManager(kfm);
-		main.setSize(urD);
 	}
 	/**
 	 * Setzt den Text des rechten Buttons

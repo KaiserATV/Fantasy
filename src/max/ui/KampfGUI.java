@@ -133,6 +133,7 @@ public class KampfGUI extends GUIVorlage{
 		scroll.repaint();	
 	}
 	
+	//Setter - Getter
 	public void setNewItemData(String[] neu) {
 		d.removeAllElements();
 		for(String s:neu) {
@@ -178,11 +179,7 @@ public class KampfGUI extends GUIVorlage{
 		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_DOWN,0), "none");
 		items.getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_SPACE,0), "none");
 			
-		
-
 		items.setFocusTraversalKeysEnabled(false);
-	
-		
 	
 		
 		items.addKeyListener(new KeyAdapter() {
@@ -204,7 +201,6 @@ public class KampfGUI extends GUIVorlage{
 				
 			}
 		});
-		
 		
 		
 		buttonLinks2.addKeyListener(zu);
@@ -270,11 +266,6 @@ public class KampfGUI extends GUIVorlage{
 		 }
 		 buttonLinks.requestFocusInWindow();
 	 }
-	 
-	 
-	 
-	 
-	 
 	 
 	 
 

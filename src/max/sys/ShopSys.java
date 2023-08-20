@@ -13,12 +13,24 @@ public class ShopSys extends VorlageSys{
 		ich = i;
 		laden = s;
 	}
-	public String getSpielerName() {
-		return ich.getName();
+	//Kauft ein gegenstand im Laden
+	public boolean kaufen(int i) {
+		if(laden instanceof Taverne && i == laden.getInv().size()) {
+			ich.setHp(ich.getHpMax());
+			return false;
+		}else if(ich.getGold()>laden.getInv().get(i).getPrice() && i < laden.getInv().size()) {
+			gekauft = laden.getInv().get(i);
+			ich.bag.addBag(gekauft); 
+			ich.setGold(ich.getGold()-gekauft.getPrice());
+			laden.removeInv(i);
+			return true;
+		}
+		return true;
 	}
-	public String getLadenName() {
-		return laden.getName();
-	}
+	
+	//Getter - Setter
+	
+	//returned das Inventar des Ladens
 	public String[][] getInventar() {
 		String[][] inventar;
 		if(!(laden instanceof Taverne)) {
@@ -45,19 +57,7 @@ public class ShopSys extends VorlageSys{
 		return inventar;
 	}
 	
-	public boolean kaufen(int i) {
-		if(laden instanceof Taverne && i == laden.getInv().size()) {
-			ich.setHp(ich.getHpMax());
-			return false;
-		}else if(ich.getGold()>laden.getInv().get(i).getPrice() && i < laden.getInv().size()) {
-			gekauft = laden.getInv().get(i);
-			ich.bag.addBag(gekauft); 
-			ich.setGold(ich.getGold()-gekauft.getPrice());
-			laden.removeInv(i);
-			return true;
-		}
-		return true;
-	}
+	//ob item gekauft werden kann
 	public boolean kannKaufen(int i) {
 		if(laden.getInv().size()==0) {
 			return false;
@@ -72,6 +72,14 @@ public class ShopSys extends VorlageSys{
 		}
 		return false;
 	}
+	
+	public String getSpielerName() {
+		return ich.getName();
+	}
+	public String getLadenName() {
+		return laden.getName();
+	}
+	
 	public int getGekauftPreis() {
 		return gekauft.getPrice();
 	}

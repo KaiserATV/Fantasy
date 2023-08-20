@@ -8,6 +8,7 @@ import ani.fantasyLebewesen.spieler.Spieler;
 
 public abstract class VorlageSys {
 
+	//ob Item anlegbar ist
 	public boolean anlegbar() {
 		if(gekauft instanceof Weapons || gekauft instanceof Armor || gekauft instanceof Equippable) {
 			return true;
@@ -16,6 +17,7 @@ public abstract class VorlageSys {
 		}
 	}
 	
+	//legt item an
 	public void anlegen() {
 		if(gekauft instanceof Weapons) {
 			ich.setWaffe(gekauft);

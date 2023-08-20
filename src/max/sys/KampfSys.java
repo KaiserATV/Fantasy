@@ -22,6 +22,7 @@ public class KampfSys extends VorlageSys{
 		schadenGesIch = 0;
 		schadenGesGegen = 0;
 		
+		//Loot der groppt werden kann
 		lootGold = gegen.lootGold();
 		lootCon = gegen.lootConsu();
 		lootItem = gegen.lootExtra();
@@ -37,6 +38,8 @@ public class KampfSys extends VorlageSys{
 		
 		
 	}
+	
+	//Funktion für den Angriff des Spielers
 	public int kaempfen() {
 		if(unsterblich) {
 			unsterblich = false;	
@@ -63,6 +66,7 @@ public class KampfSys extends VorlageSys{
 		}
 	}
 	
+	//Wenn gewonnen
 	public void gewonnen() {
 			gegen.setHp(0);
 			if(gegen instanceof Spieler) {
@@ -70,13 +74,12 @@ public class KampfSys extends VorlageSys{
 			}
 	}
 	
-	
-	public boolean getWeiter() {
-		return weiter;
-	}
+	//Breite der Leiste
 	public int bestimmeBreite() {
 		return (int) Math.ceil((((double) gegen.getHp())/gegen.getHpMax())*1000);
 	}
+	
+	//Angriff des Monsters
 	public int monsterAngriff() {
 		if(unsterblich) {
 			unsterblich = false;	
@@ -108,6 +111,7 @@ public class KampfSys extends VorlageSys{
 		}
 	}
 	
+	//tauscht die Spieler
 	public void tauscheReihenfolge() {
 		Spieler tmp = ich;
 		ich = (Spieler) gegen;
@@ -125,6 +129,7 @@ public class KampfSys extends VorlageSys{
 		
 	}
 	
+	//benutzt ein item und entfernt es aus dem rucksack
 	public String itemBenutzen(Item i) {
 		String name = i.anwendenText(ich);
 		if(i instanceof Scroll) {
@@ -135,22 +140,20 @@ public class KampfSys extends VorlageSys{
 		ich.bag.removeBag(i);
 		return name;
 	}
+	//überprüft ob flucht möglich
+	public boolean flucht() {
+		if(ich.getHp()>5 && ich.getGold()>=100) {
+			ich.reduziereHp(5);
+			ich.setGold(ich.getGold()-100);
+			return true;
+		}
+		return false;
+	}
 	
-	public boolean isPve() {
-		return gegen instanceof Monster;
-	}
-	public String getNamenEins() {
-		return ich.getName();
-	}
-	public String getNamenZwei() {
-		return gegen.getName();
-	}
-	public int getLebenEins() {
-		return ich.getHp();
-	}
-	public int getLebenZwei() {
-		return gegen.getHp();
-	}
+	
+	//Getter - Setter
+	
+	//Benutzebare Items im Inventar
 	public String[] getUsables() {
 		List<String> itemsList= new LinkedList<String>();
 		if(ich.bag.getBag().size()>0) {
@@ -168,18 +171,7 @@ public class KampfSys extends VorlageSys{
 		
 		return items;
 	}
-	public BufferedImage getBildEins() {
-		return ichBild;
-	}
-	public BufferedImage getBildZwei() {
-		return gegenBild;
-	}
-	public String getItemName(Item x) {
-		return ich.bag.get(x).getName(); 
-	}
-	public String getItemEffekt(Item x) {
-		return ich.bag.get(x).getEffekt();
-	}
+	//returned das ausgewählte item im item menu
 	public Item getItem(int index) {
 		int j = 0;
 		for(Item i:ich.bag.getBag()) {
@@ -193,15 +185,8 @@ public class KampfSys extends VorlageSys{
 		
 		return null;
 	}
-	public boolean flucht() {
-		if(ich.getHp()>5 && ich.getGold()>=100) {
-			ich.reduziereHp(5);
-			ich.setGold(ich.getGold()-100);
-			return true;
-		}
-		return false;
-	}
 	
+	//fügt den Loot dem Inventar hinzu
 	public void addLootBag() {
 		if(lootCon != null) {
 			ich.bag.addBag(lootCon);
@@ -211,6 +196,39 @@ public class KampfSys extends VorlageSys{
 		ich.setGold(ich.getGold()+lootGold);
 	}
 	
+	
+	
+	public boolean getWeiter() {
+		return weiter;
+	}
+	public boolean isPve() {
+		return gegen instanceof Monster;
+	}
+	public String getNamenEins() {
+		return ich.getName();
+	}
+	public String getNamenZwei() {
+		return gegen.getName();
+	}
+	public int getLebenEins() {
+		return ich.getHp();
+	}
+	public int getLebenZwei() {
+		return gegen.getHp();
+	}
+	
+	public BufferedImage getBildEins() {
+		return ichBild;
+	}
+	public BufferedImage getBildZwei() {
+		return gegenBild;
+	}
+	public String getItemName(Item x) {
+		return ich.bag.get(x).getName(); 
+	}
+	public String getItemEffekt(Item x) {
+		return ich.bag.get(x).getEffekt();
+	}
 	
 	public int getLootGold() {
 		return lootGold;

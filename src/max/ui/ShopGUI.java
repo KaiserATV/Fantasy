@@ -44,6 +44,37 @@ public class ShopGUI extends GUIVorlage{
 		
 		
 	}
+	
+	private void styleInv(){
+		inventar.setBackground(Color.decode("#211f1f"));
+		inventar.setForeground(Color.decode("#ccc3bd"));
+		inventar.setSelectionBackground(Color.decode("#1a1d49"));
+		inventar.setSelectionForeground(Color.decode("#d9dbf4"));
+		
+	}
+	
+	//entfernt zeile aus datenmodel
+	public void removeZeile(int i) {
+		if(dtm.getRowCount()>1) {
+			dtm.removeRow(i);	
+		}else if(dtm.getRowCount() == 1){
+			dtm.removeRow(0);
+		}else {
+			
+		}	
+		if(dtm.getRowCount() == 0) {
+			
+		}else {
+			inventar.setRowSelectionInterval(0, 0);	
+			inventar.scrollRectToVisible(inventar.getCellRect(0, 0, false));
+		}
+	}
+	
+	
+	
+	// Gettter - Setter
+	
+	
 	/**
 	 * 
 	 * @param rechts Key für Fokus nach rechts
@@ -131,30 +162,7 @@ public class ShopGUI extends GUIVorlage{
 		scrollHuelle.add(scroll,BorderLayout.CENTER);
 	}
 	
-	private void styleInv(){
-		inventar.setBackground(Color.decode("#211f1f"));
-		inventar.setForeground(Color.decode("#ccc3bd"));
-		inventar.setSelectionBackground(Color.decode("#1a1d49"));
-		inventar.setSelectionForeground(Color.decode("#d9dbf4"));
-		
-	}
 	
-	
-	public void removeZeile(int i) {
-		if(dtm.getRowCount()>1) {
-			dtm.removeRow(i);	
-		}else if(dtm.getRowCount() == 1){
-			dtm.removeRow(0);
-		}else {
-			
-		}	
-		if(dtm.getRowCount() == 0) {
-			
-		}else {
-			inventar.setRowSelectionInterval(0, 0);	
-			inventar.scrollRectToVisible(inventar.getCellRect(0, 0, false));
-		}
-	}
 	public void setKaufMenu() {
 		layout.replace(bildEbene, scrollHuelle);
 		scrollHuelle.repaint();    	

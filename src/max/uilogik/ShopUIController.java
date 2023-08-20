@@ -44,13 +44,13 @@ public class ShopUIController extends UICon{
 	
 		buttonInit();
 	}
-	
+	//buttonInitialisierung
 	private void buttonInit() {
 		gui.setKeyListenerLinks(setMenu, 0);
 		gui.setKeyListenerRechts(verlassen, 0);
 		gui.anlegenListener(anlegenLinks, anlegenRechts);
 	}
-	
+	//auswahl eines items des shops und die zu treffende aktion
 	private KeyAdapter aus = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -96,7 +96,7 @@ public class ShopUIController extends UICon{
 		}
 	};
 	
-	
+	//keylistener um im menu zurückzugehen
 	private KeyAdapter zurueckMenu = new KeyAdapter() {
 		@Override 
 		public void keyPressed(KeyEvent e) {
@@ -116,7 +116,7 @@ public class ShopUIController extends UICon{
 		}
 	};
 	
-	
+	//verlässt den shop
 	private KeyAdapter verlassen = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -125,11 +125,11 @@ public class ShopUIController extends UICon{
 			}
 		}
 	};
-	
 	private void beenden() {
 		gui.beenden();
 	}
 	
+	//setzt das menu im welchem die items ersichtbar sind
 	private KeyAdapter setMenu = new KeyAdapter() {
 		@Override
 		public void keyPressed(KeyEvent e) {
@@ -139,7 +139,7 @@ public class ShopUIController extends UICon{
 			}
 		}
 	};
-	
+	//Linker Button in der anlegeebene("Anlegen")
 	private ActionListener anlegenLinks = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
@@ -148,6 +148,7 @@ public class ShopUIController extends UICon{
 			gui.setErgebnis(1);
 		}
 	};
+	//...
 	private ActionListener anlegenRechts = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
