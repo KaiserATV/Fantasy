@@ -156,7 +156,7 @@ public abstract class GUIVorlage {
         		.addComponent(entscheid,10,width,Short.MAX_VALUE)
         	);
         
-        contentPane.setPreferredSize(new Dimension(width,height));
+        contentPane.setPreferredSize(ursprung.getPreferredSize());
         layout.preferredLayoutSize(contentPane);
         
         contentPane.setLayout(layout);
