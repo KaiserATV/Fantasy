@@ -89,10 +89,10 @@ public class KampfUIController extends UICon{
 				if(itemMenu && g < (sys.getUsables().length-1)&& g >=0) {	
 					gui.setAngriff(1);
 					itemMenu = false;
-					angriffsMenu = true;
+					angriffsMenu = false;
+					entscheidMenu = true;
 					gui.addAktion(sys.itemBenutzen(sys.getItem(g)));
 					gui.removeItem(g);
-					gui.setErgebnis(3);
 					naechsterZugItem();
 				}
 			}
