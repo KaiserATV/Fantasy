@@ -21,7 +21,6 @@ public class KampfSys extends VorlageSys{
 		urSprLebenGegen = gegen.getHp();
 		schadenGesIch = 0;
 		schadenGesGegen = 0;
-		getauscht = false;
 		
 		lootGold = gegen.lootGold();
 		lootCon = gegen.lootConsu();
@@ -124,7 +123,6 @@ public class KampfSys extends VorlageSys{
 		gegenBild = ichBild;
 		ichBild = t;
 		
-		getauscht = true;
 	}
 	
 	public String itemBenutzen(Item i) {
@@ -245,7 +243,6 @@ public class KampfSys extends VorlageSys{
 	
 	
 	private boolean zahm = false;
-	private boolean getauscht;
 	private boolean unsterblich;
 	private int schadenGesIch;
 	private int schadenGesGegen;

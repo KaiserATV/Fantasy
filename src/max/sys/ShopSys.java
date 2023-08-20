@@ -2,9 +2,7 @@ package max.sys;
 
 import ani.fantasyShops.Shops;
 import ani.fantasyShops.Taverne;
-import fabio.spielerbewegung.*;
 import ani.fantasyItems.Item;
-import ani.fantasyItems.equippable.Equippable;
 import ani.fantasyItems.schmiedegut.Armor;
 import ani.fantasyItems.weapons.Weapons;
 import ani.fantasyLebewesen.spieler.Spieler;

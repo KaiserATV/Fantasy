@@ -28,10 +28,6 @@ import javax.swing.SwingConstants;
 
 public abstract class GUIVorlage {
     public GUIVorlage(JFrame ursprung){
-       
-        
-        aktionZeilen = 0;
-        ergebnisZeilen = 1;
         
         
         main = ursprung;
@@ -232,7 +228,6 @@ public abstract class GUIVorlage {
      */
 	public void clearAktion() {
 		setAktion("");
-		aktionZeilen =0;
 	}
 	public void beenden(){
 		main.setContentPane(urCP);
@@ -376,9 +371,6 @@ public abstract class GUIVorlage {
     
     protected JPanel scrollHuelle = new JPanel();
     protected JScrollPane scroll;
-    
-	private int aktionZeilen;
-	private int ergebnisZeilen;
 	
 	private Container urCP;
 	private Dimension urD;

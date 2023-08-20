@@ -43,7 +43,6 @@ public class KampfUIController extends UICon{
 		
 		
 		
-		entscheidMenu = true;
 		angriffsMenu = false;
 		itemMenu = false;
 		
@@ -69,7 +68,6 @@ public class KampfUIController extends UICon{
 	private void back() {
 		if(angriffsMenu) {
 			angriffsMenu = false;
-			entscheidMenu = true;
 			gui.setEntscheid(1);
 		}else if(itemMenu) {
 			itemMenu = false;
@@ -90,7 +88,6 @@ public class KampfUIController extends UICon{
 					gui.setAngriff(1);
 					itemMenu = false;
 					angriffsMenu = false;
-					entscheidMenu = true;
 					gui.addAktion(sys.itemBenutzen(sys.getItem(g)));
 					gui.removeItem(g);
 					naechsterZugItem();
@@ -114,7 +111,6 @@ public class KampfUIController extends UICon{
 			public void keyPressed(KeyEvent e) {
 				if(e.getKeyCode() == auswahl) {
 					gui.setEntscheid(0);
-					entscheidMenu = true;
 					if(!pve) {
 						tauschen();
 					}else if(monsterTod) {
@@ -142,7 +138,6 @@ public class KampfUIController extends UICon{
 		public void keyPressed(KeyEvent e) {
 			if(e.getKeyCode() == auswahl) {
 				gui.setAngriff(0);
-				entscheidMenu = false;
 				angriffsMenu = true;
 			}
 		}
@@ -382,7 +377,6 @@ public class KampfUIController extends UICon{
 	private boolean monsterTod=false;
 	private int zaehler = 0;
 	private boolean pve;
-	private boolean entscheidMenu;
 	private boolean angriffsMenu;
 	private boolean itemMenu;
 	private KampfGUI gui;

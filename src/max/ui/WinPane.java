@@ -5,24 +5,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.util.List;
 
-import javax.imageio.ImageIO;
-import javax.swing.BoxLayout;
 import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 import ani.fantasyLebewesen.spieler.Spieler;
-import fabio.spiel.Spiel;
 import img.BufferedImagesSammlung;
-import ani.fantasyLebewesen.nsc.Beluaferus;
-import ani.fantasyLebewesen.nsc.Volares;
 
 public class WinPane extends JPanel  {
 

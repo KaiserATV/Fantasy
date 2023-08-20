@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.KeyboardFocusManager;
-import java.awt.Rectangle;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Arrays;
@@ -29,8 +28,7 @@ public class ShopGUI extends GUIVorlage{
 		info.setBackground(Color.black);
 		infoFarbe.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
 		
-		System.out.println(infoFarbe.getSize().getHeight()+ " "+info.getPreferredSize().getHeight()+" "+infoText.getSize().getHeight());
-		
+	
 		aktionText.setForeground(Color.white);
 		aktionText.setBackground(Color.black);
 		infoFarbe.setBackground(Color.decode("#e0bd0f"));

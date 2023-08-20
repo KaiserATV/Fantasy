@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.HashSet;
 
-import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -51,7 +50,6 @@ public class KampfGUI extends GUIVorlage{
 		buttonLinks.setBackground(Color.DARK_GRAY);
 		
 		//AktionsMenu
-//		aktion.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.decode("#454647")));
 		aktion.setBackground(Color.BLACK);
         entscheid.setBackground(Color.BLACK);
         aktionText.setForeground(Color.white);
@@ -234,7 +232,6 @@ public class KampfGUI extends GUIVorlage{
 	  * @return den ausgewählten Index
 	  */
 	 public int getSelectedIndex() {
-		 System.out.println(items.getSelectedIndex());
 		 return items.getSelectedIndex();
 	 }
 	 /**
