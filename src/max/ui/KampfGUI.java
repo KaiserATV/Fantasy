@@ -36,7 +36,6 @@ public class KampfGUI extends GUIVorlage{
 		
 		
 		 //Menu für Entscheidung über Angriff oder Items
-        angriff.setVisible(true);
         angriff.setFocusable(false);
         angriff.setLayout(null);
         angriff.setBackground(Color.BLACK);
@@ -46,7 +45,6 @@ public class KampfGUI extends GUIVorlage{
        
       
         //Menu für Items
-        items.setVisible(true);
         items.setLayoutOrientation(JList.HORIZONTAL_WRAP);
 		items.setFixedCellHeight(100);
 		items.setFixedCellWidth(500);
@@ -127,18 +125,18 @@ public class KampfGUI extends GUIVorlage{
 		scroll = new JScrollPane(items);
 		
 		scroll.setBorder(null);
-//        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 		
-		items.setPreferredSize(new Dimension(width-20,180));
-//		items.setBackground(Color.black);
-        scroll.setPreferredSize(new Dimension(width,200));
-        scroll.getViewport().getView().setPreferredSize(new Dimension(width, 200));
+		items.setSize(width,items.getVisibleRowCount()*50);
+		items.setBackground(Color.black);
 		scroll.getInsets(null);
-//		scroll.setBackground(Color.black);
+		scroll.setBackground(Color.black);
+		
+		scrollHuelle.setLayout(new BorderLayout());
 		
 		scrollHuelle.setBackground(Color.white);
-		scrollHuelle.add(scroll);
+		scrollHuelle.add(scroll, BorderLayout.CENTER);
 		scroll.repaint();	
 	}
 	
@@ -192,23 +190,22 @@ public class KampfGUI extends GUIVorlage{
 		items.setFocusTraversalKeysEnabled(false);
 	
 		
-//		items.getInputMap().put(KeyStroke.getKeyStroke(links,0), "selectNext");
-//		items.getInputMap().put(KeyStroke.getKeyStroke(rechts,0), "selectPrevious");
-//		items.getInputMap().put(KeyStroke.getKeyStroke(oben,0), "selectPreviousRow");
-//		items.getInputMap().put(KeyStroke.getKeyStroke(unten,0), "selectNextRow");
 	
 		
 		items.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
-				System.out.println(items.getSelectedIndex());
 				if(e.getKeyCode() == rechts && items.getSelectedIndex()<items.getModel().getSize()) {
 					items.setSelectedIndex(items.getSelectedIndex()+1);
-					System.out.println("rechts");
 					items.ensureIndexIsVisible(items.getSelectedIndex());
 				}else if(e.getKeyCode() == links && items.getSelectedIndex()>0) {
 					items.setSelectedIndex(items.getSelectedIndex()-1);
-					System.out.println("links");
+					items.ensureIndexIsVisible(items.getSelectedIndex());
+				}else if(e.getKeyCode() == oben && items.getSelectedIndex()>1){
+					items.setSelectedIndex(items.getSelectedIndex()-2);
+					items.ensureIndexIsVisible(items.getSelectedIndex());
+				}else if(e.getKeyCode() == unten && items.getSelectedIndex()<items.getModel().getSize()-2) {
+					items.setSelectedIndex(items.getSelectedIndex()+2);
 					items.ensureIndexIsVisible(items.getSelectedIndex());
 				}
 				
