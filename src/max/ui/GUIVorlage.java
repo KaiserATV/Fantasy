@@ -105,7 +105,7 @@ public abstract class GUIVorlage {
         buttons[4] = buttonRechts2;
         buttons[5] = anlegenRechts;
         for(JButton b:buttons) {
-            b.setPreferredSize(new Dimension(Math.floorDiv(width, 4), 50));
+            b.setPreferredSize(new Dimension(Math.floorDiv(width, 4),  (int)Math.floor(height*50.0/1000)));
         	b.setFont(schrift);
 			b.setForeground(Color.white);
 			b.setBackground(Color.black);
@@ -126,17 +126,17 @@ public abstract class GUIVorlage {
         //Setzen Position
         infoText.setHorizontalTextPosition(JLabel.CENTER);
         
-        info.setPreferredSize(new Dimension(width, 50));
+        info.setPreferredSize(new Dimension(width, (int)Math.floor(height*50.0/1000)));
         
-        bildEbene.setPreferredSize(new Dimension(width,650));
+        bildEbene.setPreferredSize(new Dimension(width, (int)Math.floor(height*650.0/1000)));
         
-        aktionText.setPreferredSize(new Dimension(width,100));
+        aktionText.setPreferredSize(new Dimension(width, (int)Math.floor(height*100.0/1000)));
         
-        entscheid.setPreferredSize(new Dimension(width, 200));
+        entscheid.setPreferredSize(new Dimension(width,  (int)Math.floor(height*200.0/1000)));
 
-        ergebnis.setPreferredSize(new Dimension(width,200));
+        ergebnis.setPreferredSize(new Dimension(width, (int)Math.floor(height*200.0/1000)));
         
-        anlegen.setPreferredSize(new Dimension(width,200));
+        anlegen.setPreferredSize(new Dimension(width, (int)Math.floor(height*200.0/1000)));
         
         
         layout = new GroupLayout(contentPane);
@@ -344,7 +344,7 @@ public abstract class GUIVorlage {
 	 
 	 public void setBackground(BufferedImage b) {
 		 background = b;
-		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance(bildEbene.getWidth(), bildEbene.getHeight(), Image.SCALE_FAST)));
+		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance(bildEbene.getPreferredSize().getWidth(), bildEbene.getPreferredSize().getHeight(), Image.SCALE_FAST)));
 	 }
 	 
 	 
