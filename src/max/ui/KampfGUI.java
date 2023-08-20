@@ -31,11 +31,11 @@ public class KampfGUI extends GUIVorlage{
 		
 		 //Menu für Entscheidung über Angriff oder Items
         angriff.setFocusable(false);
-        angriff.setLayout(null);
-        angriff.setBackground(Color.BLACK);
         angriff.setLayout(new BorderLayout());
+        angriff.setBackground(Color.BLACK);
         angriff.add(buttonLinks2,BorderLayout.LINE_START);
         angriff.add(buttonRechts2,BorderLayout.LINE_END);
+        angriff.setPreferredSize(new Dimension(width,  (int)Math.floor(height*(200.0/1000))));
        
       
         //Menu für Items
@@ -64,15 +64,14 @@ public class KampfGUI extends GUIVorlage{
 		spieler1.setSize(300,300);
 		spieler2.setSize(175,175);
 		 
-		spieler1.setLocation((int)Math.floor((50.0/1000)*width), 350); 
-		spieler2.setLocation((int)Math.floor((420.0/1000)*width), 225);
+		spieler1.setLocation((int)Math.floor((50.0/1000)*width), (int)Math.floor(height*(350.0/1000))); 
+		spieler2.setLocation((int)Math.floor((420.0/1000)*width), (int)Math.floor(height*(225.0/1000)));
 		bildEbene.add(spieler1);
 		bildEbene.add(spieler2);
 		 
 		
         scrollHuelle.setVisible(true);
-        scrollHuelle.setPreferredSize(new Dimension(width,200));
-        angriff.setPreferredSize(new Dimension(width,200));
+        scrollHuelle.setPreferredSize(new Dimension(width,(int)Math.floor(height*(200.0/1000))));
         
         buttonLinks.setFocusable(true);
         buttonRechts.setFocusable(true);
@@ -85,6 +84,8 @@ public class KampfGUI extends GUIVorlage{
         buttonRechts2.setText("Items");
         
         contentPane.repaint();
+        
+        
 	}
 	
 	
@@ -224,6 +225,7 @@ public class KampfGUI extends GUIVorlage{
 		 }else {
 			 layout.replace(entscheid, angriff);
 		 }
+		 
     	contentPane.repaint();
     	buttonLinks2.requestFocusInWindow();
 	 } 

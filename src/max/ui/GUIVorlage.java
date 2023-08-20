@@ -105,7 +105,7 @@ public abstract class GUIVorlage {
         buttons[4] = buttonRechts2;
         buttons[5] = anlegenRechts;
         for(JButton b:buttons) {
-            b.setPreferredSize(new Dimension(Math.floorDiv(width, 4),  (int)Math.floor(height*50.0/1000)));
+            b.setPreferredSize(new Dimension(Math.floorDiv(width, 4),  50));
         	b.setFont(schrift);
 			b.setForeground(Color.white);
 			b.setBackground(Color.black);
@@ -169,10 +169,6 @@ public abstract class GUIVorlage {
 
         infoText.setHorizontalAlignment(SwingConstants.CENTER);
         infoText.setVerticalAlignment(SwingConstants.CENTER);
-        
-        
-        System.out.println(info.getPreferredSize());
-        System.out.println(infoText.getSize());
         
         main.setContentPane(contentPane);
         
