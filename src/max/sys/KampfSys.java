@@ -183,9 +183,16 @@ public class KampfSys extends VorlageSys{
 		return ich.bag.get(x).getEffekt();
 	}
 	public Item getItem(int index) {
-		if(index < ich.bag.getBag().size()) {
-			return ich.bag.getBag().get(index);	
+		int j = 0;
+		for(Item i:ich.bag.getBag()) {
+			if(i instanceof Useables) {
+				if (j == index) {
+					return i;
+				}
+				j++;
+			}
 		}
+		
 		return null;
 	}
 	public boolean flucht() {
@@ -196,6 +203,7 @@ public class KampfSys extends VorlageSys{
 		}
 		return false;
 	}
+	
 	public void addLootBag() {
 		if(lootCon != null) {
 			ich.bag.addBag(lootCon);

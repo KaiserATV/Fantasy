@@ -25,6 +25,7 @@ public abstract class VorlageSys {
 			ich.setArmor(gekauft);
 		}	
 	}
+	
 	public String getAnlegText() {
 		return gekauft.anwendenText(ich);
 	}
