@@ -174,8 +174,7 @@ public abstract class GUIVorlage {
         infoText.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
         infoFarbe.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
         
-        
-        
+        System.out.println(infoText.getSize());
         
         main.setContentPane(contentPane);
         
