@@ -25,9 +25,11 @@ public class ShopGUI extends GUIVorlage{
 	public ShopGUI(JFrame x) {
 		super(x);
 		
+		info.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.black));
+		info.setBackground(Color.black);
+		infoFarbe.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
 		
-		infoFarbe.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 2, Color.black));
-		info.setBorder(BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
+		System.out.println(infoFarbe.getSize().getHeight()+ " "+info.getPreferredSize().getHeight()+" "+infoText.getSize().getHeight());
 		
 		aktionText.setForeground(Color.white);
 		aktionText.setBackground(Color.black);
