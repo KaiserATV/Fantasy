@@ -119,6 +119,12 @@ public class KampfUIController extends UICon{
 					}else if(monsterTod) {
 						gui.beenden();
 						bewegung.removeSpieler(sys.getVerlierer());
+					}else if(monsterTod) {
+					    gui.beenden();
+					    bewegung.removeSpieler(sys.getVerlierer());
+					}else if(sys.getLebenEins() <= 0) { // Überprüfen, ob der Spieler tot ist (angenommen, getLebenEins() gibt das Leben des Spielers zurück)
+					    gui.beenden();
+					    bewegung.removeSpieler(sys.getVerlierer()); // Entfernen des Spielers
 					}else {
 						gui.setAktion("Was wird "+sys.getNamenEins() + " tun?");
 						gui.addAktion(sys.getNamenEins()+" Leben: "+sys.getLebenEins());

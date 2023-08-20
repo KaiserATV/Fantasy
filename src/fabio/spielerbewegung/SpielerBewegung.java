@@ -155,15 +155,16 @@ public class SpielerBewegung {
 	}
 
 	public void removeSpieler(Spieler s) {
-		s.setPlatzierung(alleSpieler.size()-1);
-		alleSpieler.remove(s);
-	
-		if(alleSpieler.size() <= 1) {
-			gewonnen();
-		}
-	
-	
+	    s.setPlatzierung(alleSpieler.size()-1);
+	    alleSpieler.remove(s);
+
+	    if(alleSpieler.size() <= 1) {
+	        gewonnen();
+	    } else {
+	        naechsterSpieler();  // Hier wechseln Sie zum nächsten Spieler, nachdem ein Spieler entfernt wurde
+	    }
 	}
+
 	
 	private void gewonnen() {
 		frame.setContentPane(new WinPane(alleSpielerUr,bis).getContentPane());
