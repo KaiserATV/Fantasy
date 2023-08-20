@@ -3,16 +3,12 @@ package ani.fantasyLebewesen.spieler;
 import java.awt.Color;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 import ani.fantasyLebewesen.Bag;
 import ani.fantasyLebewesen.Lebewesen;
-import ani.fantasyLebewesen.nsc.Monster;
 import ani.fantasyItems.Item;
 import ani.fantasyItems.equippable.Equippable;
-import ani.fantasyItems.equippable.jewelry.Jewelry;
 import ani.fantasyItems.schmiedegut.Armor;
 import ani.fantasyItems.useables.consumables.Consumeables;
 import ani.fantasyItems.weapons.Weapons;

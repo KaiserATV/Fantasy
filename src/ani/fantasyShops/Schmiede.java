@@ -1,9 +1,6 @@
 package ani.fantasyShops;
 
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-
-
 import ani.fantasyItems.weapons.*;
 import ani.fantasyItems.schmiedegut.*;
 

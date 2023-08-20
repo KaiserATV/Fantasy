@@ -4,8 +4,6 @@ package ani.fantasyShops;
 import ani.fantasyItems.useables.consumables.food.*;
 
 import java.awt.Point;
-import java.awt.image.BufferedImage;
-
 import ani.fantasyItems.useables.consumables.drinks.*;
 
 public class Taverne extends Shops {

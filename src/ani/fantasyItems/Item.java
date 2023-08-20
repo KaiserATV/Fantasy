@@ -2,12 +2,9 @@ package ani.fantasyItems;
 
 import java.util.Random;
 
-import ani.fantasyItems.useables.Useables;
 import ani.fantasyItems.weapons.Bow;
 import ani.fantasyItems.weapons.Sword;
 import ani.fantasyLebewesen.Lebewesen;
-import ani.fantasyLebewesen.nsc.Monster;
-import ani.fantasyLebewesen.spieler.Spieler;
 
 public abstract class Item {
 	// Jedes Item hat Preis und Art/Namen

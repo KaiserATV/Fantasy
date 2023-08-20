@@ -2,7 +2,6 @@ package ani.fantasyShops;
 
 
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import ani.fantasyItems.equippable.jewelry.*;
 import ani.fantasyItems.useables.scroll.*;
 import ani.fantasyItems.schmiedegut.Armor;

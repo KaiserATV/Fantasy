@@ -1,7 +1,6 @@
 package ani.fantasyItems.useables.consumables.drinks;
 
 import ani.fantasyLebewesen.Lebewesen;
-import ani.fantasyLebewesen.spieler.Spieler;
 
 public class Met extends Drinks {
 	public Met() {

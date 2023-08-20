@@ -7,9 +7,6 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-import ani.fantasyItems.Item;
-import ani.fantasyItems.useables.consumables.Consumeables;
-
 public class Elf extends Spieler {
 	
 	public Elf(String n, Point position, Color color, int[] bel) {

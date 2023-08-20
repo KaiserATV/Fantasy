@@ -1,6 +1,5 @@
 package main;
 
-import java.awt.Font;
 import java.util.Random;
 
 import fabio.spiel.Spiel;

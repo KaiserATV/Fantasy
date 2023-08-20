@@ -1,7 +1,6 @@
 package ani.fantasyItems.equippable.jewelry;
 
 import ani.fantasyLebewesen.Lebewesen;
-import ani.fantasyLebewesen.nsc.Monster;
 import ani.fantasyLebewesen.spieler.Spieler;
 
 public class Goldring extends Ring {

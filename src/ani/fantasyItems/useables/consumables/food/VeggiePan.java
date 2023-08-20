@@ -1,7 +1,6 @@
 package ani.fantasyItems.useables.consumables.food;
 
 import ani.fantasyLebewesen.Lebewesen;
-import ani.fantasyLebewesen.spieler.Spieler;
 
 public class VeggiePan extends Food {
 	public VeggiePan() {
