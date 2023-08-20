@@ -26,6 +26,7 @@ import javax.swing.WindowConstants;
 import ani.fantasyLebewesen.spieler.Spieler;
 import img.BufferedImagesSammlung;
 
+
 public class Karte {
 
 	public enum FeldTyp {
@@ -103,7 +104,8 @@ public class Karte {
 		}
 	}
 
-
+	// Anlegen des KartenPanels
+	
 	public Karte(BufferedImagesSammlung b) {
 		karte = new FeldTyp[KARTE_BREITE][KARTE_HOEHE];
 
@@ -140,7 +142,7 @@ public class Karte {
 		frame.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				Dimension newSize = frame.getSize();
+				frame.getSize();
 				frame.repaint(); // Neuzeichnen, um die Änderungen anzuzeigen
 			}
 		});

@@ -24,20 +24,24 @@ import img.BufferedImagesSammlung;
 import max.uilogik.KampfUIController;
 import max.uilogik.ShopUIController;
 
+//Diese Klasse handhabt die Aktionen, die auf einem Spielfeld passieren können.
 public class FeldAktionen {
 
+	// Diese Felder speichern die aktuelle Bewegung, Position, Geschäfte an Positionen, das Hauptfenster und Bilder.
 	private SpielerBewegung bewegung;
 	private Point position;
 	private Map<Point, Shops> shopsAtPositions = new HashMap<>();
 	private JFrame frame;
 	private BufferedImagesSammlung bilder;
 
+	// Konstruktor, initialisiert die Hauptattribute der Klasse.
 	public FeldAktionen(JFrame jf, SpielerBewegung bew, BufferedImagesSammlung bis) {
 		frame = jf;
 		bewegung = bew;
 		bilder = bis;
 	}
 
+	// Methoden zum Betreten der Shops und Kämpfe
 	public void betreteBuchhandlung(Spieler ich) {
 		Buchhandlung b=null;
 		if (shopsAtPositions.containsKey(position) && shopsAtPositions.get(position) instanceof Buchhandlung) {
@@ -87,12 +91,50 @@ public class FeldAktionen {
 	}
 
 
-	public void setPosition(Point newPosition) {
-		this.position = newPosition;
+	private void monsterLaufen(Spieler ich, Monster gegen, BufferedImage b) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), b);
+			}
+		});
 	}
 
 	
+	// Aktualisiert die aktuelle Position des Spielers.
+	public void setPosition(Point newPosition) {
+		this.position = newPosition;
+	}
+	
+	// Methode zum Aufrufen der entsprechenden Shops
+	private void shopLaufen(Spieler ich, Shops s, BufferedImage b) {
+		SwingUtilities.invokeLater(new Runnable() {
 
+			@Override
+			public void run() {
+				new ShopUIController(ich, s, frame, bewegung, b);
+			}
+		});
+	}
+	
+	// Methode für PVP Kampf
+	public void spielerKampf(Spieler eins, Spieler zwei) {
+		spielerLaufen(eins, zwei);
+	}
+
+	// Methode für Kampf
+	private void spielerLaufen(Spieler eins, Spieler zwei) {
+		SwingUtilities.invokeLater(new Runnable() {
+
+			@Override
+			public void run() {
+				new KampfUIController(eins, zwei, frame, bewegung, bilder.getKampfHintergrund(), null);
+			}
+		});
+
+	}
+	// Methode für den fahrenden Händler
 	public void wahrscheinlichkeitHaendlerTreffen(Spieler ich) {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
@@ -104,7 +146,7 @@ public class FeldAktionen {
 			shopLaufen(ich, t, bilder.getKarrenBild());
 		}
 	}
-
+	// Methode für den Monsterkampf, allgemeine Wahrscheinlichkeit und Wahl der Monster
 	public void wahrscheinlichkeitMonsterInteraktion(Spieler ich) {
 		Random rand = new Random();
 		int chance = rand.nextInt(100); // Ein Wert zwischen 0 und 99
@@ -123,40 +165,5 @@ public class FeldAktionen {
 			monsterLaufen(ich, m,b);
 
 		}
-	}
-	
-	
-	private void shopLaufen(Spieler ich, Shops s, BufferedImage b) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				ShopUIController shop = new ShopUIController(ich, s, frame, bewegung, b);
-			}
-		});
-	}
-
-	public void spielerKampf(Spieler eins, Spieler zwei) {
-		spielerLaufen(eins, zwei);
-	}
-
-	private void spielerLaufen(Spieler eins, Spieler zwei) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				KampfUIController kampf = new KampfUIController(eins, zwei, frame, bewegung, bilder.getKampfHintergrund(), null);
-			}
-		});
-
-	}
-	private void monsterLaufen(Spieler ich, Monster gegen, BufferedImage b) {
-		SwingUtilities.invokeLater(new Runnable() {
-
-			@Override
-			public void run() {
-				KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), b);
-			}
-		});
 	}
 }
