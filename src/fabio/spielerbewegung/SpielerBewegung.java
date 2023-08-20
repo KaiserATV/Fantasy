@@ -157,7 +157,6 @@ public class SpielerBewegung {
 	public void removeSpieler(Spieler s) {
 	    s.setPlatzierung(alleSpieler.size()-1);
 	    alleSpieler.remove(s);
-	    System.out.println(alleSpieler.size());
 	    if(alleSpieler.size() < 2) {
 	        gewonnen();
 	    } else {
@@ -168,7 +167,6 @@ public class SpielerBewegung {
 	
 	private void gewonnen() {
 		frame.setContentPane(new WinPane(alleSpielerUr,bis).getContentPane());
-		System.out.println("test");
 		frame.repaint();
 		frame.revalidate();
 		
