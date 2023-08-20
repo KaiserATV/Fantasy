@@ -44,7 +44,8 @@ public abstract class GUIVorlage {
         urD = main.getSize();
         
         
-        width = ursprung.getWidth();    
+        width = ursprung.getWidth(); 
+        height = ursprung.getHeight();
         
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);
@@ -52,9 +53,11 @@ public abstract class GUIVorlage {
         
         //Feld für Infos - Farbe in Unterklassen implementieren
         info.setFocusable(false);
-        info.setLayout(new BorderLayout());
-        info.add(infoText, BorderLayout.CENTER);
-//        infoText.add(infoFarbe);
+        info.setLayout(null);
+        info.add(infoText,0);
+        info.add(infoFarbe,1);
+        info.revalidate();
+        info.repaint();
         infoText.setFont(schrift);
         infoText.setFocusable(false);
         infoText.setHorizontalAlignment(JLabel.CENTER);
@@ -129,6 +132,7 @@ public abstract class GUIVorlage {
         
         //Setzen Position
         infoText.setHorizontalTextPosition(JLabel.CENTER);
+        
         info.setPreferredSize(new Dimension(width, 50));
         
         bildEbene.setPreferredSize(new Dimension(width,650));
@@ -146,7 +150,7 @@ public abstract class GUIVorlage {
         
         layout.setVerticalGroup(
         		layout.createSequentialGroup()
-        			.addComponent(info,20, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE)
+        			.addComponent(info)
         			.addComponent(bildEbene,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(aktionText,50,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
         			.addComponent(entscheid,10,GroupLayout.DEFAULT_SIZE,Short.MAX_VALUE)
@@ -159,18 +163,21 @@ public abstract class GUIVorlage {
         		.addComponent(entscheid,10,width,Short.MAX_VALUE)
         	);
         
-//        contentPane.setPreferredSize(main.getSize());
-//        contentPane.setPreferredSize(main.getPreferredSize());(?)
         contentPane.setPreferredSize(new Dimension(1000,1000));
         layout.preferredLayoutSize(contentPane);
         
         contentPane.setLayout(layout);
         
         
-//        infoText.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-//        infoFarbe.setBackground(Color.red);
+        infoFarbe.setBackground(Color.red);
+        infoText.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
+        infoFarbe.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
+        
+        
+        
         
         main.setContentPane(contentPane);
+        
         
         
         buttonLinks.requestFocusInWindow();
@@ -186,6 +193,7 @@ public abstract class GUIVorlage {
      */
     public void setInfoWidth(int w){
    	infoFarbe.setSize(new Dimension(w,50));
+   	info.setBackground(Color.black);
     	
     	
 	 }
@@ -345,6 +353,7 @@ public abstract class GUIVorlage {
 	 
 	
 	protected int width;
+	protected int height;
 	protected KeyboardFocusManager kfm;
     protected JButton[] buttons = new JButton[6];
     
