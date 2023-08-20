@@ -131,7 +131,7 @@ public class FeldAktionen {
 
 			@Override
 			public void run() {
-				ShopUIController shop = new ShopUIController(ich, s, frame, bewegung, b);
+				new ShopUIController(ich, s, frame, bewegung, b);
 			}
 		});
 	}
@@ -145,7 +145,7 @@ public class FeldAktionen {
 
 			@Override
 			public void run() {
-				KampfUIController kampf = new KampfUIController(eins, zwei, frame, bewegung, bilder.getKampfHintergrund(), null);
+				new KampfUIController(eins, zwei, frame, bewegung, bilder.getKampfHintergrund(), null);
 			}
 		});
 
@@ -155,7 +155,7 @@ public class FeldAktionen {
 
 			@Override
 			public void run() {
-				KampfUIController kampf = new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), b);
+				new KampfUIController(ich, gegen, frame, bewegung, bilder.getKampfHintergrund(), b);
 			}
 		});
 	}

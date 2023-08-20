@@ -228,6 +228,12 @@ public class SpielerBewegung {
 	    // Zeige die Änderungen an der Spielerposition auf der Karte an
 	    frame.repaint();
 	}
+	public int getAktuellerSpielerIndex() {
+		return aktuellerSpielerIndex;
+	}
+	public void setAktuellerSpielerIndex(int aktuellerSpielerIndex) {
+		this.aktuellerSpielerIndex = aktuellerSpielerIndex;
+	}
 
 
 }

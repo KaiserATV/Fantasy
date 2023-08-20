@@ -97,13 +97,21 @@ public class Spiel {
 
 		if (alleSpieler.size() != 0 && alleSpieler.size() < 5) {
 			// Aktuellen Spieler bewegen (anhand von Koordinaten)
-			spielerBewegung = new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler,spiel.alleSpielerUr,bilder);
+			setSpielerBewegung(new SpielerBewegung(spiel.karte, spiel.karte.getFrame(), spiel.alleSpieler,spiel.alleSpielerUr,bilder));
 			// KartenPanel-Instanz aus dem Karte-Objekt holen
 			Karte.KartenPanel kartenPanel = spiel.karte.new KartenPanel();
 			// Das KartenPanel neu zeichnen, um die Spielerpositionen zu aktualisieren
 			kartenPanel.grabFocus();
 			kartenPanel.repaint();
 		}
+	}
+
+	public static SpielerBewegung getSpielerBewegung() {
+		return spielerBewegung;
+	}
+
+	public static void setSpielerBewegung(SpielerBewegung spielerBewegung) {
+		Spiel.spielerBewegung = spielerBewegung;
 	}
 
 }

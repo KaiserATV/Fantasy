@@ -140,7 +140,7 @@ public class Karte {
 		frame.addComponentListener(new ComponentAdapter() {
 			@Override
 			public void componentResized(ComponentEvent e) {
-				Dimension newSize = frame.getSize();
+				frame.getSize();
 				frame.repaint(); // Neuzeichnen, um die Änderungen anzuzeigen
 			}
 		});
