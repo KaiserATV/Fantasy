@@ -52,7 +52,8 @@ public class Spiel {
 	public void addNamen(String s) {
 		alleNamen.add(s);
 	}
-
+	
+	//Getter und Setter Methoden
 	public FeldTyp getFeldTypAtPosition(Point point) {
 		return karte.getFeldTypAtPosition(point);
 	}
@@ -76,7 +77,7 @@ public class Spiel {
 		}
 		return false;
 	}
-
+		//Spielerliste erstellen
 	public void spielerAdd(Spieler spieler) {
 		// Spieler zur Liste hinzufügen
 		spiel.alleSpieler.add(spieler);

@@ -109,7 +109,7 @@ public class SpielerBewegung {
     				}
   
     			}
-
+    			//Spielerwechselevents
     			if (e.getID() == KeyEvent.KEY_PRESSED) {
     				if (e.getKeyCode() == belegung[4]) {
     					Spieler nextSpieler = alleSpieler.get(
@@ -152,18 +152,18 @@ public class SpielerBewegung {
 			alleSpieler.get(nextIndex).resetBewegungen();
 		}
 	}
-
+	//Methode um Spieler zu entfernen
 	public void removeSpieler(Spieler s) {
 	    s.setPlatzierung(alleSpieler.size()-1);
 	    alleSpieler.remove(s);
 	    if(alleSpieler.size() < 2) {
 	        gewonnen();
 	    } else {
-	        naechsterSpieler();  // Hier wechseln Sie zum nächsten Spieler, nachdem ein Spieler entfernt wurde
+	        naechsterSpieler();  // Wechsel zum nächsten Spieler, nachdem ein Spieler entfernt wurde
 	    }
 	}
 
-	
+	//  Methode, die den Sieg initialisiert
 	private void gewonnen() {
 		frame.setContentPane(new WinPane(alleSpielerUr,bis).getContentPane());
 		frame.repaint();
@@ -190,7 +190,7 @@ public class SpielerBewegung {
 	private void spielerBewegt() {
 	    Spieler aktuellerSpieler = Lebewesen.getAktuellerSpieler();
 
-	    // Prüfe zuerst, ob es einen Kampf mit einem anderen Spieler gibt
+	    // Prüfen ob es einen Kampf mit einem anderen Spieler gibt
 	    boolean kampfGefunden = false;
 	    for (Spieler s : alleSpieler) {
 	        if (s.getPosition().equals(aktuellerSpieler.getPosition()) && !s.equals(Lebewesen.getAktuellerSpieler())) {
@@ -225,7 +225,7 @@ public class SpielerBewegung {
 	        }
 	    }
 
-	    // Zeige die Änderungen an der Spielerposition auf der Karte an
+	    // Zeigt die Änderungen an der Spielerposition auf der Karte an
 	    frame.repaint();
 	}
 	public int getAktuellerSpielerIndex() {
