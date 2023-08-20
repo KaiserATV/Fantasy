@@ -185,7 +185,7 @@ public abstract class GUIVorlage {
      * @param w - Die Breite in Pixel
      */
     public void setInfoWidth(int w){
-//    	infoFarbe.setSize(new Dimension(w,50));
+   	infoFarbe.setSize(new Dimension(w,50));
     	
     	
 	 }
