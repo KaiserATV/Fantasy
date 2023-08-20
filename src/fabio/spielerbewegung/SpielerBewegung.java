@@ -147,7 +147,7 @@ public class SpielerBewegung {
 	 */
 	public void naechsterSpieler() {
 		if (alleSpieler != null && !alleSpieler.isEmpty()) {
-			int currentIndex = alleSpieler.indexOf(Lebewesen.getAktuellerSpieler());
+			int currentIndex = alleSpielerUr.indexOf(Lebewesen.getAktuellerSpieler());
 			int nextIndex = (currentIndex + 1) % alleSpieler.size();
 			Lebewesen.setAktuellerSpieler(alleSpieler.get(nextIndex));
 			alleSpieler.get(nextIndex).resetBewegungen();
