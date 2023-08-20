@@ -157,8 +157,8 @@ public class SpielerBewegung {
 	public void removeSpieler(Spieler s) {
 	    s.setPlatzierung(alleSpieler.size()-1);
 	    alleSpieler.remove(s);
-
-	    if(alleSpieler.size() <= 1) {
+	    System.out.println(alleSpieler.size());
+	    if(alleSpieler.size() < 2) {
 	        gewonnen();
 	    } else {
 	        naechsterSpieler();  // Hier wechseln Sie zum nächsten Spieler, nachdem ein Spieler entfernt wurde
@@ -168,6 +168,7 @@ public class SpielerBewegung {
 	
 	private void gewonnen() {
 		frame.setContentPane(new WinPane(alleSpielerUr,bis).getContentPane());
+		System.out.println("test");
 		frame.repaint();
 		frame.revalidate();
 		
