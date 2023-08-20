@@ -1,25 +1,19 @@
 package max.ui;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.ComponentOrientation;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.KeyboardFocusManager;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyAdapter;
-import java.awt.event.WindowEvent;
 import java.awt.image.BufferedImage;
 
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -169,12 +163,16 @@ public abstract class GUIVorlage {
         
         
         infoFarbe.setBackground(Color.red);
-        infoText.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
-        infoFarbe.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
+        infoText.setSize(new Dimension((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight())));
+        infoFarbe.setSize(new Dimension((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight())));
         
 
         infoText.setHorizontalAlignment(SwingConstants.CENTER);
         infoText.setVerticalAlignment(SwingConstants.CENTER);
+        
+        
+        System.out.println(info.getPreferredSize());
+        System.out.println(infoText.getPreferredSize());
         
         main.setContentPane(contentPane);
         
