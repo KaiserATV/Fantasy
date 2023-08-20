@@ -171,10 +171,10 @@ public abstract class GUIVorlage {
         
         
         infoFarbe.setBackground(Color.red);
-        infoText.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
-        infoFarbe.setSize(new Dimension(width,(int)Math.floor(height*(50.0/1000))));
+        infoText.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
+        infoFarbe.setSize((int) Math.floor(info.getPreferredSize().getWidth()),(int)Math.floor(info.getPreferredSize().getHeight()));
         
-        System.out.println(info.getSize());
+        System.out.println(info.getPreferredSize());
         System.out.println(infoText.getSize());
         
         main.setContentPane(contentPane);
