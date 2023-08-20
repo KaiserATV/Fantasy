@@ -33,6 +33,11 @@ import javax.swing.LayoutStyle;
 import ani.fantasyLebewesen.spieler.*;
 import fabio.spiel.Spiel;
 
+
+// Diese Klasse wurde zT mit dem GUI Builder von Apache Netbeans generiert. Das war zu einem Zeitpunkt wo ich noch nicht vernünfig mit GroupLayout umgehen konnte
+// und nicht in der Lage war anders die GUI zu realisierien. Nach aktuellem Stand wäre ich glaube ich in der Lage dieses Layout selbst zu schreiben. 
+// Da ich mir nicht ganz sicher bin wie das zählt, da es prinzipiell "fremder" Code ist, aber auch nicht wirklich, wollte ich das an der Stelle erwähnt haben. 
+// Die Person die diese Klasse erstellt hat war Max (ich).
 public class SpielerDialog extends Dialog {
     private static final long serialVersionUID = 1L;
 
@@ -47,6 +52,9 @@ public class SpielerDialog extends Dialog {
     private String[] farben = new String[] { "Rot", "Blau", "Grün", "Gelb" };   
     private List<String> farbenList = new LinkedList<String>(Arrays.asList(farben));
     private DefaultComboBoxModel<String> bdm = new DefaultComboBoxModel<String>(farben);
+    
+    
+    
     
     private void initComponents() {
 
@@ -247,7 +255,7 @@ public class SpielerDialog extends Dialog {
         setVisible(false);
         dispose();
     } 
-    //3-7
+    //maximal 4 spieler sind zulässig
     private void defaultText() {
     	if(s.getSpielerAnzahl() == 3) {
     		jButton2.setVisible(false);
@@ -257,6 +265,7 @@ public class SpielerDialog extends Dialog {
     	jButton1.setText("Spielen ("+(s.getSpielerAnzahl()+1)+"/4)?");
         jTextField0.setText("Spielererstelltung: Spieler "+(s.getSpielerAnzahl()+1));
     	
+        //initiale Belegung der Felder
     	jTextField1.setText(vorname[zufall.nextInt(vorname.length)]+" "+nachname[zufall.nextInt(nachname.length)]);
     	jTextField2.setText("Left");
     	beleg[0] = KeyEvent.VK_LEFT;
@@ -278,7 +287,11 @@ public class SpielerDialog extends Dialog {
     	
     	
     }
+    
+    //initialisiert alle listener
     private void initListeners() {	
+    	
+    	//wenn enter name enter gedrückt wird, automatisch focus auf herkuntfsauswahl
     	jTextField1.addKeyListener(new KeyAdapter() {
     		@Override
     		public void keyPressed(KeyEvent e) {
@@ -288,6 +301,7 @@ public class SpielerDialog extends Dialog {
     		}
     	});
     	
+    	//keybelegung als arraylist
     	ArrayList<Component> key = new ArrayList<Component>();
     	key.add(jTextField2);
     	key.add(jTextField3);
@@ -297,7 +311,7 @@ public class SpielerDialog extends Dialog {
     	key.add(jTextField7);
     	
     	
-    	
+    	//wenn linksclick auf tastenfeld wird eingabe eingelesen und zu belegung hinzugefügt
     	MouseListener ml = new MouseAdapter() {
     		@Override
     		public void mouseClicked(MouseEvent e) {
@@ -321,7 +335,7 @@ public class SpielerDialog extends Dialog {
     		c.addMouseListener(ml);
     	}
     	
-    	
+    	//belegung für weiter button
     	jButton2.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -366,6 +380,7 @@ public class SpielerDialog extends Dialog {
     		
     	});
     }
+    //fügt spieler dem spiel hinzu mit den derzeit ausgewählten optionen
     private void spielerHinzu(int i) {
     	if(i == 0) {
     		s.spielerAdd(new Kraemer(jTextField1.getText().trim(), s.getKartenEcken().get(s.getSpielerAnzahl()), bestimmeColor(), beleg));	
@@ -381,17 +396,19 @@ public class SpielerDialog extends Dialog {
 			
 		
 	}
-    
+    //überprüft, das keine taste doppelt
     private boolean falscheTasten() {
-    	if(beleg[0] == beleg[1] || beleg[0] == beleg[2] || beleg[0] == beleg[3] || beleg[0] == beleg[4] || beleg[0] == beleg[5]) {
-    		return true;
+    	for(int i = 0; i < beleg.length; i++) {
+    		for(int j = 0; j < beleg.length; j++) {
+    			if(beleg[i] == beleg[j] && i != j) {
+    				return true;
+    			}
+    		}
     	}
-    	if(beleg[1] == beleg[2] || beleg[1] == beleg[3] || beleg[1] == beleg[4] || beleg[1] == beleg[5]) {
-    		return true;
-    	}
-    	return false;
     	
+    	return false;
     }
+    //bestimt die farbe des spielers
     private Color bestimmeColor() {
     		switch(farbenList.get(jComboBox2.getSelectedIndex())) {
     		case "Rot":

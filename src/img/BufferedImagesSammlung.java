@@ -6,6 +6,8 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
+
+//Klasse in der Bilder intialisiert werden um Ladezeiten bei Shopgenerierung zu vermindern
 public class BufferedImagesSammlung {
 	private BufferedImage beluaferus = null;
 	private BufferedImage volares = null;
@@ -39,6 +41,18 @@ public class BufferedImagesSammlung {
 			e.printStackTrace();
 		}
 	}
+
+	
+	//Generiert die Pfade zu den Bildern
+	private static String getBasePath() {
+		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator;
+	}
+	private static String getShopPath() {
+		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator + "shops"+ File.separator;
+	}
+	
+	
+	//Getter 
 	
 	public BufferedImage getBeluaferus() {
 		return beluaferus;
@@ -72,15 +86,6 @@ public class BufferedImagesSammlung {
 	}
 	public BufferedImage getTaverneBild() {
 		return taverneBild;
-	}
-	
-	
-	
-	private static String getBasePath() {
-		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator;
-	}
-	private static String getShopPath() {
-		return System.getProperty("user.dir") + File.separator + "src" + File.separator + "img" + File.separator + "shops"+ File.separator;
 	}
 
 }
