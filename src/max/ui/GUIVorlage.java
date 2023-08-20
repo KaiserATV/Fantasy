@@ -344,7 +344,7 @@ public abstract class GUIVorlage {
 	 
 	 public void setBackground(BufferedImage b) {
 		 background = b;
-		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance(bildEbene.getPreferredSize().getWidth(), bildEbene.getPreferredSize().getHeight(), Image.SCALE_FAST)));
+		 bildEbene.setIcon(new ImageIcon(b.getScaledInstance((int) Math.floor(bildEbene.getPreferredSize().getWidth()),(int)Math.floor(bildEbene.getPreferredSize().getHeight()), Image.SCALE_FAST)));
 	 }
 	 
 	 
