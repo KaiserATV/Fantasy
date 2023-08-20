@@ -51,7 +51,7 @@ public class KampfGUI extends GUIVorlage{
 		buttonLinks.setBackground(Color.DARK_GRAY);
 		
 		//AktionsMenu
-		aktion.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.decode("#454647")));
+//		aktion.setBorder(BorderFactory.createMatteBorder(0, 0, 1, 0, Color.decode("#454647")));
 		aktion.setBackground(Color.BLACK);
         entscheid.setBackground(Color.BLACK);
         aktionText.setForeground(Color.white);

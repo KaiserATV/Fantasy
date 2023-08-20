@@ -39,8 +39,8 @@ public abstract class GUIVorlage {
         urD = main.getSize();
         
         
-        width = (int) Math.floor(ursprung.getSize().getWidth()); 
-        height = (int) Math.floor(ursprung.getSize().getHeight());
+        width = (int) Math.floor(urCP.getPreferredSize().getWidth()); 
+        height = (int) Math.floor(urCP.getPreferredSize().getHeight());
         
         kfm = KeyboardFocusManager.getCurrentKeyboardFocusManager();
         KeyboardFocusManager.setCurrentKeyboardFocusManager(null);
@@ -156,7 +156,7 @@ public abstract class GUIVorlage {
         		.addComponent(entscheid,10,width,Short.MAX_VALUE)
         	);
         
-        contentPane.setPreferredSize(ursprung.getPreferredSize());
+        contentPane.setPreferredSize(urCP.getPreferredSize());
         layout.preferredLayoutSize(contentPane);
         
         contentPane.setLayout(layout);
@@ -177,8 +177,6 @@ public abstract class GUIVorlage {
         buttonLinks.requestFocusInWindow();
         
         main.pack();
-        
-        
         
     }
     /**
